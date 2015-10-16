@@ -3,6 +3,7 @@
 #include "corona.h"
 #include "Globals.h"
 
+
 cTexture::cTexture(void)
 {
 }
@@ -15,8 +16,9 @@ bool cTexture::Load(char *filename,int type,int wraps,int wrapt,int magf,int min
 {
 	corona::Image* img;
 	int components;
-
-	img = corona::OpenImage(filename);
+	char dir[32] = "resource/";
+	strcat (dir, filename);
+	img = corona::OpenImage(dir);
 	if(type==GL_RGB)
 	{
 		//img = corona::OpenImage(filename,corona::PF_R8G8B8);
