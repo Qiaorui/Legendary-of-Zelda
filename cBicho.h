@@ -12,7 +12,14 @@
 #define STATE_LOOKRIGHT		1
 #define STATE_WALKLEFT		2
 #define STATE_WALKRIGHT		3
-
+#define STATE_WALKUP        4
+#define STATE_WALKDOWN      5	
+#define STATE_LOOKUP        6 
+#define STATE_LOOKDOWN      7
+#define STATE_SWORD_DOWN    8
+#define STATE_SWORD_UP      9
+#define STATE_SWORD_RIGHT   10
+#define STATE_SWORD_LEFT    11   
 class cRect
 {
 public:
@@ -42,6 +49,9 @@ public:
 
 	void MoveRight(int *map);
 	void MoveLeft(int *map);
+	void MoveUp(int *map);
+	void MoveDown(int *map);
+	void SwordAttack(int *map);
 	void Jump(int *map);
 	void Stop();
 	void Logic(int *map);

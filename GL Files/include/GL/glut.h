@@ -266,7 +266,7 @@ extern void exit(int);
 #define GLUT_KEY_F12			12
 /* directional keys */
 #define GLUT_KEY_LEFT			100
-#define GLUT_KEY_UP			101
+#define GLUT_KEY_UP			    101
 #define GLUT_KEY_RIGHT			102
 #define GLUT_KEY_DOWN			103
 #define GLUT_KEY_PAGE_UP		104
@@ -274,6 +274,7 @@ extern void exit(int);
 #define GLUT_KEY_HOME			106
 #define GLUT_KEY_END			107
 #define GLUT_KEY_INSERT			108
+#define GLUT_KEY_SPACEBAR		32
 #endif
 
 /* Entry/exit  state. */

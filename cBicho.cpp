@@ -192,12 +192,91 @@ void cBicho::MoveRight(int *map)
 		}
 	}
 }
+
+
+void cBicho::MoveUp(int *map)
+{
+	int yaux;
+
+	//Whats next tile?
+	if ((y % TILE_SIZE) == 0)
+	{
+		yaux = y;
+		y += STEP_LENGTH;
+
+		if (CollidesMapWall(map, true))
+		{
+			y = yaux;
+			state = STATE_LOOKUP;
+		}
+	}
+	//Advance, no problem
+	else
+	{
+		y += STEP_LENGTH;
+
+		if (state != STATE_WALKUP)
+		{
+			state = STATE_WALKUP;
+			seq = 0;
+			delay = 0;
+		}
+	}
+}
+
+
+void cBicho::MoveDown(int *map)
+{
+	int yaux;
+
+	//Whats next tile?
+	if ((y % TILE_SIZE) == 0)
+	{
+		yaux = y;
+		y -= STEP_LENGTH;
+
+		if (CollidesMapWall(map, true))
+		{
+			y = yaux;
+			state = STATE_LOOKDOWN;
+		}
+	}
+	//Advance, no problem
+	else
+	{
+		y -= STEP_LENGTH;
+
+		if (state != STATE_WALKDOWN)
+		{
+			state = STATE_WALKDOWN;
+			seq = 0;
+			delay = 0;
+		}
+	}
+}
+
+void cBicho::SwordAttack(int *map)
+{
+	printf("estat:"+ state);
+	if (state = STATE_LOOKDOWN) state = STATE_SWORD_DOWN;
+	else if (state = STATE_LOOKUP) state = STATE_SWORD_UP;
+	else if (state = STATE_LOOKRIGHT) state = STATE_SWORD_RIGHT;
+	else if (state = STATE_LOOKLEFT) state = STATE_SWORD_LEFT;
+	
+}
+
 void cBicho::Stop()
 {
 	switch(state)
 	{
 		case STATE_WALKLEFT:	state = STATE_LOOKLEFT;		break;
 		case STATE_WALKRIGHT:	state = STATE_LOOKRIGHT;	break;
+		case STATE_WALKUP:	    state = STATE_LOOKUP;		break;
+		case STATE_WALKDOWN:	state = STATE_LOOKDOWN;	    break;
+		case STATE_SWORD_DOWN:	state = STATE_LOOKDOWN;	    break;
+		case STATE_SWORD_LEFT:	state = STATE_LOOKLEFT;		break;
+		case STATE_SWORD_RIGHT:	state = STATE_LOOKRIGHT;	break;
+		case STATE_SWORD_UP:	state = STATE_LOOKUP;		break;
 	}
 }
 void cBicho::Jump(int *map)
@@ -237,12 +316,12 @@ void cBicho::Logic(int *map)
 			}
 		}
 	}
-	else
+	/*else
 	{
 		//Over floor?
 		if(!CollidesMapFloor(map))
 			y -= (2*STEP_LENGTH);
-	}
+	}*/
 }
 void cBicho::NextFrame(int max)
 {

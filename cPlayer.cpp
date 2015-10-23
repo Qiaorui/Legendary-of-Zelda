@@ -31,7 +31,32 @@ void cPlayer::Draw(int tex_id)
 		case STATE_WALKRIGHT:	xo =91.0f/432.0f; yo =  bity + (GetFrame()*(31.0f/303.0f));
 								NextFrame(2);
 								break;
-    	//case STATE_WALKUP:      xo = 60.0f/432.0f;
+
+    	case STATE_LOOKUP:      xo = 60.0f/ 432.0f;	yo = bity;
+								break;
+
+		case STATE_LOOKDOWN:    xo = 0.0f / 432.0f;	yo = bity;
+								break;
+
+		case STATE_WALKUP:		xo = 60.0f / 432.0f;	yo = bity + (GetFrame()*(31.0f / 303.0f));
+							    NextFrame(2);
+								break;
+
+		case STATE_WALKDOWN:    xo = 0.0f / 432.0f;	yo = bity + (GetFrame()*(31.0f / 303.0f));
+								NextFrame(2);
+								break;
+		case STATE_SWORD_DOWN:  xo = 0.0f / 432.0f;		yo = bity + 90.0f / 303.0f;
+								break;
+
+		case STATE_SWORD_LEFT:  xo = 30.0f / 432.0f;	yo = bity + 90.0f / 303.0f;
+								break;
+
+		case STATE_SWORD_RIGHT: xo = 60.0f / 432.0f;	yo = bity + 90.0f / 303.0f;
+								break;
+
+		case STATE_SWORD_UP:    xo = 90.0f / 432.0f;	yo = bity + 90.0f / 303.0f;
+								break;
+
 		//default:			xo = 91.0f/432.0f; yo = bity; break;
 	}
 	xf = xo + bitx;
