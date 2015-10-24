@@ -4,6 +4,7 @@
 *.vcxproj
 *.sdf
 *.sln
+*.dll
 # *.htm
 # *.xml
 # *.exe
