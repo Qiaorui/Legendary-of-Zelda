@@ -59,6 +59,8 @@ void cPlayer::Draw(int tex_id)
 
 		//default:			xo = 91.0f/432.0f; yo = bity; break;
 	}
+
+	//Here you need to put another bitx and bity for atack accion. I will review here later
 	xf = xo + bitx;
 	yf = yo - bity;
 

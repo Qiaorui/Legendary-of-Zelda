@@ -1,11 +1,21 @@
-*.obj
-Backup*
+# *.obj
+# Backup*
 *.filters
 *.vcxproj
-*.htm
-*.xml
-*.exe
-*.idb
-*.log
-DEBUG/
-.vs/
+*.sdf
+*.sln
+# *.htm
+# *.xml
+# *.exe
+# *.idb
+# *.log
+# DEBUG/
+# .vs/
+
+**
+!*.cpp
+!*.h
+!corona.*
+!resource/
+!2DEngine.vcproj
+

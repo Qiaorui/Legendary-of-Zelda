@@ -33,12 +33,13 @@ void AppMouse(int button, int state, int x, int y)
 }
 void AppIdle()
 {
-	//int t1, t2;
-	//t1=glutGet(GLUT_ELAPSED_TIME);
+	int t1, t2;
+	t1=glutGet(GLUT_ELAPSED_TIME);
 	if(!Game.Loop()) exit(0);
-	//while (t1-t2 < 20) {
-	//	t2 =glutGet(GLUT_ELAPSED_TIME);
-	//}
+	t2 = glutGet(GLUT_ELAPSED_TIME);
+	while (t2-t1 < 20) { //1000/20 = 50fps
+		t2 =glutGet(GLUT_ELAPSED_TIME);
+	}
 }
 
 void main(int argc, char** argv)
