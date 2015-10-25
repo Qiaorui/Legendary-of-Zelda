@@ -273,10 +273,10 @@ void cBicho::Stop()
 		case STATE_WALKRIGHT:	state = STATE_LOOKRIGHT;	break;
 		case STATE_WALKUP:	    state = STATE_LOOKUP;		break;
 		case STATE_WALKDOWN:	state = STATE_LOOKDOWN;	    break;
-		//case STATE_SWORD_DOWN:	state = STATE_LOOKDOWN;	    break;
-		//case STATE_SWORD_LEFT:	state = STATE_LOOKLEFT;		break;
-		//case STATE_SWORD_RIGHT:	state = STATE_LOOKRIGHT;	break;
-		//case STATE_SWORD_UP:	state = STATE_LOOKUP;		break;
+		case STATE_SWORD_DOWN:	state = STATE_LOOKDOWN;	    break;
+		case STATE_SWORD_LEFT:	state = STATE_LOOKLEFT;		break;
+		case STATE_SWORD_RIGHT:	state = STATE_LOOKRIGHT;	break;
+		case STATE_SWORD_UP:	state = STATE_LOOKUP;		break;
 	}
 }
 void cBicho::Jump(int *map)
