@@ -46,7 +46,6 @@ public:
 	bool CollidesMapFloor(int *map);
 	void GetArea(cRect *rc);
 	void DrawRect(int tex_id,float xo,float yo,float xf,float yf);
-
 	void MoveRight(int *map);
 	void MoveLeft(int *map);
 	void MoveUp(int *map);

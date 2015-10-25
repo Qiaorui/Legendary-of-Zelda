@@ -258,10 +258,10 @@ void cBicho::MoveDown(int *map)
 void cBicho::SwordAttack(int *map)
 {
 	printf("estat:"+ state);
-	if (state = STATE_LOOKDOWN) state = STATE_SWORD_DOWN;
-	else if (state = STATE_LOOKUP) state = STATE_SWORD_UP;
-	else if (state = STATE_LOOKRIGHT) state = STATE_SWORD_RIGHT;
-	else if (state = STATE_LOOKLEFT) state = STATE_SWORD_LEFT;
+	if (state == STATE_LOOKDOWN) state = STATE_SWORD_DOWN;
+	else if (state == STATE_LOOKUP) state = STATE_SWORD_UP;
+	else if (state == STATE_LOOKRIGHT) state = STATE_SWORD_RIGHT;
+	else if (state == STATE_LOOKLEFT) state = STATE_SWORD_LEFT;
 	
 }
 
@@ -273,10 +273,10 @@ void cBicho::Stop()
 		case STATE_WALKRIGHT:	state = STATE_LOOKRIGHT;	break;
 		case STATE_WALKUP:	    state = STATE_LOOKUP;		break;
 		case STATE_WALKDOWN:	state = STATE_LOOKDOWN;	    break;
-		case STATE_SWORD_DOWN:	state = STATE_LOOKDOWN;	    break;
-		case STATE_SWORD_LEFT:	state = STATE_LOOKLEFT;		break;
-		case STATE_SWORD_RIGHT:	state = STATE_LOOKRIGHT;	break;
-		case STATE_SWORD_UP:	state = STATE_LOOKUP;		break;
+		//case STATE_SWORD_DOWN:	state = STATE_LOOKDOWN;	    break;
+		//case STATE_SWORD_LEFT:	state = STATE_LOOKLEFT;		break;
+		//case STATE_SWORD_RIGHT:	state = STATE_LOOKRIGHT;	break;
+		//case STATE_SWORD_UP:	state = STATE_LOOKUP;		break;
 	}
 }
 void cBicho::Jump(int *map)
