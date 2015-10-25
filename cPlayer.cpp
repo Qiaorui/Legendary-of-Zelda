@@ -62,6 +62,7 @@ void cPlayer::Draw(int tex_id)
 								xf = xo + bitx;
 								yf = yo - bity - (GetFrame()*(11.0f / 303.0f));
 								NextFrame(2);
+								if (GetFrame() == 0) SetState(STATE_LOOKDOWN);
 								break;
 
 		case STATE_SWORD_LEFT:  xo = 30.0f / 432.0f - (GetFrame()*(6.0f / 303.0f));
@@ -69,6 +70,7 @@ void cPlayer::Draw(int tex_id)
 								xf = xo + bitx + (GetFrame()*(10.0f / 303.0f));
 								yf = yo - bity;
 								NextFrame(2);
+								if (GetFrame() == 0) SetState(STATE_LOOKLEFT);
 								break;
 
 		case STATE_SWORD_UP:    xo = 60.0f / 432.0f;
@@ -76,6 +78,7 @@ void cPlayer::Draw(int tex_id)
 								xf = xo + bitx;
 								yf = yo - bity - (GetFrame()*(11.0f / 303.0f));
 								NextFrame(2);
+								if (GetFrame() == 0) SetState(STATE_LOOKUP);
 								break;
 
 		case STATE_SWORD_RIGHT: xo = 90.0f / 432.0f - (GetFrame()*(6.0f / 303.0f));
@@ -83,6 +86,7 @@ void cPlayer::Draw(int tex_id)
 								xf = xo + bitx + (GetFrame()*(10.0f / 303.0f));
 								yf = yo - bity;
 								NextFrame(2); 
+								if (GetFrame() == 0) SetState(STATE_LOOKRIGHT);
 								break;
 
 		//default:			xo = 91.0f/432.0f; yo = bity; break;
