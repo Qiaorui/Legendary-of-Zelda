@@ -35,9 +35,8 @@ bool cGame::Init()
 	if(!res) return false;
 	Player.SetTile(4,1);
 	Player.SetWidthHeight(32,32);
-	Player.SetState(STATE_LOOKRIGHT);
-
-	return res;
+	Player.SetState(STATE_LOOKDOWN);
+	Player.SetPosition(11*16, 16*16+8);
 }
 
 bool cGame::Loop()
