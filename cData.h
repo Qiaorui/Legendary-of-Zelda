@@ -7,7 +7,7 @@
 #define NUM_IMG		2
 
 //Image identifiers
-#define IMG_BLOCKS	0
+#define IMG_OVERLOAD	0
 #define IMG_PLAYER	1
 /*
 #define IMG_ENEMY1	2

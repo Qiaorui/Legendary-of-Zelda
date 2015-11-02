@@ -16,7 +16,7 @@ bool cTexture::Load(char *filename,int type,int wraps,int wrapt,int magf,int min
 {
 	corona::Image* img;
 	int components;
-	char dir[32] = "resource/";
+	char dir[64] = "resource/";
 	strcat (dir, filename);
 	img = corona::OpenImage(dir);
 	if(type==GL_RGB)
