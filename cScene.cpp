@@ -19,7 +19,7 @@ bool cScene::LoadLevel(int level)
 	float coordx_tile, coordy_tile;
 	int row, column;
 	float h = 16.0f / 384.0f;
-	float w = 16.0f / 192.0f;
+	float w = 16.0f / 208.0f;
 	res=true;
 	string buffer = "";
 	if(level<10) sprintf(file,"%s0%d%s",(char *)FILENAME,level,(char *)FILENAME_EXT);
@@ -63,8 +63,8 @@ bool cScene::LoadLevel(int level)
 					//Tiles = 1,2,3,...
 					map[(j*SCENE_WIDTH) + i] = row*column;
 
-					coordx_tile = column*16.0f / 192.0f;
-					coordy_tile = row*16.0f / 384.0f;
+					coordx_tile = column*w;
+					coordy_tile = row*h;
 					
 					glTexCoord2f(coordx_tile, coordy_tile + h);	glVertex2i(px, py);
 					glTexCoord2f(coordx_tile + w, coordy_tile + h);	glVertex2i(px + 16, py);
