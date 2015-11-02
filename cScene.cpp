@@ -61,7 +61,41 @@ bool cScene::LoadLevel(int level)
 					}*/
 	
 					//Tiles = 1,2,3,...
-					map[(j*SCENE_WIDTH) + i] = row*column;
+					if (row == 0 && column == 3) {
+						int tmp = rand() % 16;
+						switch (tmp)
+						{
+						case 0:
+							column = 3;
+							row = 1;
+							break;
+						case 1:
+							column = 3;
+							row = 2;
+							break;
+						/*case 2:
+							column = 4;
+							row = 2;
+							break;
+						case 3:
+							column = 5;
+							row = 2;
+							break;*/
+						case 4:
+							column = 7;
+							row = 0;
+							break;
+						case 5:
+							column = 7;
+							row = 1;
+							break;
+						default:
+							break;
+						}
+					}
+					
+
+					map[(j*SCENE_WIDTH) + i] = (row*13)+column;
 
 					coordx_tile = column*w;
 					coordy_tile = row*h;

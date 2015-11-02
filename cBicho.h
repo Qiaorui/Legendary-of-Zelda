@@ -19,7 +19,13 @@
 #define STATE_SWORD_DOWN    8
 #define STATE_SWORD_UP      9
 #define STATE_SWORD_RIGHT   10
-#define STATE_SWORD_LEFT    11   
+#define STATE_SWORD_LEFT    11  
+
+#define UP 0
+#define DOWN 1
+#define LEFT 2
+#define RIGHT 3
+
 class cRect
 {
 public:
@@ -42,7 +48,7 @@ public:
 	void GetWidthHeight(int *w,int *h);
 
 	bool Collides(cRect *rc);
-	bool CollidesMapWall(int *map,bool right);
+	bool CollidesMapWall(int *map, int direction);
 	bool CollidesMapFloor(int *map);
 	void GetArea(cRect *rc);
 	void DrawRect(int tex_id,float xo,float yo,float xf,float yf);
