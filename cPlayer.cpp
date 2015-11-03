@@ -63,15 +63,15 @@ void cPlayer::Draw(int tex_id)
 								xf = xo + 1.5f*bitx;
 								yf = yo - (1.5f*bity);
 								NextFrame(7);
-								//if (GetFrame() == 0) SetState(STATE_LOOKDOWN);
+								//if (GetFrame() == 6) SetState(STATE_LOOKDOWN);
 								break;
 
-		case STATE_SWORD_LEFT:  xo = (GetFrame()*(2 * bitx) + 0.25f*bitx);
+		case STATE_SWORD_LEFT:  xo = (GetFrame()*(2 * bitx));
 								yo = 6.0f*bity;
 								xf = xo + 2.0f*bitx; 
-								yf = yo - (1.5f*bity);
+								yf = yo - (2.0f*bity);
 								NextFrame(7);
-								//if (GetFrame() == 0) SetState(STATE_LOOKLEFT);
+								//if (GetFrame() == 6) SetState(STATE_LOOKLEFT);
 								break;
 
 		case STATE_SWORD_UP:    xo = (GetFrame()*(2 * bitx));
@@ -79,15 +79,15 @@ void cPlayer::Draw(int tex_id)
 								xf = xo + 2.0f*bitx;
 								yf = yo - (2.0f*bity);
 								NextFrame(6);
-								//if (GetFrame() == 0) SetState(STATE_LOOKUP);
+								//if (GetFrame() == 5) SetState(STATE_LOOKUP);
 								break;
 
-		case STATE_SWORD_RIGHT: xo = (GetFrame()*(2 * bitx) + 0.25f*bitx);
+		case STATE_SWORD_RIGHT: xo = (GetFrame()*(2 * bitx));
 								yo = 8.0f*bity;
 								xf = xo + 2.0f*bitx;
-								yf = yo - (1.5f*bity);
+								yf = yo - (2.0f*bity);
 								NextFrame(7);
-								//if (GetFrame() == 0) SetState(STATE_LOOKRIGHT);
+								//if (GetFrame() == 6) SetState(STATE_LOOKRIGHT);
 								break;
 
 		//default:			xo = 91.0f/432.0f; yo = bity; break;
@@ -122,20 +122,28 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	case STATE_SWORD_DOWN:
 		tmpyo = -14.15f;
 		tmpxf = 14.15f;
+		if (GetFrame() == 6) SetState(STATE_LOOKDOWN);
 		break;
 	case STATE_SWORD_LEFT:
-		tmpxf = 28.3f;
 		tmpyo = -14.15f;
+		tmpyf = 14.15f;
+		tmpxo = -14.15f;
+		tmpxf = 14.15f;
+		if (GetFrame() == 6) SetState(STATE_LOOKLEFT);
 		break;
 	case STATE_SWORD_RIGHT:
-		tmpxf = 28.3f;
 		tmpyo = -14.15f;
+		tmpyf = 14.15f;
+		tmpxo = -14.15f;
+		tmpxf = 14.15f;
+		if (GetFrame() == 6) SetState(STATE_LOOKRIGHT);
 		break;
 	case STATE_SWORD_UP:
 		tmpyo = -14.15f;
 		tmpyf = 14.15f;
 		tmpxo = -14.15f;
 		tmpxf = 14.15f;
+		if (GetFrame() == 5) SetState(STATE_LOOKUP);
 		//tmpyf = +14.15f;
 		//tmpxf = 28.3f;
 		break;

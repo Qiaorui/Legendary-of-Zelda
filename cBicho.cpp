@@ -258,26 +258,38 @@ void cBicho::MoveDown(int *map)
 void cBicho::SwordAttack(int *map)
 {
 	printf("estat:"+ state);
-	if (state == STATE_LOOKDOWN) state = STATE_SWORD_DOWN;
-	else if (state == STATE_LOOKUP) state = STATE_SWORD_UP;
-	else if (state == STATE_LOOKRIGHT) state = STATE_SWORD_RIGHT;
-	else if (state == STATE_LOOKLEFT) state = STATE_SWORD_LEFT;
-	
+	if (state == STATE_LOOKDOWN) {
+		state = STATE_SWORD_DOWN;
+		seq = 0;
+	}
+	else if (state == STATE_LOOKUP) {
+		state = STATE_SWORD_UP;
+		seq = 0;
+	}
+	else if (state == STATE_LOOKRIGHT) {
+		state = STATE_SWORD_RIGHT;
+		seq = 0;
+	}
+	else if (state == STATE_LOOKLEFT) {
+		state = STATE_SWORD_LEFT;
+		seq = 0;
+	}
 }
 
 void cBicho::Stop()
 {
-	switch(state)
+	switch (state)
 	{
-		case STATE_WALKLEFT:	state = STATE_LOOKLEFT;		break;
-		case STATE_WALKRIGHT:	state = STATE_LOOKRIGHT;	break;
-		case STATE_WALKUP:	    state = STATE_LOOKUP;		break;
-		case STATE_WALKDOWN:	state = STATE_LOOKDOWN;	    break;
-		case STATE_SWORD_DOWN:	state = STATE_LOOKDOWN;	    break;
-		case STATE_SWORD_LEFT:	state = STATE_LOOKLEFT;		break;
-		case STATE_SWORD_RIGHT:	state = STATE_LOOKRIGHT;	break;
-		case STATE_SWORD_UP:	state = STATE_LOOKUP;		break;
+	case STATE_WALKLEFT:	state = STATE_LOOKLEFT;		break;
+	case STATE_WALKRIGHT:	state = STATE_LOOKRIGHT;	break;
+	case STATE_WALKUP:	    state = STATE_LOOKUP;		break;
+	case STATE_WALKDOWN:	state = STATE_LOOKDOWN;	    break;
 	}
+	/*if(state == STATE_SWORD_DOWN && seq==6)	state = STATE_LOOKDOWN;	
+	else if(state == STATE_SWORD_LEFT && seq ==6)state = STATE_LOOKLEFT;		
+	else if (state == STATE_SWORD_RIGHT && seq == 6)	state = STATE_LOOKRIGHT;
+	else if (state == STATE_SWORD_UP && seq == 6)	state = STATE_LOOKUP;*/
+	
 }
 void cBicho::Jump(int *map)
 {
@@ -326,7 +338,9 @@ void cBicho::Logic(int *map)
 void cBicho::NextFrame(int max)
 {
 	delay++;
-	if(delay == FRAME_DELAY)
+	int framedelay = FRAME_DELAY;
+	if (state == STATE_SWORD_DOWN || state == STATE_SWORD_LEFT || state == STATE_SWORD_RIGHT || state == STATE_SWORD_UP) framedelay = 4;
+	if(delay >= framedelay)
 	{
 		seq++;
 		seq%=max;
