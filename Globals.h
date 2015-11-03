@@ -5,5 +5,5 @@
 #include <math.h>
 #include <glut.h>
 #include <string>
-
+#include <iostream>
 using namespace std;

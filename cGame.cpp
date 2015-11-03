@@ -14,11 +14,12 @@ bool cGame::Init()
 {
 	bool res=true;
 
+
 	//Graphics initialization
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0,GAME_WIDTH,0,GAME_HEIGHT,0,1);
+	glOrtho(0,SCREEN_WIDTH,0,SCREEN_HEIGHT,0,1);
 	glMatrixMode(GL_MODELVIEW);
 	
 	glAlphaFunc(GL_GREATER, 0.05f);
@@ -35,9 +36,8 @@ bool cGame::Init()
 	if(!res) return false;
 	Player.SetTile(4,1);
 	Player.SetWidthHeight(32,32);
-	Player.SetState(STATE_LOOKRIGHT);
-
-	return res;
+	Player.SetState(STATE_LOOKDOWN);
+	Player.SetPosition(11*16, 16*16+8);
 }
 
 bool cGame::Loop()
@@ -92,6 +92,16 @@ void cGame::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	
+	int x, y;
+	Player.GetPosition(&x,&y);
+	//!!!!! player attributes are wrong!
+	x += 48;
+	y += 32;
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(x - SCREEN_WIDTH/2, x + SCREEN_WIDTH / 2, y - SCREEN_HEIGHT/2, y + SCREEN_HEIGHT / 2, 0, 1);
+	glMatrixMode(GL_MODELVIEW);
+
 	glLoadIdentity();
 
 	Scene.Draw(Data.GetID(IMG_OVERLOAD));
