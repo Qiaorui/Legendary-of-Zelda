@@ -10,6 +10,15 @@ cGame::~cGame(void)
 {
 }
 
+
+
+void cGame::resize(int weight, int height) {
+	int min;
+	if (weight < height) min = weight;
+	else min = height;
+	glViewport((weight - min) / 2, (height - min) / 2, min, min);
+}
+
 bool cGame::Init()
 {
 	bool res=true;
@@ -19,7 +28,7 @@ bool cGame::Init()
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0,SCREEN_WIDTH,0,SCREEN_HEIGHT,0,1);
+	glOrtho(0, GAME_WIDTH,0, GAME_HEIGHT,0,1);
 	glMatrixMode(GL_MODELVIEW);
 	
 	glAlphaFunc(GL_GREATER, 0.05f);
@@ -38,6 +47,8 @@ bool cGame::Init()
 	Player.SetWidthHeight(32,32);
 	Player.SetState(STATE_LOOKDOWN);
 	Player.SetPosition(11*16, 16*16+8);
+
+	return res;
 }
 
 bool cGame::Loop()
@@ -87,25 +98,40 @@ bool cGame::Process()
 	return res;
 }
 
+
+void setCamera(int x, int y) {
+	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(x - GAME_WIDTH / 2, x + GAME_WIDTH / 2, y - GAME_HEIGHT / 2, y + GAME_HEIGHT / 2, 0, 3);
+	glMatrixMode(GL_MODELVIEW);
+}
+
+
 //Output
 void cGame::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	int x, y;
-	Player.GetPosition(&x,&y);
-	//!!!!! player attributes are wrong!
-	x += 48;
-	y += 32;
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(x - SCREEN_WIDTH/2, x + SCREEN_WIDTH / 2, y - SCREEN_HEIGHT/2, y + SCREEN_HEIGHT / 2, 0, 1);
-	glMatrixMode(GL_MODELVIEW);
+	Player.GetPosition(&x, &y);
+	setCamera(x,y);
 
 	glLoadIdentity();
 
 	Scene.Draw(Data.GetID(IMG_OVERLOAD));
 	Player.Draw(Data.GetID(IMG_PLAYER));
+
+
+	//TODO temporal lines to test
+	glBegin(GL_LINES);
+	glColor3f(1, 0, 0);
+	glVertex2d(x - GAME_WIDTH / 2, y);
+	glVertex2d(x + GAME_WIDTH / 2, y);
+
+
+	glEnd();
+	glColor3f(1, 1, 1);
 
 	glutSwapBuffers();
 }

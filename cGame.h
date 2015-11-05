@@ -4,10 +4,12 @@
 #include "cPlayer.h"
 #include "cData.h"
 
-#define GAME_WIDTH	480
-#define GAME_HEIGHT 480
-#define SCREEN_WIDTH 256
-#define SCREEN_HEIGHT 256
+//#define GAME_WIDTH	480
+//#define GAME_HEIGHT 480
+#define GAME_WIDTH	256
+#define GAME_HEIGHT 256
+//#define SCREEN_WIDTH 256
+//#define SCREEN_HEIGHT 256
 
 class cGame
 {
@@ -18,6 +20,9 @@ public:
 	bool Init();
 	bool Loop();
 	void Finalize();
+
+	//When resize windows
+	void resize(int weight, int height);
 
 	//Input
 	void ReadKeyboard(unsigned char key, int x, int y, bool press);

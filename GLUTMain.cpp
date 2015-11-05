@@ -42,6 +42,10 @@ void AppIdle()
 	}
 }
 
+void AppResize(int weight, int height) {
+	Game.resize(weight, height);
+}
+
 void main(int argc, char** argv)
 {
 	int res_x,res_y,pos_x,pos_y;
@@ -69,6 +73,7 @@ void main(int argc, char** argv)
 	//glutSetCursor(GLUT_CURSOR_NONE);
 
 	//Register callback functions
+	glutReshapeFunc(AppResize);
 	glutDisplayFunc(AppRender);			
 	glutKeyboardFunc(AppKeyboard);		
 	glutKeyboardUpFunc(AppKeyboardUp);	
