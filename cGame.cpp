@@ -126,7 +126,7 @@ void cGame::Render()
 
 	Scene[0].Draw(Data.GetID(IMG_OVERLOAD));
 	Player.Draw(Data.GetID(IMG_PLAYER));
-	//Player.Draw(Data.GetID(IMG_LIFE));
+	Player.DrawLife(Data.GetID(IMG_LIFE));
 
 
 	//TODO temporal lines to test
@@ -142,7 +142,7 @@ void cGame::Render()
 	glVertex2d(x, y + GAME_HEIGHT/2);
 	glEnd();
 	glColor3f(1, 1, 1);
-
+	
 
 	glutSwapBuffers();
 }

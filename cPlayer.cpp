@@ -6,7 +6,7 @@ cPlayer::~cPlayer(){}
 
 void cPlayer::Draw(int tex_id)
 {
-	if (tex_id == 2) {
+	//if (tex_id == 2) {
 		float xo, yo, xf, yf;
 		xf = yf = -1;
 		//BLOCK_SIZE = 16, FILE_SIZE = 432
@@ -101,10 +101,10 @@ void cPlayer::Draw(int tex_id)
 		}
 
 		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
-	}
-	else {
-		DrawLife(tex_id);
-	}
+	//}
+	//else {
+	//	DrawLife(tex_id);
+	//}
 
 }
 
@@ -176,18 +176,20 @@ void cPlayer::DrawLife(int tex_id){ // has to be really imprioved, only to try h
 	int screen_x = x + SCENE_Xo;
 	int screen_y = y + SCENE_Yo;
 	GetLife(&l);
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex_id);
+	glBegin(GL_QUADS);
 	for (int i = 0; i < l; ++i) {
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, tex_id);
-		glBegin(GL_QUADS);
 		glTexCoord2f(0.0f, bity);	glVertex2i(screen_x - 120, screen_y + 100);  //Left Down
 		glTexCoord2f(bitx, bity);	glVertex2i(screen_x - 100, screen_y + 100); //right down
 		glTexCoord2f(bitx, 0.0f);	glVertex2i(screen_x - 100, screen_y + 120); //right up
 		glTexCoord2f(0.0f, 0.0f);	glVertex2i(screen_x - 120, screen_y + 120); //left up
-		glEnd();
 		screen_x += 20;
-		}
 	}
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
 
 
 int cPlayer::getCurrentSceneId() {
