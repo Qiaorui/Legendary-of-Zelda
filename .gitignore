@@ -12,6 +12,10 @@ Backup*
 *.log
 *.opensdf
 DEBUG/
+*.user
+*.suo
+*.db
+*/
 .vs/
 .gitattributes
 

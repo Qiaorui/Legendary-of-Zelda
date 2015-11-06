@@ -37,6 +37,7 @@ bool cGame::Init()
 	//Scene initialization
 	res = Data.LoadImage(IMG_OVERLOAD,"LinkToPast-Overworld.png",GL_RGBA);
 	if(!res) return false;
+	Scene[0].initialize(36,28);
 	res = Scene[0].LoadLevel(1);
 	if(!res) return false;
 
@@ -118,20 +119,31 @@ void cGame::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	
+
+
+	//Setting camera
 	int x, y;
 	Player.GetPosition(&x, &y);
-	setCamera(x,y);
+	int w, h;
+	Player.GetWidthHeight(&w, &h);
+	int cx, cy;
+	if ((x+w/2 - GAME_WIDTH / 2) < 0 ) cx = GAME_WIDTH / 2;
+	else if ((x+w/2 + GAME_WIDTH / 2) > Scene[0].getWidth() * TILE_SIZE) cx = Scene[0].getWidth() * TILE_SIZE - GAME_WIDTH / 2;
+	else cx = x+w/2;
+	if ((y +h/2- GAME_HEIGHT/2) < 0 ) cy = GAME_HEIGHT/2;
+	else if ( (y+h/2 + GAME_HEIGHT/2)> Scene[0].getHeight() * TILE_SIZE) cy = Scene[0].getHeight() *TILE_SIZE - GAME_HEIGHT/2;
+	else cy = y+h/2;
+	setCamera(cx,cy);
+
+
 
 	glLoadIdentity();
-
 	Scene[0].Draw(Data.GetID(IMG_OVERLOAD));
 	Player.Draw(Data.GetID(IMG_PLAYER));
 	Player.DrawLife(Data.GetID(IMG_LIFE));
 
 
 	//TODO temporal lines to test
-	int w, h;
-	Player.GetWidthHeight(&w, &h);
 	glBegin(GL_LINES);
 	glColor3f(1,0,0);
 	glVertex2d(x,y+h);

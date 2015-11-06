@@ -21,12 +21,19 @@ class cScene
 public:
 	cScene(void);
 	virtual ~cScene(void);
-
+	void initialize(int w, int h);
 	bool LoadLevel(int level);
 	void Draw(int tex_id);
 	int *GetMap();
+	int getWidth();
+	int getHeight();
+	void setWidth(int w);
+	void setHeight(int h);
+
 
 private:
 	int map[SCENE_WIDTH * SCENE_HEIGHT];	//scene
 	int id_DL;								//actual level display list
+	int width;
+	int height;
 };

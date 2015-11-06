@@ -181,10 +181,10 @@ void cPlayer::DrawLife(int tex_id){ // has to be really imprioved, only to try h
 	glBindTexture(GL_TEXTURE_2D, tex_id);
 	glBegin(GL_QUADS);
 	for (int i = 0; i < l; ++i) {
-		glTexCoord2f(0.0f, bity);	glVertex2i(screen_x - 120, screen_y + 100);  //Left Down
-		glTexCoord2f(bitx, bity);	glVertex2i(screen_x - 100, screen_y + 100); //right down
-		glTexCoord2f(bitx, 0.0f);	glVertex2i(screen_x - 100, screen_y + 120); //right up
-		glTexCoord2f(0.0f, 0.0f);	glVertex2i(screen_x - 120, screen_y + 120); //left up
+		glTexCoord2f(0.0f, bity);	glVertex2i(screen_x + 80, screen_y + 100);  //Left Down
+		glTexCoord2f(bitx, bity);	glVertex2i(screen_x + 60, screen_y + 100); //right down
+		glTexCoord2f(bitx, 0.0f);	glVertex2i(screen_x + 60, screen_y + 120); //right up
+		glTexCoord2f(0.0f, 0.0f);	glVertex2i(screen_x + 80, screen_y + 120); //left up
 		screen_x += 20;
 	}
 	glEnd();

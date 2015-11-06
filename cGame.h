@@ -39,3 +39,4 @@ private:
 	cPlayer Player;
 	cData Data;
 };
+

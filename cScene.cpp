@@ -9,6 +9,11 @@ cScene::~cScene(void)
 {
 }
 
+void cScene::initialize(int w, int h) {
+	width = w;
+	height = h;
+}
+
 bool cScene::LoadLevel(int level)
 {
 	bool res;
@@ -142,4 +147,20 @@ void cScene::Draw(int tex_id)
 int* cScene::GetMap()
 {
 	return map;
+}
+
+int cScene::getWidth(){
+	return width;
+}
+
+int cScene::getHeight(){
+	return height;
+}
+
+void cScene::setWidth(int w) {
+	width = w;
+}
+
+void cScene::setHeight(int h) {
+	height = h;
 }
