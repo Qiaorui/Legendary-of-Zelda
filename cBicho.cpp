@@ -76,7 +76,7 @@ bool cBicho::CollidesMapWall(int *map,int direction)
 
 	switch (direction) {
 	case UP:
-		tile_y += 1;
+		tile_y += height_tiles;
 		//tile_x += width_tiles;
 		break;
 	case DOWN:
