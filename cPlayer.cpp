@@ -166,6 +166,7 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 
 	glDisable(GL_TEXTURE_2D);
 }
+
 void cPlayer::DrawLife(int tex_id){ // has to be really imprioved, only to try how to do it!
 
 	float bitx = 57.0f / 170.0f;
@@ -187,3 +188,13 @@ void cPlayer::DrawLife(int tex_id){ // has to be really imprioved, only to try h
 		screen_x += 20;
 		}
 	}
+
+
+int cPlayer::getCurrentSceneId() {
+	return current_scene_id;
+}
+
+void cPlayer::setCurrentSceneId(int scene_id) {
+	current_scene_id = scene_id;
+}
+

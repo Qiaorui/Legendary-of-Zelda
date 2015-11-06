@@ -10,6 +10,7 @@
 #define GAME_HEIGHT 256
 //#define SCREEN_WIDTH 256
 //#define SCREEN_HEIGHT 256
+#define NUM_SCENE 3
 
 class cGame
 {
@@ -34,7 +35,7 @@ public:
 
 private:
 	unsigned char keys[256];
-	cScene Scene;
+	cScene Scene[NUM_SCENE];
 	cPlayer Player;
 	cData Data;
 };

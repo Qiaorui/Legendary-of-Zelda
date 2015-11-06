@@ -37,7 +37,7 @@ bool cGame::Init()
 	//Scene initialization
 	res = Data.LoadImage(IMG_OVERLOAD,"LinkToPast-Overworld.png",GL_RGBA);
 	if(!res) return false;
-	res = Scene.LoadLevel(1);
+	res = Scene[0].LoadLevel(1);
 	if(!res) return false;
 
 	//Player initialization
@@ -49,6 +49,7 @@ bool cGame::Init()
 	Player.SetWidthHeight(32,32);
 	Player.SetState(STATE_LOOKDOWN);
 	Player.SetPosition(11*16, 16*16+8);
+	Player.setCurrentSceneId(0);
 
 	return res;
 }
@@ -85,17 +86,19 @@ bool cGame::Process()
 	//Process Input
 	if(keys[27])	res=false;
 	
-	if(keys[GLUT_KEY_UP])			Player.MoveUp(Scene.GetMap());
-	else if (keys[GLUT_KEY_DOWN])	Player.MoveDown(Scene.GetMap());
-	else if(keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene.GetMap());
-	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene.GetMap());
+	int id = Player.getCurrentSceneId();
+
+	if(keys[GLUT_KEY_UP])			Player.MoveUp(Scene[id].GetMap());
+	else if (keys[GLUT_KEY_DOWN])	Player.MoveDown(Scene[id].GetMap());
+	else if(keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene[id].GetMap());
+	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap());
 	else Player.Stop();
-	if (keys[GLUT_KEY_SPACEBAR])	Player.SwordAttack(Scene.GetMap());
+	if (keys[GLUT_KEY_SPACEBAR])	Player.SwordAttack(Scene[id].GetMap());
 
 	
 	
 	//Game Logic
-	Player.Logic(Scene.GetMap());
+	Player.Logic(Scene[id].GetMap());
 
 	return res;
 }
@@ -121,20 +124,25 @@ void cGame::Render()
 
 	glLoadIdentity();
 
-	Scene.Draw(Data.GetID(IMG_OVERLOAD));
+	Scene[0].Draw(Data.GetID(IMG_OVERLOAD));
 	Player.Draw(Data.GetID(IMG_PLAYER));
-	Player.Draw(Data.GetID(IMG_LIFE));
+	//Player.Draw(Data.GetID(IMG_LIFE));
 
 
 	//TODO temporal lines to test
 	glBegin(GL_LINES);
-	glColor3f(1, 0, 0);
+	glColor3f(1, 1, 0);
 	glVertex2d(x - GAME_WIDTH / 2, y);
 	glVertex2d(x + GAME_WIDTH / 2, y);
-
-
 	glEnd();
 	glColor3f(1, 1, 1);
+	glBegin(GL_LINES);
+	glColor3f(0, 1, 0);
+	glVertex2d(x, y - GAME_HEIGHT/2);
+	glVertex2d(x, y + GAME_HEIGHT/2);
+	glEnd();
+	glColor3f(1, 1, 1);
+
 
 	glutSwapBuffers();
 }

@@ -10,6 +10,7 @@ Backup*
 *.exe
 *.idb
 *.log
+*.opensdf
 DEBUG/
 .vs/
 .gitattributes
