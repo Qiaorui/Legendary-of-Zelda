@@ -37,11 +37,13 @@ class cBicho
 {
 public:
 	cBicho(void);
-	cBicho(int x,int y,int w,int h);
+	cBicho(int x,int y,int w,int h, int l);
 	~cBicho(void);
 
 	void SetPosition(int x,int y);
 	void GetPosition(int *x,int *y);
+	void SetLife(int l);
+	void GetLife(int *l);
 	void SetTile(int tx,int ty);
 	void GetTile(int *tx,int *ty);
 	void SetWidthHeight(int w,int h);
@@ -70,6 +72,7 @@ public:
 private:
 	int x,y;
 	int w,h;
+	int l;
 	int state;
 
 	bool jumping;

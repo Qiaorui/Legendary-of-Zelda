@@ -5,101 +5,106 @@ cPlayer::cPlayer() {}
 cPlayer::~cPlayer(){}
 
 void cPlayer::Draw(int tex_id)
-{	
-	float xo,yo,xf,yf;
-	xf = yf = -1;
-	//BLOCK_SIZE = 16, FILE_SIZE = 432
-	// 16 / 432 = 0.037
-	//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
-	float bitx = 28.3f/454.0f;
-	//BLOCK_SIZE = 16, FILE_SIZE = 303
-	// 16 / 303 = 0.053
-	float bity = 28.3f/340.0f;
-	int frame = GetFrame();
+{
+	if (tex_id == 2) {
+		float xo, yo, xf, yf;
+		xf = yf = -1;
+		//BLOCK_SIZE = 16, FILE_SIZE = 432
+		// 16 / 432 = 0.037
+		//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
+		float bitx = 28.3f / 454.0f;
+		//BLOCK_SIZE = 16, FILE_SIZE = 303
+		// 16 / 303 = 0.053
+		float bity = 28.3f / 340.0f;
+		int frame = GetFrame();
 
-	switch(GetState())
-	{
-		//1
+		switch (GetState())
+		{
+			//1
 		case STATE_LOOKLEFT:	xo = 0.0f;
-								yo = 3.0f*bity;
-								break;
-		//4
-		case STATE_LOOKRIGHT:	xo = 0.0f;	
-								yo = 2.0f*bity;
-								break;
-		//1..3
+			yo = 3.0f*bity;
+			break;
+			//4
+		case STATE_LOOKRIGHT:	xo = 0.0f;
+			yo = 2.0f*bity;
+			break;
+			//1..3
 		case STATE_WALKLEFT:	xo = (GetFrame()*bitx);
-								yo = 3.0f*bity;
-								NextFrame(8);
-								break;
-		//4..6
+			yo = 3.0f*bity;
+			NextFrame(8);
+			break;
+			//4..6
 		case STATE_WALKRIGHT:	xo = (GetFrame()*bitx);
-								yo = 2.0f*bity;
-								NextFrame(8);
-								break;
+			yo = 2.0f*bity;
+			NextFrame(8);
+			break;
 
-    	case STATE_LOOKUP:      xo = 0.0f;
-								yo = 4.0f*bity;
-								break;
+		case STATE_LOOKUP:      xo = 0.0f;
+			yo = 4.0f*bity;
+			break;
 
 		case STATE_LOOKDOWN:    xo = 0.0f;
-								yo = bity;
-								break;
+			yo = bity;
+			break;
 
 		case STATE_WALKUP:		xo = (GetFrame()*bitx);
-								yo = 4.0f*bity;
-							    NextFrame(8);
-								break;
+			yo = 4.0f*bity;
+			NextFrame(8);
+			break;
 
 		case STATE_WALKDOWN:    xo = (GetFrame()*bitx);
-								yo = bity;
-								NextFrame(8);
-								break;
+			yo = bity;
+			NextFrame(8);
+			break;
 
-		//player has atacking movement, so has to add frame
+			//player has atacking movement, so has to add frame
 
-		case STATE_SWORD_DOWN:  xo = (GetFrame()*(2*bitx) + 0.5f*bitx);
-								yo = 12.0f*bity;
-								xf = xo + 1.5f*bitx;
-								yf = yo - (1.5f*bity);
-								NextFrame(7);
-								//if (GetFrame() == 6) SetState(STATE_LOOKDOWN);
-								break;
+		case STATE_SWORD_DOWN:  xo = (GetFrame()*(2 * bitx) + 0.5f*bitx);
+			yo = 12.0f*bity;
+			xf = xo + 1.5f*bitx;
+			yf = yo - (1.5f*bity);
+			NextFrame(7);
+			//if (GetFrame() == 6) SetState(STATE_LOOKDOWN);
+			break;
 
 		case STATE_SWORD_LEFT:  xo = (GetFrame()*(2 * bitx));
-								yo = 6.0f*bity;
-								xf = xo + 2.0f*bitx; 
-								yf = yo - (2.0f*bity);
-								NextFrame(7);
-								//if (GetFrame() == 6) SetState(STATE_LOOKLEFT);
-								break;
+			yo = 6.0f*bity;
+			xf = xo + 2.0f*bitx;
+			yf = yo - (2.0f*bity);
+			NextFrame(7);
+			//if (GetFrame() == 6) SetState(STATE_LOOKLEFT);
+			break;
 
 		case STATE_SWORD_UP:    xo = (GetFrame()*(2 * bitx));
-								yo = 10.0f*bity;
-								xf = xo + 2.0f*bitx;
-								yf = yo - (2.0f*bity);
-								NextFrame(6);
-								//if (GetFrame() == 5) SetState(STATE_LOOKUP);
-								break;
+			yo = 10.0f*bity;
+			xf = xo + 2.0f*bitx;
+			yf = yo - (2.0f*bity);
+			NextFrame(6);
+			//if (GetFrame() == 5) SetState(STATE_LOOKUP);
+			break;
 
 		case STATE_SWORD_RIGHT: xo = (GetFrame()*(2 * bitx));
-								yo = 8.0f*bity;
-								xf = xo + 2.0f*bitx;
-								yf = yo - (2.0f*bity);
-								NextFrame(7);
-								//if (GetFrame() == 6) SetState(STATE_LOOKRIGHT);
-								break;
+			yo = 8.0f*bity;
+			xf = xo + 2.0f*bitx;
+			yf = yo - (2.0f*bity);
+			NextFrame(7);
+			//if (GetFrame() == 6) SetState(STATE_LOOKRIGHT);
+			break;
 
-		//default:			xo = 91.0f/432.0f; yo = bity; break;
+			//default:			xo = 91.0f/432.0f; yo = bity; break;
+		}
+
+		//When we are not atacking 
+		if (xf == -1 && yf == -1) {
+			xf = xo + bitx;
+			yf = yo - bity;
+		}
+
+		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
-
-	//When we are not atacking 
-	if (xf == -1 && yf == -1) {
-		xf = xo + bitx;
-		yf = yo - bity;
+	else {
+		DrawLife(tex_id);
 	}
-
-	DrawRect(tex_id, xo, yo, xf, yf,GetState(),frame);
 
 }
 
@@ -161,3 +166,24 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 
 	glDisable(GL_TEXTURE_2D);
 }
+void cPlayer::DrawLife(int tex_id){ // has to be really imprioved, only to try how to do it!
+
+	float bitx = 57.0f / 170.0f;
+	float bity = 1.0f;
+	int x, y, l;
+	GetPosition(&x, &y);
+	int screen_x = x + SCENE_Xo;
+	int screen_y = y + SCENE_Yo;
+	GetLife(&l);
+	for (int i = 0; i < l; ++i) {
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex_id);
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, bity);	glVertex2i(screen_x - 120, screen_y + 100);  //Left Down
+		glTexCoord2f(bitx, bity);	glVertex2i(screen_x - 100, screen_y + 100); //right down
+		glTexCoord2f(bitx, 0.0f);	glVertex2i(screen_x - 100, screen_y + 120); //right up
+		glTexCoord2f(0.0f, 0.0f);	glVertex2i(screen_x - 120, screen_y + 120); //left up
+		glEnd();
+		screen_x += 20;
+		}
+	}

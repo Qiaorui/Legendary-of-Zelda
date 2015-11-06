@@ -11,12 +11,13 @@ cBicho::cBicho(void)
 }
 cBicho::~cBicho(void){}
 
-cBicho::cBicho(int posx,int posy,int width,int height)
+cBicho::cBicho(int posx,int posy,int width,int height, int life)
 {
 	x = posx;
 	y = posy;
 	w = width;
 	h = height;
+	l = life;
 }
 void cBicho::SetPosition(int posx,int posy)
 {
@@ -27,6 +28,16 @@ void cBicho::GetPosition(int *posx,int *posy)
 {
 	*posx = x;
 	*posy = y;
+}
+void cBicho::SetLife(int life)
+{
+	l = life;
+
+}
+void cBicho::GetLife(int *life)
+{
+	*life = l;
+	
 }
 void cBicho::SetTile(int tx,int ty)
 {

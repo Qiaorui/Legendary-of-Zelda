@@ -42,8 +42,10 @@ bool cGame::Init()
 
 	//Player initialization
 	res = Data.LoadImage(IMG_PLAYER,"linkSprite_basic.png",GL_RGBA);
+	res = Data.LoadImage(IMG_LIFE, "corazones_vida.png", GL_RGBA);
 	if(!res) return false;
 	Player.SetTile(4,1);
+	Player.SetLife(3);
 	Player.SetWidthHeight(32,32);
 	Player.SetState(STATE_LOOKDOWN);
 	Player.SetPosition(11*16, 16*16+8);
@@ -121,6 +123,7 @@ void cGame::Render()
 
 	Scene.Draw(Data.GetID(IMG_OVERLOAD));
 	Player.Draw(Data.GetID(IMG_PLAYER));
+	Player.Draw(Data.GetID(IMG_LIFE));
 
 
 	//TODO temporal lines to test

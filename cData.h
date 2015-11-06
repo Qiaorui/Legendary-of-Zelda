@@ -9,6 +9,7 @@
 //Image identifiers
 #define IMG_OVERLOAD	0
 #define IMG_PLAYER	1
+#define IMG_LIFE	2
 /*
 #define IMG_ENEMY1	2
 #define IMG_ENEMY2	3
