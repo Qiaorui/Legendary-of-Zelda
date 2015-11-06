@@ -12,11 +12,11 @@ cGame::~cGame(void)
 
 
 
-void cGame::resize(int weight, int height) {
+void cGame::resize(int width, int height) {
 	int min;
-	if (weight < height) min = weight;
+	if (width < height) min = width;
 	else min = height;
-	glViewport((weight - min) / 2, (height - min) / 2, min, min);
+	glViewport((width - min) / 2, (height - min) / 2, min, min);
 }
 
 bool cGame::Init()
@@ -130,19 +130,23 @@ void cGame::Render()
 
 
 	//TODO temporal lines to test
+	int w, h;
+	Player.GetWidthHeight(&w, &h);
 	glBegin(GL_LINES);
+	glColor3f(1,0,0);
+	glVertex2d(x,y+h);
+	glVertex2d(x+w,y+h);
+	glVertex2d(x+w,y);
+	glVertex2d(x+w,y+h);
 	glColor3f(1, 1, 0);
 	glVertex2d(x - GAME_WIDTH / 2, y);
 	glVertex2d(x + GAME_WIDTH / 2, y);
-	glEnd();
-	glColor3f(1, 1, 1);
-	glBegin(GL_LINES);
 	glColor3f(0, 1, 0);
 	glVertex2d(x, y - GAME_HEIGHT/2);
 	glVertex2d(x, y + GAME_HEIGHT/2);
 	glEnd();
 	glColor3f(1, 1, 1);
-	
+	//TODO
 
 	glutSwapBuffers();
 }

@@ -76,11 +76,11 @@ bool cBicho::CollidesMapWall(int *map,int direction)
 
 	switch (direction) {
 	case UP:
-		//tile_y += height_tiles;
+		tile_y += 1;
 		//tile_x += width_tiles;
 		break;
 	case DOWN:
-		//tile_y -= height_tiles;
+		//tile_y --;
 		//tile_x -= width_tiles;
 	case LEFT:
 		break;
@@ -88,12 +88,19 @@ bool cBicho::CollidesMapWall(int *map,int direction)
 		tile_x += width_tiles;
 		break;
 	}
-	
-	for(j=0;j<height_tiles;j++)
-	{
-		if(map[ tile_x + ((tile_y+j)*SCENE_WIDTH) ] > 13*3-1)	return true;
+	if (direction == LEFT || direction == RIGHT) {
+		for (j = 0; j<height_tiles; j++)
+		{
+			if (map[tile_x + ((tile_y + j)*SCENE_WIDTH)] > 13 * 3 - 1)	return true;
+		}
 	}
-	
+
+	if (direction == UP || direction == DOWN) {
+		for (j = 0; j<width_tiles; j++)
+		{
+			if (map[tile_x + j+ (tile_y*SCENE_WIDTH)] > 13 * 3 - 1)	return true;
+		}
+	}
 	return false;
 }
 

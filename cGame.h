@@ -23,7 +23,7 @@ public:
 	void Finalize();
 
 	//When resize windows
-	void resize(int weight, int height);
+	void resize(int width, int height);
 
 	//Input
 	void ReadKeyboard(unsigned char key, int x, int y, bool press);

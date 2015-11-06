@@ -42,8 +42,8 @@ void AppIdle()
 	}
 }
 
-void AppResize(int weight, int height) {
-	Game.resize(weight, height);
+void AppResize(int width, int height) {
+	Game.resize(width, height);
 }
 
 void main(int argc, char** argv)
