@@ -47,7 +47,7 @@ bool cGame::Init()
 	if(!res) return false;
 	Player.SetTile(4,1);
 	Player.SetLife(3);
-	Player.SetWidthHeight(32,32);
+	Player.SetWidthHeight(16,25);
 	Player.SetState(STATE_LOOKDOWN);
 	Player.SetPosition(11*16, 16*16+8);
 	Player.setCurrentSceneId(0);

@@ -59,10 +59,10 @@ void cPlayer::Draw(int tex_id)
 
 			//player has atacking movement, so has to add frame
 
-		case STATE_SWORD_DOWN:  xo = (GetFrame()*(2 * bitx) + 0.5f*bitx);
+		case STATE_SWORD_DOWN:  xo = (GetFrame()*(2 * bitx));
 			yo = 12.0f*bity;
-			xf = xo + 1.5f*bitx;
-			yf = yo - (1.5f*bity);
+			xf = xo + 2.0f*bitx;
+			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			//if (GetFrame() == 6) SetState(STATE_LOOKDOWN);
 			break;
@@ -121,33 +121,39 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 
 
 	float tmpxo, tmpxf, tmpyo, tmpyf;
-	tmpxo = tmpxf = tmpyo = tmpyf = 0;
+	tmpxo = -6.2f;
+	tmpxf = 6.2f;
+	tmpyo = -3.1f;
+	tmpyf = 3.1f;
 	switch (s)
 	{
 	case STATE_SWORD_DOWN:
-		tmpyo = -14.15f;
-		tmpxf = 14.15f;
+		tmpyo = -20.30f;
+		tmpyf = 20.30f;
+		tmpxo = -20.30f;
+		tmpxf = 20.30f;
+
 		if (GetFrame() == 6) SetState(STATE_LOOKDOWN);
 		break;
 	case STATE_SWORD_LEFT:
-		tmpyo = -14.15f;
-		tmpyf = 14.15f;
-		tmpxo = -14.15f;
-		tmpxf = 14.15f;
+		tmpyo = -20.30f;
+		tmpyf = 20.30f;
+		tmpxo = -20.30f;
+		tmpxf = 20.30f;
 		if (GetFrame() == 6) SetState(STATE_LOOKLEFT);
 		break;
 	case STATE_SWORD_RIGHT:
-		tmpyo = -14.15f;
-		tmpyf = 14.15f;
-		tmpxo = -14.15f;
-		tmpxf = 14.15f;
+		tmpyo = -20.30f;
+		tmpyf = 20.30f;
+		tmpxo = -20.30f;
+		tmpxf = 20.30f;
 		if (GetFrame() == 6) SetState(STATE_LOOKRIGHT);
 		break;
 	case STATE_SWORD_UP:
-		tmpyo = -14.15f;
-		tmpyf = 14.15f;
-		tmpxo = -14.15f;
-		tmpxf = 14.15f;
+		tmpyo = -20.30f;
+		tmpyf = 20.30f;
+		tmpxo = -20.30f;
+		tmpxf = 20.30f;
 		if (GetFrame() == 5) SetState(STATE_LOOKUP);
 		//tmpyf = +14.15f;
 		//tmpxf = 28.3f;
