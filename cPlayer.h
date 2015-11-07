@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cBicho.h"
-
+#include "irrKlang.h"
 #define PLAYER_START_CX		3
 #define PLAYER_START_CY		2
 
@@ -16,7 +16,7 @@ public:
 
 	void DrawLife(int tex_id);
 
-	
+	irrklang::ISoundEngine* engine = irrklang::createIrrKlangDevice();
 	void setCurrentSceneId(int scene_id);
 	int getCurrentSceneId();
 

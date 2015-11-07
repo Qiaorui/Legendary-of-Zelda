@@ -64,7 +64,10 @@ void cPlayer::Draw(int tex_id)
 			xf = xo + 2.0f*bitx;
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
-			//if (GetFrame() == 6) SetState(STATE_LOOKDOWN);
+			if (GetFrame() == 1) {
+				engine->play2D("resource/LTTP_Sword1.wav", false);
+				//engine->play2D("resource/MC_Link_Sword2.wav", false);
+			}
 			break;
 
 		case STATE_SWORD_LEFT:  xo = (GetFrame()*(2 * bitx));
@@ -72,7 +75,10 @@ void cPlayer::Draw(int tex_id)
 			xf = xo + 2.0f*bitx;
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
-			//if (GetFrame() == 6) SetState(STATE_LOOKLEFT);
+			if (GetFrame() == 1) {
+				engine->play2D("resource/LTTP_Sword1.wav", false);
+				//engine->play2D("resource/MC_Link_Sword2.wav", false);
+			}
 			break;
 
 		case STATE_SWORD_UP:    xo = (GetFrame()*(2 * bitx));
@@ -80,7 +86,10 @@ void cPlayer::Draw(int tex_id)
 			xf = xo + 2.0f*bitx;
 			yf = yo - (2.0f*bity);
 			NextFrame(6);
-			//if (GetFrame() == 5) SetState(STATE_LOOKUP);
+			if (GetFrame() == 1) {
+				engine->play2D("resource/LTTP_Sword1.wav", false);
+				//engine->play2D("resource/MC_Link_Sword2.wav", false);
+			}
 			break;
 
 		case STATE_SWORD_RIGHT: xo = (GetFrame()*(2 * bitx));
@@ -88,7 +97,10 @@ void cPlayer::Draw(int tex_id)
 			xf = xo + 2.0f*bitx;
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
-			//if (GetFrame() == 6) SetState(STATE_LOOKRIGHT);
+			if (GetFrame() == 1) {
+				engine->play2D("resource/LTTP_Sword1.wav", false);
+				//engine->play2D("resource/MC_Link_Sword2.wav", false);
+			}
 			break;
 
 			//default:			xo = 91.0f/432.0f; yo = bity; break;

@@ -1,7 +1,7 @@
 #include "cGame.h"
 #include "Globals.h"
-
-
+#include "irrKlang.h"
+#pragma comment(lib, "irrklang.lib")
 cGame::cGame(void)
 {
 }
@@ -40,6 +40,9 @@ bool cGame::Init()
 	Scene[0].initialize(36,28);
 	res = Scene[0].LoadLevel(1);
 	if(!res) return false;
+	//sound init
+	irrklang::ISoundEngine* engine = irrklang::createIrrKlangDevice();
+	engine->play2D("resource/04.-overworld.mp3", true);
 
 	//Player initialization
 	res = Data.LoadImage(IMG_PLAYER,"linkSprite_basic.png",GL_RGBA);

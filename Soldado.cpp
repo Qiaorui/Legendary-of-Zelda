@@ -26,11 +26,11 @@ void Soldado::Draw(int tex_id)
 	switch (GetState())
 	{
 		//1
-	case STATE_LOOKLEFT:	xo = 181.0f;
+	case STATE_LOOKLEFT:	xo = 181.0f / 840.0f;
 		yo = 71.0f;
 		break;
 		//4
-	case STATE_LOOKRIGHT:	xo = 95.0f;
+	case STATE_LOOKRIGHT:	xo = 95.0f / 840.0f;
 		yo = 71.0f;
 		break;
 		//1..3
@@ -44,7 +44,7 @@ void Soldado::Draw(int tex_id)
 		NextFrame(8);
 		break;
 
-	case STATE_LOOKUP:      xo = 265.0f;
+	case STATE_LOOKUP:      xo = 265.0f / 840.0f;
 		yo = 71.0f;
 		break;
 
