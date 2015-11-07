@@ -139,31 +139,6 @@ void Soldado::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Soldado::DrawLife(int tex_id) { // has to be really imprioved, only to try how to do it!
-
-	float bitx = 57.0f / 170.0f;
-	float bity = 1.0f;
-	int x, y, l;
-	GetPosition(&x, &y);
-	int screen_x = x;
-	int screen_y = y;
-	GetLife(&l);
-
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, tex_id);
-	glBegin(GL_QUADS);
-	for (int i = 0; i < l; ++i) {
-		glTexCoord2f(0.0f, bity);	glVertex2i(screen_x + 80, screen_y + 100);  //Left Down
-		glTexCoord2f(bitx, bity);	glVertex2i(screen_x + 60, screen_y + 100); //right down
-		glTexCoord2f(bitx, 0.0f);	glVertex2i(screen_x + 60, screen_y + 120); //right up
-		glTexCoord2f(0.0f, 0.0f);	glVertex2i(screen_x + 80, screen_y + 120); //left up
-		screen_x += 20;
-	}
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-}
-
-
 int Soldado::getCurrentSceneId() {
 	return current_scene_id;
 }

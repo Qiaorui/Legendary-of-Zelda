@@ -15,7 +15,6 @@ DEBUG/
 *.user
 *.suo
 *.db
-*/
 .vs/
 .gitattributes
 
