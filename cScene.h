@@ -4,11 +4,11 @@
 
 //#define SCENE_Xo		(2*TILE_SIZE)
 //#define SCENE_Yo		TILE_SIZE
-#define SCENE_Xo		0
-#define SCENE_Yo		0
+//#define SCENE_Xo		0
+//#define SCENE_Yo		0
 
-#define SCENE_WIDTH		36
-#define SCENE_HEIGHT	28
+//#define SCENE_WIDTH		36
+//#define SCENE_HEIGHT	28
 
 #define FILENAME		"level"
 #define FILENAME_EXT	".txt"
@@ -24,7 +24,7 @@ public:
 	void initialize(int w, int h);
 	bool LoadLevel(int level);
 	void Draw(int tex_id);
-	int *GetMap();
+	vector<int> GetMap();
 	int getWidth();
 	int getHeight();
 	void setWidth(int w);
@@ -32,7 +32,8 @@ public:
 
 
 private:
-	int map[SCENE_WIDTH * SCENE_HEIGHT];	//scene
+	vector<int> map;
+	//int map[SCENE_WIDTH * SCENE_HEIGHT];	//scene
 	int id_DL;								//actual level display list
 	int width;
 	int height;

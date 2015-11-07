@@ -50,18 +50,18 @@ public:
 	void GetWidthHeight(int *w,int *h);
 
 	bool Collides(cRect *rc);
-	bool CollidesMapWall(int *map, int direction);
-	bool CollidesMapFloor(int *map);
+	bool CollidesMapWall(vector<int> map, int direction, int width);
+	//bool CollidesMapFloor(int *map);
 	void GetArea(cRect *rc);
 	void DrawRect(int tex_id,float xo,float yo,float xf,float yf);
-	void MoveRight(int *map);
-	void MoveLeft(int *map);
-	void MoveUp(int *map);
-	void MoveDown(int *map);
-	void SwordAttack(int *map);
-	void Jump(int *map);
+	void MoveRight(vector<int> map, int width);
+	void MoveLeft(vector<int> map, int width);
+	void MoveUp(vector<int> map, int width);
+	void MoveDown(vector<int> map, int width);
+	void SwordAttack();
+	//void Jump(int *map);
 	void Stop();
-	void Logic(int *map);
+	void Logic(vector<int> map, int width);
 
 	int  GetState();
 	void SetState(int s);

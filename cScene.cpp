@@ -12,6 +12,7 @@ cScene::~cScene(void)
 void cScene::initialize(int w, int h) {
 	width = w;
 	height = h;
+	map.resize(w*h);
 }
 
 bool cScene::LoadLevel(int level)
@@ -37,12 +38,12 @@ bool cScene::LoadLevel(int level)
 	glNewList(id_DL,GL_COMPILE);
 		glBegin(GL_QUADS);
 	
-			for(j=SCENE_HEIGHT-1;j>=0;j--)
+			for(j=height-1;j>=0;j--)
 			{
-				px=SCENE_Xo;
-				py=SCENE_Yo+(j*TILE_SIZE);
+				px=0;
+				py=0+(j*TILE_SIZE);
 
-				for(i=0;i<SCENE_WIDTH;i++)
+				for(i=0;i<width;i++)
 				{
 					while (tile != '(') {
 						fscanf(fd, "%c", &tile);
@@ -100,7 +101,7 @@ bool cScene::LoadLevel(int level)
 					}
 					
 
-					map[(j*SCENE_WIDTH) + i] = (row*13)+column;
+					map[(j*width) + i] = (row*13)+column;
 
 					coordx_tile = column*w;
 					coordy_tile = row*h;
@@ -144,7 +145,7 @@ void cScene::Draw(int tex_id)
 	glCallList(id_DL);
 	glDisable(GL_TEXTURE_2D);
 }
-int* cScene::GetMap()
+vector<int> cScene::GetMap()
 {
 	return map;
 }

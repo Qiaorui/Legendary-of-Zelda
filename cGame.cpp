@@ -28,7 +28,7 @@ bool cGame::Init()
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, GAME_WIDTH,0, GAME_HEIGHT,0,1);
+	glOrtho(0, 36*16,0, 28*16,0,1);
 	glMatrixMode(GL_MODELVIEW);
 	
 	glAlphaFunc(GL_GREATER, 0.05f);
@@ -45,11 +45,11 @@ bool cGame::Init()
 	res = Data.LoadImage(IMG_PLAYER,"linkSprite_basic.png",GL_RGBA);
 	res = Data.LoadImage(IMG_LIFE, "corazones_vida.png", GL_RGBA);
 	if(!res) return false;
-	Player.SetTile(4,1);
+	Player.SetTile(11,16);
 	Player.SetLife(3);
 	Player.SetWidthHeight(16,25);
 	Player.SetState(STATE_LOOKDOWN);
-	Player.SetPosition(11*16, 16*16+8);
+	//Player.SetPosition(11*16, 16*16+8);
 	Player.setCurrentSceneId(0);
 
 	return res;
@@ -88,18 +88,21 @@ bool cGame::Process()
 	if(keys[27])	res=false;
 	
 	int id = Player.getCurrentSceneId();
+	int w, h;
+	w = Scene[id].getWidth();
+	h = Scene[id].getHeight();
 
-	if(keys[GLUT_KEY_UP])			Player.MoveUp(Scene[id].GetMap());
-	else if (keys[GLUT_KEY_DOWN])	Player.MoveDown(Scene[id].GetMap());
-	else if(keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene[id].GetMap());
-	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap());
+	if(keys[GLUT_KEY_UP])			Player.MoveUp(Scene[id].GetMap(), w );
+	else if (keys[GLUT_KEY_DOWN])	Player.MoveDown(Scene[id].GetMap(), w );
+	else if(keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene[id].GetMap(), w );
+	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w );
 	else Player.Stop();
-	if (keys[GLUT_KEY_SPACEBAR])	Player.SwordAttack(Scene[id].GetMap());
+	if (keys[GLUT_KEY_SPACEBAR])	Player.SwordAttack();
 
 	
 	
 	//Game Logic
-	Player.Logic(Scene[id].GetMap());
+	Player.Logic(Scene[id].GetMap(), w );
 
 	return res;
 }
@@ -109,7 +112,7 @@ void setCamera(int x, int y) {
 	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(x - GAME_WIDTH / 2, x + GAME_WIDTH / 2, y - GAME_HEIGHT / 2, y + GAME_HEIGHT / 2, 0, 3);
+	glOrtho(x - GAME_WIDTH / 2, x + GAME_WIDTH / 2, y - GAME_HEIGHT / 2, y + GAME_HEIGHT / 2, 0, 1);
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -120,18 +123,18 @@ void cGame::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 
-
-	//Setting camera
+	int id = Player.getCurrentSceneId();
 	int x, y;
 	Player.GetPosition(&x, &y);
 	int w, h;
 	Player.GetWidthHeight(&w, &h);
+	//Setting camera
 	int cx, cy;
 	if ((x+w/2 - GAME_WIDTH / 2) < 0 ) cx = GAME_WIDTH / 2;
-	else if ((x+w/2 + GAME_WIDTH / 2) > Scene[0].getWidth() * TILE_SIZE) cx = Scene[0].getWidth() * TILE_SIZE - GAME_WIDTH / 2;
+	else if ((x+w/2 + GAME_WIDTH / 2) > Scene[id].getWidth() * TILE_SIZE) cx = Scene[id].getWidth() * TILE_SIZE - GAME_WIDTH / 2;
 	else cx = x+w/2;
 	if ((y +h/2- GAME_HEIGHT/2) < 0 ) cy = GAME_HEIGHT/2;
-	else if ( (y+h/2 + GAME_HEIGHT/2)> Scene[0].getHeight() * TILE_SIZE) cy = Scene[0].getHeight() *TILE_SIZE - GAME_HEIGHT/2;
+	else if ( (y+h/2 + GAME_HEIGHT/2)> Scene[id].getHeight() * TILE_SIZE) cy = Scene[id].getHeight() *TILE_SIZE - GAME_HEIGHT/2;
 	else cy = y+h/2;
 	setCamera(cx,cy);
 

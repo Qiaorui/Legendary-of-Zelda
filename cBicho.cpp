@@ -63,7 +63,8 @@ bool cBicho::Collides(cRect *rc)
 {
 	return ((x>rc->left) && (x+w<rc->right) && (y>rc->bottom) && (y+h<rc->top));
 }
-bool cBicho::CollidesMapWall(int *map,int direction)
+
+bool cBicho::CollidesMapWall(vector<int> map, int direction, int width)
 {
 	int tile_x,tile_y;
 	int j;
@@ -91,19 +92,20 @@ bool cBicho::CollidesMapWall(int *map,int direction)
 	if (direction == LEFT || direction == RIGHT) {
 		for (j = 0; j<height_tiles; j++)
 		{
-			if (map[tile_x + ((tile_y + j)*SCENE_WIDTH)] > 13 * 3 - 1)	return true;
+			if (map[tile_x + ((tile_y + j)*width)] > 13 * 3 - 1)	return true;
 		}
 	}
 
 	if (direction == UP || direction == DOWN) {
 		for (j = 0; j<width_tiles; j++)
 		{
-			if (map[tile_x + j+ (tile_y*SCENE_WIDTH)] > 13 * 3 - 1)	return true;
+			if (map[tile_x + j+ (tile_y*width)] > 13 * 3 - 1)	return true;
 		}
 	}
 	return false;
 }
 
+/*  Useless code
 bool cBicho::CollidesMapFloor(int *map)
 {
 	int tile_x,tile_y;
@@ -138,6 +140,7 @@ bool cBicho::CollidesMapFloor(int *map)
 	}
 	return on_base;
 }
+*/
 
 void cBicho::GetArea(cRect *rc)
 {
@@ -150,8 +153,8 @@ void cBicho::DrawRect(int tex_id,float xo,float yo,float xf,float yf)
 {
 	int screen_x,screen_y;
 
-	screen_x = x + SCENE_Xo;
-	screen_y = y + SCENE_Yo + (BLOCK_SIZE - TILE_SIZE);
+	screen_x = x;
+	screen_y = y;
 
 	glEnable(GL_TEXTURE_2D);
 	
@@ -166,7 +169,7 @@ void cBicho::DrawRect(int tex_id,float xo,float yo,float xf,float yf)
 	glDisable(GL_TEXTURE_2D);
 }
 
-void cBicho::MoveLeft(int *map)
+void cBicho::MoveLeft(vector<int> map, int width)
 {
 	int xaux;
 	
@@ -176,7 +179,7 @@ void cBicho::MoveLeft(int *map)
 		xaux = x;
 		x -= STEP_LENGTH;
 
-		if(CollidesMapWall(map,LEFT))
+		if(CollidesMapWall(map,LEFT,width))
 		{
 			x = xaux;
 			state = STATE_LOOKLEFT;
@@ -194,7 +197,7 @@ void cBicho::MoveLeft(int *map)
 		}
 	}
 }
-void cBicho::MoveRight(int *map)
+void cBicho::MoveRight(vector<int> map, int width)
 {
 	int xaux;
 
@@ -204,7 +207,7 @@ void cBicho::MoveRight(int *map)
 		xaux = x;
 		x += STEP_LENGTH;
 
-		if(CollidesMapWall(map,RIGHT))
+		if(CollidesMapWall(map,RIGHT,width))
 		{
 			x = xaux;
 			state = STATE_LOOKRIGHT;
@@ -225,7 +228,7 @@ void cBicho::MoveRight(int *map)
 }
 
 
-void cBicho::MoveUp(int *map)
+void cBicho::MoveUp(vector<int> map, int width)
 {
 	int yaux;
 
@@ -235,7 +238,7 @@ void cBicho::MoveUp(int *map)
 		yaux = y;
 		y += STEP_LENGTH;
 
-		if (CollidesMapWall(map,UP))
+		if (CollidesMapWall(map,UP,width))
 		{
 			y = yaux;
 			state = STATE_LOOKUP;
@@ -256,7 +259,7 @@ void cBicho::MoveUp(int *map)
 }
 
 
-void cBicho::MoveDown(int *map)
+void cBicho::MoveDown(vector<int> map, int width)
 {
 	int yaux;
 
@@ -266,7 +269,7 @@ void cBicho::MoveDown(int *map)
 		yaux = y;
 		y -= STEP_LENGTH;
 
-		if (CollidesMapWall(map, DOWN))
+		if (CollidesMapWall(map, DOWN, width))
 		{
 			y = yaux;
 			state = STATE_LOOKDOWN;
@@ -286,7 +289,7 @@ void cBicho::MoveDown(int *map)
 	}
 }
 
-void cBicho::SwordAttack(int *map)
+void cBicho::SwordAttack()
 {
 	printf("estat:"+ state);
 	if (state == STATE_LOOKDOWN) {
@@ -322,6 +325,8 @@ void cBicho::Stop()
 	else if (state == STATE_SWORD_UP && seq == 6)	state = STATE_LOOKUP;*/
 	
 }
+
+/*
 void cBicho::Jump(int *map)
 {
 	if(!jumping)
@@ -334,8 +339,11 @@ void cBicho::Jump(int *map)
 		}
 	}
 }
-void cBicho::Logic(int *map)
+*/
+
+void cBicho::Logic(vector<int> map, int width)
 {
+	/*
 	float alfa;
 
 	if(jumping)
@@ -359,7 +367,7 @@ void cBicho::Logic(int *map)
 			}
 		}
 	}
-	/*else
+	else
 	{
 		//Over floor?
 		if(!CollidesMapFloor(map))

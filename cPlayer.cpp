@@ -116,8 +116,8 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
     
 	GetPosition(&x, &y);
 	GetWidthHeight(&w, &h);
-	screen_x = x + SCENE_Xo;
-	screen_y = y + SCENE_Yo + (BLOCK_SIZE - TILE_SIZE);
+	screen_x = x ;
+	screen_y = y ;
 
 
 	float tmpxo, tmpxf, tmpyo, tmpyf;
@@ -179,8 +179,8 @@ void cPlayer::DrawLife(int tex_id){ // has to be really imprioved, only to try h
 	float bity = 1.0f;
 	int x, y, l;
 	GetPosition(&x, &y);
-	int screen_x = x + SCENE_Xo;
-	int screen_y = y + SCENE_Yo;
+	int screen_x = x ;
+	int screen_y = y ;
 	GetLife(&l);
 
 	glEnable(GL_TEXTURE_2D);
