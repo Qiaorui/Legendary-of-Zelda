@@ -79,19 +79,19 @@ bool cBicho::CollidesMapWall(vector<int> map, int direction, int width)
 	case UP:
 		tile_y += height_tiles;
 		//tile_x += width_tiles;
-		++width_tiles;
+		if(x % TILE_SIZE > 0) ++width_tiles;
 		break;
 	case DOWN:
 		//tile_y --;
 		//tile_x += width_tiles;
-		++width_tiles;
+		if (x % TILE_SIZE > 0) ++width_tiles;
 		break;
 	case LEFT:
-		++height_tiles;
+		if (y % TILE_SIZE > 0) ++height_tiles;
 		break;
 	case RIGHT:
 		tile_x += width_tiles;
-		++height_tiles;
+		if (y % TILE_SIZE > 0) ++height_tiles;
 		break;
 	}
 	/*
