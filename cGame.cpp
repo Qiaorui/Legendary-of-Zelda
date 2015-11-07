@@ -1,7 +1,7 @@
 #include "cGame.h"
 #include "Globals.h"
-#include "irrKlang.h"
-#pragma comment(lib, "irrklang.lib")
+#include "Sound.h"
+
 cGame::cGame(void)
 {
 }
@@ -41,9 +41,9 @@ bool cGame::Init()
 	res = Scene[0].LoadLevel(1);
 	if(!res) return false;
 	//sound init
-	irrklang::ISoundEngine* engine = irrklang::createIrrKlangDevice();
-	engine->play2D("resource/04.-overworld.mp3", true);
 
+	Sound::getInstance()->playBgm(SOUND_OVERLOAD);
+	
 	//Player initialization
 	res = Data.LoadImage(IMG_PLAYER,"linkSprite_basic.png",GL_RGBA);
 	res = Data.LoadImage(IMG_LIFE, "corazones_vida.png", GL_RGBA);
@@ -107,7 +107,6 @@ bool cGame::Process()
 	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w );
 	else Player.Stop();
 	if (keys[GLUT_KEY_SPACEBAR])	Player.SwordAttack();
-
 	
 	
 	//Game Logic

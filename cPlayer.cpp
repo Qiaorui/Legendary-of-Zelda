@@ -65,7 +65,8 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			if (GetFrame() == 1) {
-				engine->play2D("resource/LTTP_Sword1.wav", false);
+				Sound::getInstance()->play();
+				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
 			break;
@@ -76,7 +77,8 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			if (GetFrame() == 1) {
-				engine->play2D("resource/LTTP_Sword1.wav", false);
+				Sound::getInstance()->play();
+				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
 			break;
@@ -87,7 +89,8 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(6);
 			if (GetFrame() == 1) {
-				engine->play2D("resource/LTTP_Sword1.wav", false);
+				Sound::getInstance()->play();
+				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
 			break;
@@ -98,7 +101,8 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			if (GetFrame() == 1) {
-				engine->play2D("resource/LTTP_Sword1.wav", false);
+				Sound::getInstance()->play();
+				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
 			break;
