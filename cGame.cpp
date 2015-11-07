@@ -51,7 +51,13 @@ bool cGame::Init()
 	Player.SetState(STATE_LOOKDOWN);
 	//Player.SetPosition(11*16, 16*16+8);
 	Player.setCurrentSceneId(0);
-
+	//Enemies initialization
+	res = Data.LoadImage(IMG_ENEMIES, "Enemies.png", GL_RGBA);
+	if (!res) return false;
+	Soldier.SetTile(5, 5);
+	Soldier.SetLife(3);
+	Soldier.SetWidthHeight(16, 28);
+	Soldier.SetState(STATE_LOOKDOWN);
 	return res;
 }
 
@@ -144,6 +150,7 @@ void cGame::Render()
 	Scene[0].Draw(Data.GetID(IMG_OVERLOAD));
 	Player.Draw(Data.GetID(IMG_PLAYER));
 	Player.DrawLife(Data.GetID(IMG_LIFE));
+	Soldier.Draw(Data.GetID(IMG_ENEMIES));
 
 
 	//TODO temporal lines to test

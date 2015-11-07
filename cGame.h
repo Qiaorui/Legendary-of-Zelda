@@ -2,6 +2,7 @@
 
 #include "cScene.h"
 #include "cPlayer.h"
+#include "Soldado.h"
 #include "cData.h"
 
 //#define GAME_WIDTH	480
@@ -37,6 +38,7 @@ private:
 	unsigned char keys[256];
 	cScene Scene[NUM_SCENE];
 	cPlayer Player;
+	Soldado Soldier;
 	cData Data;
 };
 
