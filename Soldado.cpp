@@ -26,12 +26,12 @@ void Soldado::Draw(int tex_id)
 	switch (GetState())
 	{
 		//1
-	case STATE_LOOKLEFT:	xo = 181.0f / 840.0f;
-		yo = 71.0f;
+	case STATE_LOOKLEFT:	xo = 183.0f / 840.0f;
+		yo = 71.0f / 567.0f;
 		break;
 		//4
 	case STATE_LOOKRIGHT:	xo = 95.0f / 840.0f;
-		yo = 71.0f;
+		yo = 71.0f / 567.0f;
 		break;
 		//1..3
 	case STATE_WALKLEFT:	xo = (GetFrame()*bitx);
@@ -45,7 +45,7 @@ void Soldado::Draw(int tex_id)
 		break;
 
 	case STATE_LOOKUP:      xo = 265.0f / 840.0f;
-		yo = 71.0f;
+		yo = 71.0f / 567.0f;
 		break;
 
 	case STATE_LOOKDOWN:    xo = 16.0f/840.0f;
@@ -149,3 +149,13 @@ void Soldado::setCurrentSceneId(int scene_id) {
 	current_scene_id = scene_id;
 }
 
+void Soldado::Logic(vector<int> map, int width) {
+	int x, y;
+	GetPosition(&x, &y);
+
+	
+	++y;
+		SetPosition(x, y);
+
+	
+}

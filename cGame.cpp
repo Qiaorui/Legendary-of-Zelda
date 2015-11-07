@@ -60,7 +60,7 @@ bool cGame::Init()
 	Soldier.SetTile(12, 18);
 	Soldier.SetLife(3);
 	Soldier.SetWidthHeight(16, 28);
-	Soldier.SetState(STATE_LOOKDOWN);
+	Soldier.SetState(STATE_LOOKRIGHT);
 	return res;
 }
 
@@ -112,7 +112,7 @@ bool cGame::Process()
 	
 	//Game Logic
 	Player.Logic(Scene[id].GetMap(), w );
-
+	Soldier.Logic(Scene[id].GetMap(), w);
 	return res;
 }
 

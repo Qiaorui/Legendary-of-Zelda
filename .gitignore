@@ -17,7 +17,6 @@ DEBUG/
 *.db
 .vs/
 .gitattributes
-*/
 
 !*.cpp
 !*.h

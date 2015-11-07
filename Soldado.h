@@ -13,6 +13,7 @@ public:
 
 
 	void setCurrentSceneId(int scene_id);
+	void Logic(vector<int> map, int width);
 	int getCurrentSceneId();
 
 private:
