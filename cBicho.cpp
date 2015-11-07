@@ -67,41 +67,58 @@ bool cBicho::Collides(cRect *rc)
 bool cBicho::CollidesMapWall(vector<int> map, int direction, int width)
 {
 	int tile_x,tile_y;
-	int j;
+	int i,j;
 	int width_tiles,height_tiles;
 
 	tile_x = x / TILE_SIZE;
 	tile_y = y / TILE_SIZE;
-	width_tiles  = w / TILE_SIZE;
-	height_tiles = h / TILE_SIZE;
+	width_tiles  = w / TILE_SIZE ;
+	height_tiles = h / TILE_SIZE ;
 
 	switch (direction) {
 	case UP:
 		tile_y += height_tiles;
 		//tile_x += width_tiles;
+		++width_tiles;
 		break;
 	case DOWN:
 		//tile_y --;
-		//tile_x -= width_tiles;
+		//tile_x += width_tiles;
+		++width_tiles;
+		break;
 	case LEFT:
+		++height_tiles;
 		break;
 	case RIGHT:
 		tile_x += width_tiles;
+		++height_tiles;
 		break;
 	}
+	/*
+	for ( i = 0; i < height_tiles; i++)
+	{
+		for (j = 0; j < width_tiles; j++)
+		{
+			if (map[(tile_y + i)*width + tile_x + j] > 13 * 4 - 1) return true;
+		}
+	}
+	*/
+	//TODO UP and RIGHT movement still bugging. Fix tomorrow
 	if (direction == LEFT || direction == RIGHT) {
 		for (j = 0; j<height_tiles; j++)
 		{
-			if (map[tile_x + ((tile_y + j)*width)] > 13 * 3 - 1)	return true;
+			if (map[tile_x + ((tile_y + j)*width)] > 13 * 4 - 1)	return true;
 		}
 	}
 
 	if (direction == UP || direction == DOWN) {
 		for (j = 0; j<width_tiles; j++)
 		{
-			if (map[tile_x + j+ (tile_y*width)] > 13 * 3 - 1)	return true;
+			if (map[tile_x + j+ (tile_y*width)] > 13 * 4 - 1)	return true;
 		}
 	}
+
+
 	return false;
 }
 
