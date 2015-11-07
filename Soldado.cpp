@@ -8,6 +8,7 @@ Soldado::~Soldado(){}
 
 void Soldado::Draw(int tex_id)
 {
+	
 	//if (tex_id == 2) {
 	float xo, yo, xf, yf;
 	xf = yf = -1;
@@ -18,7 +19,7 @@ void Soldado::Draw(int tex_id)
 	float bitxp = 16.0f / 840.0f;
 	//BLOCK_SIZE = 16, FILE_SIZE = 303
 	// 16 / 303 = 0.053
-	float bity =  28.0f / 1200.0f;
+	float bity =  28.0f / 567.0f;
 	float  bitx = 0.0f;
 	int frame = GetFrame();
 
@@ -47,8 +48,8 @@ void Soldado::Draw(int tex_id)
 		yo = 71.0f;
 		break;
 
-	case STATE_LOOKDOWN:    xo = 16.0f;
-		yo = 71.0f;
+	case STATE_LOOKDOWN:    xo = 16.0f/840.0f;
+		yo = 71.0f/567.0f;
 		break;
 
 	case STATE_WALKUP:		xo = (GetFrame()*bitx);
@@ -111,7 +112,8 @@ void Soldado::Draw(int tex_id)
 	//else {
 	//	DrawLife(tex_id);
 	//}
-
+	
+//DrawRect(tex_id, 16.0f / 840.0f, 71.0 / 567.0f, 31.0f / 840.0f, 44.0f / 567.0f, 0, 0);
 }
 
 void Soldado::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame)

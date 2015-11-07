@@ -54,7 +54,7 @@ bool cGame::Init()
 	//Enemies initialization
 	res = Data.LoadImage(IMG_ENEMIES, "Enemies.png", GL_RGBA);
 	if (!res) return false;
-	Soldier.SetTile(5, 5);
+	Soldier.SetTile(12, 18);
 	Soldier.SetLife(3);
 	Soldier.SetWidthHeight(16, 28);
 	Soldier.SetState(STATE_LOOKDOWN);
