@@ -61,6 +61,8 @@ bool cGame::Init()
 	Soldier.SetLife(3);
 	Soldier.SetWidthHeight(16, 28);
 	Soldier.SetState(STATE_WALKLEFT);
+	Plant.SetTile(15, 10);
+	Plant.SetWidthHeight(18, 17);
 	return res;
 }
 
@@ -153,6 +155,7 @@ void cGame::Render()
 	Player.Draw(Data.GetID(IMG_PLAYER));
 	Player.DrawLife(Data.GetID(IMG_LIFE), cx, cy);
 	Soldier.Draw(Data.GetID(IMG_ENEMIES));
+	Plant.Draw(Data.GetID(IMG_ENEMIES));
 
 
 	//TODO temporal lines to test

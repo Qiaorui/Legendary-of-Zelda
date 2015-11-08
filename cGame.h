@@ -3,6 +3,7 @@
 #include "cScene.h"
 #include "cPlayer.h"
 #include "Soldado.h"
+#include "PlantaBomba.h"
 #include "cData.h"
 
 //#define GAME_WIDTH	480
@@ -39,6 +40,7 @@ private:
 	cScene Scene[NUM_SCENE];
 	cPlayer Player;
 	Soldado Soldier;
+	PlantaBomba Plant;
 	cData Data;
 };
 

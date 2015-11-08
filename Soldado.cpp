@@ -62,39 +62,6 @@ void Soldado::Draw(int tex_id)
 		NextFrame(2); // si se pone 4 gira la cabeza
 		break;
 
-		//player has atacking movement, so has to add frame
-
-	case STATE_SWORD_DOWN:  xo = (GetFrame()*(2 * bitx));
-		yo = 12.0f*bity;
-		xf = xo + 2.0f*bitx;
-		yf = yo - (2.0f*bity);
-		NextFrame(7);
-		//if (GetFrame() == 6) SetState(STATE_LOOKDOWN);
-		break;
-
-	case STATE_SWORD_LEFT:  xo = (GetFrame()*(2 * bitx));
-		yo = 6.0f*bity;
-		xf = xo + 2.0f*bitx;
-		yf = yo - (2.0f*bity);
-		NextFrame(7);
-		//if (GetFrame() == 6) SetState(STATE_LOOKLEFT);
-		break;
-
-	case STATE_SWORD_UP:    xo = (GetFrame()*(2 * bitx));
-		yo = 10.0f*bity;
-		xf = xo + 2.0f*bitx;
-		yf = yo - (2.0f*bity);
-		NextFrame(6);
-		//if (GetFrame() == 5) SetState(STATE_LOOKUP);
-		break;
-
-	case STATE_SWORD_RIGHT: xo = (GetFrame()*(2 * bitx));
-		yo = 8.0f*bity;
-		xf = xo + 2.0f*bitx;
-		yf = yo - (2.0f*bity);
-		NextFrame(7);
-		//if (GetFrame() == 6) SetState(STATE_LOOKRIGHT);
-		break;
 
 		//default:			xo = 91.0f/432.0f; yo = bity; break;
 	}
