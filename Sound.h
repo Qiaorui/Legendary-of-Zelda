@@ -12,7 +12,8 @@ class Sound
 public:
 	static Sound* getInstance();
 	void playBgm(int id);
-	void play();
+	void playSword();
+	void playBow();
 
 private:
 	static Sound *instance;

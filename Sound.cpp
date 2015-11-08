@@ -27,6 +27,10 @@ void Sound::playBgm(int id) {
 	
 }
 
-void Sound::play() {
+void Sound::playSword() {
 	engine->play2D("resource/LTTP_Sword1.wav", false);
+}
+
+void Sound::playBow() {
+	engine->play2D("resource/LTTP_Arrow_Shoot.wav", false);
 }

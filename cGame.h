@@ -3,6 +3,7 @@
 #include "cScene.h"
 #include "cPlayer.h"
 #include "Soldado.h"
+#include "Golem.h"
 #include "PlantaBomba.h"
 #include "cData.h"
 
@@ -40,6 +41,7 @@ private:
 	cScene Scene[NUM_SCENE];
 	cPlayer Player;
 	Soldado Soldier;
+	Golem Ciclope;
 	PlantaBomba Plant;
 	cData Data;
 };

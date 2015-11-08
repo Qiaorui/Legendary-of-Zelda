@@ -77,6 +77,8 @@ bool cGame::Init()
 	Player.setCurrentSceneId(0);
 	//Enemies initialization
 	res = Data.LoadImage(IMG_ENEMIES, "Enemies.png", GL_RGBA);
+	res = Data.LoadImage(IMG_GOLEM, "Golem.png", GL_RGBA);
+	res = Data.LoadImage(IMG_ITEMS, "items.png", GL_RGBA);
 	if (!res) return false;
 	Soldier.SetTile(12, 18);
 	Soldier.SetLife(3);
@@ -84,6 +86,9 @@ bool cGame::Init()
 	Soldier.SetState(STATE_WALKLEFT);
 	Plant.SetTile(15, 10);
 	Plant.SetWidthHeight(18, 17);
+	Ciclope.SetTile(10, 4);
+	Ciclope.SetWidthHeight(24, 25);
+	Ciclope.SetState(STATE_SLEEP);
 	return res;
 }
 
@@ -185,8 +190,10 @@ void cGame::Render()
 	
 	Player.Draw(Data.GetID(IMG_PLAYER));
 	Player.DrawLife(Data.GetID(IMG_LIFE), cx, cy);
+	Player.DrawObject(Data.GetID(IMG_ITEMS), cx, cy);
 	Soldier.Draw(Data.GetID(IMG_ENEMIES));
 	Plant.Draw(Data.GetID(IMG_ENEMIES));
+	Ciclope.Draw(Data.GetID(IMG_GOLEM));
 
 
 	//TODO temporal lines to test

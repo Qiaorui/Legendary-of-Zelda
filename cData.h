@@ -12,6 +12,8 @@
 #define IMG_LIFE	2
 #define IMG_ENEMIES	3
 #define IMG_EAST_PALACE 4
+#define IMG_GOLEM 5
+#define IMG_ITEMS 6
 
 /*
 #define IMG_ENEMY1	2

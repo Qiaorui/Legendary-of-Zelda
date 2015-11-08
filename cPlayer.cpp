@@ -59,24 +59,32 @@ void cPlayer::Draw(int tex_id)
 		case STATE_BOW_LEFT:	xo = 9 * bitx + GetFrame()*bitx;
 			yo = 3.0f*bity;
 			NextFrame(3);
-			
+			if (GetFrame() == 1) {
+				Sound::getInstance()->playBow();
+			}
 			break;
 			//4..6
 		case STATE_BOW_RIGHT:	xo = 9 * bitx + GetFrame()*bitx;
 			yo = 2.0f*bity;
 			NextFrame(3);
-			
+			if (GetFrame() == 1) {
+				Sound::getInstance()->playBow();
+			}
 			break;
 		case STATE_BOW_UP:		xo = 9 * bitx + GetFrame()*bitx;
 			yo = 4.0f*bity;
 			NextFrame(3);
-			
+			if (GetFrame() == 1) {
+				Sound::getInstance()->playBow();
+			}
 			break;
 
 		case STATE_BOW_DOWN:    xo = 9 * bitx + GetFrame()*bitx;
 			yo = bity;
 			NextFrame(3);
-			
+			if (GetFrame() == 1) {
+				Sound::getInstance()->playBow();
+			}
 			break;
 			//player has atacking movement, so has to add frame
 
@@ -86,7 +94,7 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->play();
+				Sound::getInstance()->playSword();
 				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
@@ -98,7 +106,7 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->play();
+				Sound::getInstance()->playSword();
 				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
@@ -110,7 +118,7 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(6);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->play();
+				Sound::getInstance()->playSword();
 				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
@@ -122,7 +130,7 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->play();
+				Sound::getInstance()->playSword();
 				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
@@ -241,6 +249,24 @@ void cPlayer::DrawLife(int tex_id, int cx, int cy){ // has to be really impriove
 		glTexCoord2f(x0, y0);	glVertex2i(cx + 80, cy + 120); //left up
 		cx += 20;
 	}
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
+
+void cPlayer::DrawObject(int tex_id, int cx, int cy) { // has to be really imprioved, only to try how to do it!
+
+	float bitx = 16.0f / 608.0f;
+	float bity = 16.0f / 152.0f;	
+
+	float x0 = bitx;
+	float y0 = 0;
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex_id);
+	glBegin(GL_QUADS);
+		glTexCoord2f(x0, y0 + bity);	glVertex2i(cx - 100, cy + 100);  //Left Down
+		glTexCoord2f(x0 + bitx, y0 + bity);	glVertex2i(cx - 80, cy + 100); //right down
+		glTexCoord2f(x0 + bitx, y0);	glVertex2i(cx - 80, cy + 120); //right up
+		glTexCoord2f(x0, y0);	glVertex2i(cx - 100, cy + 120); //left up
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 }

@@ -23,7 +23,9 @@
 #define STATE_BOW_DOWN    12
 #define STATE_BOW_UP      13
 #define STATE_BOW_RIGHT   14
-#define STATE_BOW_LEFT    15 
+#define STATE_BOW_LEFT    15
+#define STATE_SLEEP       16
+#define STATE_OPEN        17
 
 #define UP 0
 #define DOWN 1
