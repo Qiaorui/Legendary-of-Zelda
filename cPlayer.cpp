@@ -189,25 +189,24 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	glDisable(GL_TEXTURE_2D);
 }
 
-void cPlayer::DrawLife(int tex_id){ // has to be really imprioved, only to try how to do it!
+void cPlayer::DrawLife(int tex_id, int cx, int cy){ // has to be really imprioved, only to try how to do it!
 
-	float bitx = 57.0f / 170.0f;
-	float bity = 1.0f;
-	int x, y, l;
-	GetPosition(&x, &y);
-	int screen_x = x ;
-	int screen_y = y ;
+	float bitx = 43.0f / 170.0f;
+	float bity = 39.0f/ 57.0f;
+	int l;
+	
 	GetLife(&l);
-
+	float x0 = 7.0f / 170.0f;
+	float y0 = 11.0f / 57.0f;
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex_id);
 	glBegin(GL_QUADS);
 	for (int i = 0; i < l; ++i) {
-		glTexCoord2f(0.0f, bity);	glVertex2i(screen_x + 80, screen_y + 100);  //Left Down
-		glTexCoord2f(bitx, bity);	glVertex2i(screen_x + 60, screen_y + 100); //right down
-		glTexCoord2f(bitx, 0.0f);	glVertex2i(screen_x + 60, screen_y + 120); //right up
-		glTexCoord2f(0.0f, 0.0f);	glVertex2i(screen_x + 80, screen_y + 120); //left up
-		screen_x += 20;
+		glTexCoord2f(x0, y0 + bity);	glVertex2i(cx + 80, cy + 105);  //Left Down
+		glTexCoord2f(x0 + bitx,y0 + bity);	glVertex2i(cx + 65, cy + 105); //right down
+		glTexCoord2f(x0 + bitx, y0);	glVertex2i(cx + 65, cy + 120); //right up
+		glTexCoord2f(x0, y0);	glVertex2i(cx + 80, cy + 120); //left up
+		cx += 20;
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);

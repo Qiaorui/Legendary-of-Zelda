@@ -60,7 +60,7 @@ bool cGame::Init()
 	Soldier.SetTile(12, 18);
 	Soldier.SetLife(3);
 	Soldier.SetWidthHeight(16, 28);
-	Soldier.SetState(STATE_LOOKRIGHT);
+	Soldier.SetState(STATE_WALKLEFT);
 	return res;
 }
 
@@ -145,13 +145,13 @@ void cGame::Render()
 	else if ( (y+h/2 + GAME_HEIGHT/2)> Scene[id].getHeight() * TILE_SIZE) cy = Scene[id].getHeight() *TILE_SIZE - GAME_HEIGHT/2;
 	else cy = y+h/2;
 	setCamera(cx,cy);
-
+	
 
 
 	glLoadIdentity();
 	Scene[0].Draw(Data.GetID(IMG_OVERLOAD));
 	Player.Draw(Data.GetID(IMG_PLAYER));
-	Player.DrawLife(Data.GetID(IMG_LIFE));
+	Player.DrawLife(Data.GetID(IMG_LIFE), cx, cy);
 	Soldier.Draw(Data.GetID(IMG_ENEMIES));
 
 

@@ -18,5 +18,6 @@ public:
 
 private:
 	int current_scene_id;
+	int delaymove;
 };
 

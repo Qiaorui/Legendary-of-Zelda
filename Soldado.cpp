@@ -34,14 +34,14 @@ void Soldado::Draw(int tex_id)
 		yo = 71.0f / 567.0f;
 		break;
 		//1..3
-	case STATE_WALKLEFT:	xo = (GetFrame()*bitx);
-		yo = 3.0f*bity;
-		NextFrame(8);
+	case STATE_WALKLEFT:	xo = 183.0f / 840.0f + (GetFrame()*(bitxl + 4.0f / 840.0f));
+		yo = 71.0f / 567.0f;
+		NextFrame(2); // con 4 gira la cabeza
 		break;
 		//4..6
-	case STATE_WALKRIGHT:	xo = (GetFrame()*bitx);
-		yo = 2.0f*bity;
-		NextFrame(8);
+	case STATE_WALKRIGHT:	xo = 95.0f / 840.0f + (GetFrame()*(bitxl + 2.0f / 840.0f));
+		yo = 71.0f / 567.0f;
+		NextFrame(2); // con 4 gira la cabeza
 		break;
 
 	case STATE_LOOKUP:      xo = 265.0f / 840.0f;
@@ -52,14 +52,14 @@ void Soldado::Draw(int tex_id)
 		yo = 71.0f/567.0f;
 		break;
 
-	case STATE_WALKUP:		xo = (GetFrame()*bitx);
-		yo = 4.0f*bity;
-		NextFrame(8);
+	case STATE_WALKUP:	 xo = 265.0f / 840.0f + (GetFrame()*(bitxp + 4.0f / 840.0f));
+		yo = 71.0f / 567.0f;
+		NextFrame(2); // con 4 gira la cabeza
 		break;
 
-	case STATE_WALKDOWN:    xo = (GetFrame()*bitx);
-		yo = bity;
-		NextFrame(8);
+	case STATE_WALKDOWN:    xo = 16.0f / 840.0f + (GetFrame()*(bitxp + 4.0f / 840.0f));
+		yo = 71.0f / 567.0f;
+		NextFrame(2); // si se pone 4 gira la cabeza
 		break;
 
 		//player has atacking movement, so has to add frame
@@ -100,7 +100,7 @@ void Soldado::Draw(int tex_id)
 	}
 
 	//When we are not atacking 
-	if (GetState() == STATE_LOOKDOWN || GetState() == STATE_LOOKUP){
+	if (GetState() == STATE_LOOKDOWN || GetState() == STATE_LOOKUP || GetState() == STATE_WALKUP || GetState() == STATE_WALKDOWN){
 		xf = xo + bitxp;
 	}
 	else {
@@ -150,12 +150,30 @@ void Soldado::setCurrentSceneId(int scene_id) {
 }
 
 void Soldado::Logic(vector<int> map, int width) {
-	int x, y;
-	GetPosition(&x, &y);
-
-	
-	++y;
+	++delaymove;
+	if (delaymove >= FRAME_DELAY) {
+		int x, y;
+		GetPosition(&x, &y);
+		switch (rand() % 4) {
+		case 0:
+			++x;
+			SetState(STATE_WALKRIGHT);
+			break;
+		case 1:
+			--x;
+			SetState(STATE_WALKLEFT);
+			break;
+		case 2:
+			++y;
+			SetState(STATE_WALKUP);
+			break;
+		case 3:
+			--y;
+			SetState(STATE_WALKDOWN);
+			break;
+		}
 		SetPosition(x, y);
-
+		delaymove = 0;
+	}
 	
 }
