@@ -144,6 +144,11 @@ void cScene::Draw(int tex_id)
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 	glCallList(id_DL);
 	glDisable(GL_TEXTURE_2D);
+	for (int i = 0; i < senders.size(); i++)
+	{
+		senders[i].draw();
+	}
+
 }
 vector<int> cScene::GetMap()
 {
@@ -164,4 +169,12 @@ void cScene::setWidth(int w) {
 
 void cScene::setHeight(int h) {
 	height = h;
+}
+
+void cScene::addSender(int x, int y, int scene, int ToX, int ToY, int state, float xo, float xf, float yo, float yf, int w, int h, int tex_id) {
+	Sender sender(scene, ToX, ToY, state);
+	sender.SetTile(x, y);
+	sender.SetWidthHeight(w, h);
+	sender.setImage(xo, xf, yo, yf, tex_id);
+	senders.push_back(sender);
 }

@@ -19,6 +19,29 @@ void cGame::resize(int width, int height) {
 	glViewport((width - min) / 2, (height - min) / 2, min, min);
 }
 
+
+bool sceneInitialize(cData& data, cScene* scene) {
+	bool res = true;
+	res = data.LoadImage(IMG_OVERLOAD, "LinkToPast-Overworld.png", GL_RGBA);
+	if (!res) return false;
+	scene[0].initialize(36, 28);
+	scene[0].addSender(30, 26, 
+						1, 12, 2, STATE_LOOKUP, 
+						9 * 16 / 208.0f, 11 * 16/208.0f, 3 * 16/384.0f, 2 * 16/384.0f, 
+						32, 16, 
+						data.GetID(IMG_OVERLOAD));
+	res = scene[0].LoadLevel(1);
+	if (!res) return false;
+	res = data.LoadImage(IMG_EAST_PALACE, "Eastern-Palace.png", GL_RGBA);
+	if (!res) return false;
+	scene[1].initialize(25,4);
+	res = scene[1].LoadLevel(2);
+	if (!res) return false;
+
+	return res;
+}
+
+
 bool cGame::Init()
 {
 	bool res=true;
@@ -35,11 +58,9 @@ bool cGame::Init()
 	glEnable(GL_ALPHA_TEST);
 
 	//Scene initialization
-	res = Data.LoadImage(IMG_OVERLOAD,"LinkToPast-Overworld.png",GL_RGBA);
-	if(!res) return false;
-	Scene[0].initialize(36,28);
-	res = Scene[0].LoadLevel(1);
-	if(!res) return false;
+	res = sceneInitialize(Data, Scene);
+	if (!res) return false;
+
 	//sound init
 
 	Sound::getInstance()->playBgm(SOUND_OVERLOAD);

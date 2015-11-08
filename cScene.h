@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cTexture.h"
+#include "Sender.h"
 
 //#define SCENE_Xo		(2*TILE_SIZE)
 //#define SCENE_Yo		TILE_SIZE
@@ -29,10 +30,12 @@ public:
 	int getHeight();
 	void setWidth(int w);
 	void setHeight(int h);
+	void addSender(int x, int y, int scene, int ToX, int ToY, int state, float xo, float xf, float yo, float yf, int w, int h, int tex_id);
 
 
 private:
 	vector<int> map;
+	vector<Sender> senders;
 	//int map[SCENE_WIDTH * SCENE_HEIGHT];	//scene
 	int id_DL;								//actual level display list
 	int width;
