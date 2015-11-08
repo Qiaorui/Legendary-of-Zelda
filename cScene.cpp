@@ -15,7 +15,7 @@ void cScene::initialize(int w, int h) {
 	map.resize(w*h);
 }
 
-bool cScene::LoadLevel(int level)
+bool cScene::LoadLevel(int level, float tilewidth, float tileheight)
 {
 	bool res;
 	FILE *fd;
@@ -24,8 +24,8 @@ bool cScene::LoadLevel(int level)
 	char tile = ' ';
 	float coordx_tile, coordy_tile;
 	int row, column;
-	float h = 16.0f / 384.0f;
-	float w = 16.0f / 208.0f;
+	float h = 16.0f / tileheight;
+	float w = 16.0f / tilewidth;
 	res=true;
 	string buffer = "";
 	if(level<10) sprintf(file,"%s0%d%s",(char *)FILENAME,level,(char *)FILENAME_EXT);
@@ -67,7 +67,7 @@ bool cScene::LoadLevel(int level)
 					}*/
 	
 					//Tiles = 1,2,3,...
-					if (row == 0 && column == 3) {
+					if (row == 0 && column == 3 && level == 1) {
 						int tmp = rand() % 16;
 						switch (tmp)
 						{
@@ -177,4 +177,13 @@ void cScene::addSender(int x, int y, int scene, int ToX, int ToY, int state, flo
 	sender.SetWidthHeight(w, h);
 	sender.setImage(xo, xf, yo, yf, tex_id);
 	senders.push_back(sender);
+}
+
+
+void cScene::logic(cPlayer* player) {
+	for (int i = 0; i < senders.size(); i++)
+	{
+		senders[i].logic(player);
+	}
+
 }

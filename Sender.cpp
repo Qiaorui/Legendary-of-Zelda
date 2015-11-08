@@ -26,3 +26,14 @@ void Sender::setImage(float xo, float xf, float yo, float yf, int tex_id) {
 	this->yf = yf;
 	this->tex_id = tex_id;
 }
+
+void Sender::logic(cPlayer* player) {
+	cRect body;
+	player->GetArea(&body);
+
+	if (Collides(&body)) {
+		player->setCurrentSceneId(sentToScene);
+		player->SetTile(sentToX, sentToY);
+		player->SetState(newDirection);
+	}
+}

@@ -2,6 +2,7 @@
 
 #include "cTexture.h"
 #include "Sender.h"
+#include "cPlayer.h"
 
 //#define SCENE_Xo		(2*TILE_SIZE)
 //#define SCENE_Yo		TILE_SIZE
@@ -23,7 +24,7 @@ public:
 	cScene(void);
 	virtual ~cScene(void);
 	void initialize(int w, int h);
-	bool LoadLevel(int level);
+	bool LoadLevel(int level, float tilewidth, float tileheight);
 	void Draw(int tex_id);
 	vector<int> GetMap();
 	int getWidth();
@@ -31,6 +32,7 @@ public:
 	void setWidth(int w);
 	void setHeight(int h);
 	void addSender(int x, int y, int scene, int ToX, int ToY, int state, float xo, float xf, float yo, float yf, int w, int h, int tex_id);
+	void logic(cPlayer* player);
 
 
 private:

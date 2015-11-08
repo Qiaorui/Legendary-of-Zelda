@@ -72,6 +72,7 @@ public:
 	void NextFrame(int max);
 	int  GetFrame();
 	
+
 private:
 	int x,y;
 	int w,h;

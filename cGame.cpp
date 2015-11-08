@@ -30,12 +30,12 @@ bool sceneInitialize(cData& data, cScene* scene) {
 						9 * 16 / 208.0f, 11 * 16/208.0f, 3 * 16/384.0f, 2 * 16/384.0f, 
 						32, 16, 
 						data.GetID(IMG_OVERLOAD));
-	res = scene[0].LoadLevel(1);
+	res = scene[0].LoadLevel(1,208.0f,384.0f);
 	if (!res) return false;
 	res = data.LoadImage(IMG_EAST_PALACE, "Eastern-Palace.png", GL_RGBA);
 	if (!res) return false;
 	scene[1].initialize(25,4);
-	res = scene[1].LoadLevel(2);
+	res = scene[1].LoadLevel(2,208.0f,496.0f);
 	if (!res) return false;
 
 	return res;
@@ -135,6 +135,7 @@ bool cGame::Process()
 	//Game Logic
 	Player.Logic(Scene[id].GetMap(), w );
 	Soldier.Logic(Scene[id].GetMap(), w);
+	Scene[id].logic(&Player);
 	return res;
 }
 
@@ -172,7 +173,16 @@ void cGame::Render()
 
 
 	glLoadIdentity();
-	Scene[0].Draw(Data.GetID(IMG_OVERLOAD));
+	switch (id)
+	{
+	case 0:
+		Scene[0].Draw(Data.GetID(IMG_OVERLOAD));
+	case 1:
+		Scene[1].Draw(Data.GetID(IMG_EAST_PALACE));
+	default:
+		break;
+	}
+	
 	Player.Draw(Data.GetID(IMG_PLAYER));
 	Player.DrawLife(Data.GetID(IMG_LIFE), cx, cy);
 	Soldier.Draw(Data.GetID(IMG_ENEMIES));
