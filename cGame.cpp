@@ -45,7 +45,7 @@ bool cGame::Init()
 	Sound::getInstance()->playBgm(SOUND_OVERLOAD);
 	
 	//Player initialization
-	res = Data.LoadImage(IMG_PLAYER,"linkSprite_basic.png",GL_RGBA);
+	res = Data.LoadImage(IMG_PLAYER,"linkSpritepro.png",GL_RGBA);
 	res = Data.LoadImage(IMG_LIFE, "corazones_vida.png", GL_RGBA);
 	if(!res) return false;
 	Player.SetTile(11,16);
@@ -109,7 +109,7 @@ bool cGame::Process()
 	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w );
 	else Player.Stop();
 	if (keys[GLUT_KEY_SPACEBAR])	Player.SwordAttack();
-	
+	else if (keys[98])              Player.BowAttack();
 	
 	//Game Logic
 	Player.Logic(Scene[id].GetMap(), w );

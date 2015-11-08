@@ -56,7 +56,28 @@ void cPlayer::Draw(int tex_id)
 			yo = bity;
 			NextFrame(8);
 			break;
+		case STATE_BOW_LEFT:	xo = 9 * bitx + GetFrame()*bitx;
+			yo = 3.0f*bity;
+			NextFrame(3);
+			
+			break;
+			//4..6
+		case STATE_BOW_RIGHT:	xo = 9 * bitx + GetFrame()*bitx;
+			yo = 2.0f*bity;
+			NextFrame(3);
+			
+			break;
+		case STATE_BOW_UP:		xo = 9 * bitx + GetFrame()*bitx;
+			yo = 4.0f*bity;
+			NextFrame(3);
+			
+			break;
 
+		case STATE_BOW_DOWN:    xo = 9 * bitx + GetFrame()*bitx;
+			yo = bity;
+			NextFrame(3);
+			
+			break;
 			//player has atacking movement, so has to add frame
 
 		case STATE_SWORD_DOWN:  xo = (GetFrame()*(2 * bitx));
@@ -174,6 +195,18 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 		//tmpyf = +14.15f;
 		//tmpxf = 28.3f;
 		break;
+	case STATE_BOW_DOWN:
+		if (GetFrame() == 2) SetState(STATE_LOOKDOWN);
+		break;
+	case STATE_BOW_UP:
+		if (GetFrame() == 2) SetState(STATE_LOOKUP);
+		break;
+	case STATE_BOW_RIGHT:
+		if (GetFrame() == 2) SetState(STATE_LOOKRIGHT);
+		break;
+	case STATE_BOW_LEFT:
+		if (GetFrame() == 2) SetState(STATE_LOOKLEFT);
+		break;
 	}
 
 	glEnable(GL_TEXTURE_2D);
@@ -221,3 +254,46 @@ void cPlayer::setCurrentSceneId(int scene_id) {
 	current_scene_id = scene_id;
 }
 
+void cPlayer::SwordAttack()
+{
+ 	int state = GetState();
+	int seq = GetFrame();
+	if (state == STATE_LOOKDOWN) {
+		SetState(STATE_SWORD_DOWN);
+		seq = 0;
+	}
+	else if (state == STATE_LOOKUP) {
+		SetState(STATE_SWORD_UP);
+		seq = 0;
+	}
+	else if (state == STATE_LOOKRIGHT) {
+		SetState(STATE_SWORD_RIGHT);
+		seq = 0;
+	}
+	else if (state == STATE_LOOKLEFT) {
+		SetState(STATE_SWORD_LEFT);
+		seq = 0;
+	}
+}
+
+void cPlayer::BowAttack()
+{
+	int state = GetState();
+	int seq = GetFrame();
+	if (state == STATE_LOOKDOWN) {
+		SetState(STATE_BOW_DOWN);
+		seq = 0;
+	}
+	else if (state == STATE_LOOKUP) {
+		SetState(STATE_BOW_UP);
+		seq = 0;
+	}
+	else if (state == STATE_LOOKRIGHT) {
+		SetState(STATE_BOW_RIGHT);
+		seq = 0;
+	}
+	else if (state == STATE_LOOKLEFT) {
+		SetState(STATE_BOW_LEFT);
+		seq = 0;
+	}
+}

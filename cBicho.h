@@ -19,7 +19,11 @@
 #define STATE_SWORD_DOWN    8
 #define STATE_SWORD_UP      9
 #define STATE_SWORD_RIGHT   10
-#define STATE_SWORD_LEFT    11  
+#define STATE_SWORD_LEFT    11 
+#define STATE_BOW_DOWN    12
+#define STATE_BOW_UP      13
+#define STATE_BOW_RIGHT   14
+#define STATE_BOW_LEFT    15 
 
 #define UP 0
 #define DOWN 1
@@ -58,7 +62,6 @@ public:
 	void MoveLeft(vector<int> map, int width);
 	void MoveUp(vector<int> map, int width);
 	void MoveDown(vector<int> map, int width);
-	void SwordAttack();
 	//void Jump(int *map);
 	void Stop();
 	void Logic(vector<int> map, int width);

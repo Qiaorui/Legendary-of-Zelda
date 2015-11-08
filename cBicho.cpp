@@ -306,26 +306,6 @@ void cBicho::MoveDown(vector<int> map, int width)
 	}
 }
 
-void cBicho::SwordAttack()
-{
-	printf("estat:"+ state);
-	if (state == STATE_LOOKDOWN) {
-		state = STATE_SWORD_DOWN;
-		seq = 0;
-	}
-	else if (state == STATE_LOOKUP) {
-		state = STATE_SWORD_UP;
-		seq = 0;
-	}
-	else if (state == STATE_LOOKRIGHT) {
-		state = STATE_SWORD_RIGHT;
-		seq = 0;
-	}
-	else if (state == STATE_LOOKLEFT) {
-		state = STATE_SWORD_LEFT;
-		seq = 0;
-	}
-}
 
 void cBicho::Stop()
 {
