@@ -59,10 +59,13 @@ void cBicho::GetWidthHeight(int *width,int *height)
 	*width = w;
 	*height = h;
 }
+
+
+
 bool cBicho::Collides(cRect *rc)
 {
-	bool collidesX = (x >= rc->left && x < rc->right) || (x + w > rc->left && x + w <= rc->right);
-	bool collidesY = (y >= rc->bottom && y < rc->top) || (y + h >= rc->bottom && y + h <= rc->top);
+	bool collidesX = (x < rc->right) && (x + w > rc->left);
+	bool collidesY = (y < rc->top) && (y + h > rc->bottom);
 	return collidesX && collidesY;
 }
 

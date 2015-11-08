@@ -34,7 +34,7 @@ bool sceneInitialize(cData& data, cScene* scene) {
 	if (!res) return false;
 	res = data.LoadImage(IMG_EAST_PALACE, "Eastern-Palace.png", GL_RGBA);
 	if (!res) return false;
-	scene[1].initialize(25,4);
+	scene[1].initialize(25,5);
 	res = scene[1].LoadLevel(2,208.0f,496.0f);
 	if (!res) return false;
 
