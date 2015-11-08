@@ -34,7 +34,7 @@ bool sceneInitialize(cData& data, cScene* scene) {
 	if (!res) return false;
 	res = data.LoadImage(IMG_EAST_PALACE, "Eastern-Palace.png", GL_RGBA);
 	if (!res) return false;
-	scene[1].initialize(25,5);
+	scene[1].initialize(26,16);
 	res = scene[1].LoadLevel(2,208.0f,496.0f);
 	if (!res) return false;
 
@@ -182,8 +182,10 @@ void cGame::Render()
 	{
 	case 0:
 		Scene[0].Draw(Data.GetID(IMG_OVERLOAD));
+		break;
 	case 1:
 		Scene[1].Draw(Data.GetID(IMG_EAST_PALACE));
+		break;
 	default:
 		break;
 	}
