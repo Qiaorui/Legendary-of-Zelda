@@ -106,16 +106,8 @@ bool cBicho::CollidesMapWall(vector<int> map, int direction, int width)
 		if (y % TILE_SIZE > 0) ++height_tiles;
 		break;
 	}
-	/*
-	for ( i = 0; i < height_tiles; i++)
-	{
-		for (j = 0; j < width_tiles; j++)
-		{
-			if (map[(tile_y + i)*width + tile_x + j] > 13 * 4 - 1) return true;
-		}
-	}
-	*/
-	//TODO UP and RIGHT movement still bugging. Fix tomorrow
+
+
 	if (direction == LEFT || direction == RIGHT) {
 		for (j = 0; j<height_tiles; j++)
 		{

@@ -96,6 +96,7 @@
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cTexture.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GLUTMain.cpp" />
     <ClCompile Include="Golem.cpp" />
     <ClCompile Include="PlantaBomba.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="cPlayer.h" />
     <ClInclude Include="cScene.h" />
     <ClInclude Include="cTexture.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Golem.h" />
     <ClInclude Include="PlantaBomba.h" />

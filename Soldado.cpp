@@ -108,13 +108,6 @@ void Soldado::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	glDisable(GL_TEXTURE_2D);
 }
 
-int Soldado::getCurrentSceneId() {
-	return current_scene_id;
-}
-
-void Soldado::setCurrentSceneId(int scene_id) {
-	current_scene_id = scene_id;
-}
 
 void Soldado::Logic(vector<int> map, int width) {
 	++delaymove;

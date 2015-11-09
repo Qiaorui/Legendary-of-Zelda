@@ -53,13 +53,6 @@ void PlantaBomba::DrawRect(int tex_id, float xo, float yo, float xf, float yf, i
 	glDisable(GL_TEXTURE_2D);
 }
 
-int PlantaBomba::getCurrentSceneId() {
-	return current_scene_id;
-}
-
-void PlantaBomba::setCurrentSceneId(int scene_id) {
-	current_scene_id = scene_id;
-}
 
 void PlantaBomba::Logic(vector<int> map, int width) {
 	++delaymove;

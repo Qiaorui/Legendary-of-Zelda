@@ -225,6 +225,7 @@ void cGame::Render()
 
 
 	//TODO temporal lines to test
+	/*
 	glBegin(GL_LINES);
 	glColor3f(1,0,0);
 	glVertex2d(x,y+h);
@@ -239,6 +240,7 @@ void cGame::Render()
 	glVertex2d(x, y + GAME_HEIGHT/2);
 	glEnd();
 	glColor3f(1, 1, 1);
+	*/
 	//TODO
 
 	glutSwapBuffers();
