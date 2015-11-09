@@ -150,6 +150,10 @@ void cScene::Draw(int tex_id)
 	{
 		senders[i].draw();
 	}
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		enemies[i]->Draw();
+	}
 
 }
 vector<int> cScene::GetMap()
@@ -186,6 +190,45 @@ void cScene::logic(cPlayer* player) {
 	for (int i = 0; i < senders.size(); i++)
 	{
 		senders[i].logic(player);
+	}
+
+}
+
+void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
+	
+	int id = enemies.size();
+	
+	switch (enemyType)
+	{
+	case SOLDADO:
+
+
+			enemies.push_back(new Soldado);
+			enemies[id]->SetTile(x,y);
+			enemies[id]->SetLife(3);
+			enemies[id]->SetWidthHeight(16, 28);
+			enemies[id]->SetState(STATE_LOOKDOWN);
+			enemies[id]->setImage(tex_id);
+
+		break;
+	case PLANTABOMBA:
+			enemies.push_back(new PlantaBomba);
+			enemies[id]->SetTile(x,y);
+			enemies[id]->SetLife(3);
+			enemies[id]->SetWidthHeight(18,17);
+			enemies[id]->SetState(STATE_LOOKDOWN);
+			enemies[id]->setImage(tex_id);
+		break;
+	case GOLEM:
+			enemies.push_back(new Golem);
+			enemies[id]->SetTile(x,y);
+			enemies[id]->SetLife(3);
+			enemies[id]->SetWidthHeight(24, 25);
+			enemies[id]->SetState(STATE_LOOKDOWN);
+			enemies[id]->setImage(tex_id);
+		break;
+	default:
+		break;
 	}
 
 }

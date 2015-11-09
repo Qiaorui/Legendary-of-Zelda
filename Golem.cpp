@@ -5,7 +5,7 @@
 Golem::Golem(){}
 
 Golem::~Golem(){}
-void Golem::Draw(int tex_id)
+void Golem::Draw()
 {
 
 	//if (tex_id == 2) {
