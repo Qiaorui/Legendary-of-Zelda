@@ -25,19 +25,43 @@ bool sceneInitialize(cData& data, cScene* scene) {
 	res = data.LoadImage(IMG_OVERLOAD, "LinkToPast-Overworld.png", GL_RGBA);
 	if (!res) return false;
 	scene[0].initialize(36, 28);
-	scene[0].addSender(30, 26, 
-						1, 12, 2, STATE_LOOKUP, 
-						9 * 16 / 208.0f, 11 * 16/208.0f, 3 * 16/384.0f, 2 * 16/384.0f, 
-						32, 16, 
-						data.GetID(IMG_OVERLOAD));
+	scene[0].addSender(30, 26,															//position in tile
+						1, 12, 2, STATE_LOOKUP,											//scene id, position x, y, state
+						9 * 16 / 208.0f, 11 * 16/208.0f, 3 * 16/384.0f, 2 * 16/384.0f,  //xo,xf,yo,yf
+						32, 16,															//w, h
+						data.GetID(IMG_OVERLOAD));										// img id
 	res = scene[0].LoadLevel(1,208.0f,384.0f);
 	if (!res) return false;
 	res = data.LoadImage(IMG_EAST_PALACE, "Eastern-Palace.png", GL_RGBA);
 	if (!res) return false;
 	scene[1].initialize(26,16);
+	scene[1].addSender(12, 1,															//position in tile
+						0, 30, 24, STATE_LOOKDOWN,												//scene id, position x, y, state
+						0, 16 / 208.0f, 16 / 496.0f, 0,  //xo,xf,yo,yf
+							16, 16,															//w, h
+						data.GetID(IMG_EAST_PALACE));										// img id
+	scene[1].addSender(13, 1,															//position in tile
+		0, 30, 24, STATE_LOOKDOWN,												//scene id, position x, y, state
+		0, 16 / 208.0f, 16 / 496.0f, 0 ,  //xo,xf,yo,yf
+		16, 16,															//w, h
+		data.GetID(IMG_EAST_PALACE));										// img id
+	scene[1].addSender(12, 14,															//position in tile
+		2, 15, 3, STATE_LOOKUP,											//scene id, position x, y, state
+		11 * 16 / 208.0f, 13 * 16 / 208.0f, 1 * 16 / 496.0f, 0 * 16 / 496.0f,  //xo,xf,yo,yf
+		32, 16,															//w, h
+		data.GetID(IMG_EAST_PALACE));										// img id
+
+
 	res = scene[1].LoadLevel(2,208.0f,496.0f);
 	if (!res) return false;
-
+	scene[2].initialize(32, 32);
+	scene[2].addSender(15, 1,															//position in tile
+		1, 12, 12, STATE_LOOKDOWN,											//scene id, position x, y, state
+		3 * 16 / 208.0f, 5 * 16 / 208.0f, 0 * 16 / 496.0f, 2 * 16 / 496.0f,  //xo,xf,yo,yf
+		32, 32,															//w, h
+		data.GetID(IMG_EAST_PALACE));										// img id
+		
+	res = scene[2].LoadLevel(3, 208.0f, 496.0f);
 	return res;
 }
 
@@ -186,6 +210,8 @@ void cGame::Render()
 	case 1:
 		Scene[1].Draw(Data.GetID(IMG_EAST_PALACE));
 		break;
+	case 2:
+		Scene[2].Draw(Data.GetID(IMG_EAST_PALACE));
 	default:
 		break;
 	}

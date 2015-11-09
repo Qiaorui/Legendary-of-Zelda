@@ -23,5 +23,6 @@ DEBUG/
 !corona.*
 !/resource/*
 !2DEngine.vcproj
+!2DEngine.vcxproj
 !GL*/**
 
