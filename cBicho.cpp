@@ -119,14 +119,14 @@ bool cBicho::CollidesMapWall(vector<int> map, int direction, int width)
 	if (direction == LEFT || direction == RIGHT) {
 		for (j = 0; j<height_tiles; j++)
 		{
-			if (map[tile_x + ((tile_y + j)*width)] > 13 * 4 - 1)	return true;
+			if (map[tile_x + ((tile_y + j)*width)])	return true;
 		}
 	}
 
 	if (direction == UP || direction == DOWN) {
 		for (j = 0; j<width_tiles; j++)
 		{
-			if (map[tile_x + j+ (tile_y*width)] > 13 * 4 - 1)	return true;
+			if (map[tile_x + j+ (tile_y*width)])	return true;
 		}
 	}
 

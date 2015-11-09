@@ -60,11 +60,6 @@ bool cScene::LoadLevel(int level, float tilewidth, float tileheight)
 					}
 					column = stoi(buffer);
 					buffer.clear();
-					/*if(tile==' ')
-					{
-						//Tiles must be != 0 !!!
-						map[(j*SCENE_WIDTH)+i]=0;
-					}*/
 	
 					//Tiles = 1,2,3,...
 					if (row == 0 && column == 3 && level == 1) {
@@ -100,8 +95,15 @@ bool cScene::LoadLevel(int level, float tilewidth, float tileheight)
 						}
 					}
 					
-
-					map[(j*width) + i] = (row*13)+column;
+					if (level == 1) {
+						if (row < 4) map[(j*width) + i] = 0;
+						else map[(j*width) + i] = 1;
+					}
+					else {
+						if (row < 7) map[(j*width) + i] = 0;
+						else map[(j*width) + i] = 1;
+					}
+					//map[(j*width) + i] = (row*13)+column;
 
 					coordx_tile = column*w;
 					coordy_tile = row*h;
