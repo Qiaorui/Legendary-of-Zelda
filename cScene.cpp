@@ -191,6 +191,10 @@ void cScene::logic(cPlayer* player) {
 	{
 		senders[i].logic(player);
 	}
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		enemies[i]->Logic(GetMap(), player);
+	}
 
 }
 
@@ -207,7 +211,7 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 			enemies[id]->SetTile(x,y);
 			enemies[id]->SetLife(3);
 			enemies[id]->SetWidthHeight(16, 28);
-			enemies[id]->SetState(STATE_LOOKDOWN);
+			enemies[id]->SetState(STATE_WALKDOWN);
 			enemies[id]->setImage(tex_id);
 
 		break;
@@ -224,7 +228,7 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 			enemies[id]->SetTile(x,y);
 			enemies[id]->SetLife(3);
 			enemies[id]->SetWidthHeight(24, 25);
-			enemies[id]->SetState(STATE_LOOKDOWN);
+			enemies[id]->SetState(STATE_WALKDOWN);
 			enemies[id]->setImage(tex_id);
 		break;
 	default:

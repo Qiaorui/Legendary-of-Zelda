@@ -34,3 +34,6 @@ void Sound::playSword() {
 void Sound::playBow() {
 	engine->play2D("resource/LTTP_Arrow_Shoot.wav", false);
 }
+void Sound::playDamage() {
+	engine->play2D("resource/LTTP_Link_Hurt.wav", false);
+}

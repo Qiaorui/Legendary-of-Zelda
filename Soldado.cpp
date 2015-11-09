@@ -2,7 +2,9 @@
 
 
 
-Soldado::Soldado(){}
+Soldado::Soldado(){
+	delaymove = 10;
+}
 
 Soldado::~Soldado(){}
 
@@ -109,9 +111,29 @@ void Soldado::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 }
 
 
-void Soldado::Logic(vector<int> map, int width) {
+void Soldado::Logic(vector<int> map, cPlayer* player) {
+	//comprobar si colisiona con link//////////
+	cRect body;
+	player->GetArea(&body);
+	if (delaymove < 10) {
+		int ex, ey, px, py;
+		player->GetPosition(&px, &py);
+		GetPosition(&ex, &ey);
+		if (px < ex) px = px - 1;
+		else px = px + 1;
+		if (py < ey) py = py - 1;
+		else py =py + 1;
+		player->SetPosition(px, py);
+	}
+	else if (Collides(&body)) {
+		Sound::getInstance()->playDamage();
+		int l;
+		player->GetLife(&l);
+		player->SetLife(l - 1);
+		delaymove = 0;
+	}
 	++delaymove;
-	if (delaymove >= FRAME_DELAY) {
+	if (delaymove >= FRAME_DELAY + 10) {
 		int x, y;
 		GetPosition(&x, &y);
 		switch (rand() % 4) {
@@ -133,7 +155,7 @@ void Soldado::Logic(vector<int> map, int width) {
 			break;
 		}
 		SetPosition(x, y);
-		delaymove = 0;
+		delaymove = 10;
 	}
 	
 }

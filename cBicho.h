@@ -2,6 +2,7 @@
 
 #include "cTexture.h"
 #include "Globals.h"
+#include "Sound.h"
 
 #define FRAME_DELAY		8
 #define STEP_LENGTH		2
