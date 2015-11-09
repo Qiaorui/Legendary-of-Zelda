@@ -150,6 +150,10 @@ void cScene::Draw(int tex_id)
 	{
 		senders[i].draw();
 	}
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		enemies[i].Draw();
+	}
 
 }
 vector<int> cScene::GetMap()
@@ -186,6 +190,31 @@ void cScene::logic(cPlayer* player) {
 	for (int i = 0; i < senders.size(); i++)
 	{
 		senders[i].logic(player);
+	}
+
+}
+
+void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
+	switch (enemyType)
+	{
+	case SOLDADO:
+		if (enemyType == SOLDADO) {
+			Soldado soldier;
+			soldier.SetTile(x, y);
+			soldier.SetLife(3);
+			soldier.SetWidthHeight(16, 28);
+			soldier.SetState(STATE_LOOKDOWN);
+			soldier.setImage(tex_id);
+			enemies.push_back(soldier);
+		}
+		break;
+	case PLANTABOMBA:
+
+		break;
+	case GOLEM:
+		break;
+	default:
+		break;
 	}
 
 }

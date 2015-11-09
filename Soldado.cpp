@@ -6,7 +6,7 @@ Soldado::Soldado(){}
 
 Soldado::~Soldado(){}
 
-void Soldado::Draw(int tex_id)
+void Soldado::Draw()
 {
 	
 	//if (tex_id == 2) {

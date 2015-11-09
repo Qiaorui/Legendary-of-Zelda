@@ -81,9 +81,28 @@ bool cGame::Init()
 	glAlphaFunc(GL_GREATER, 0.05f);
 	glEnable(GL_ALPHA_TEST);
 
+
+
+
 	//Scene initialization
 	res = sceneInitialize(Data, Scene);
 	if (!res) return false;
+
+	//Enemies initialization
+	res = Data.LoadImage(IMG_ENEMIES, "Enemies.png", GL_RGBA);
+	res = Data.LoadImage(IMG_GOLEM, "Golem.png", GL_RGBA);
+	res = Data.LoadImage(IMG_ITEMS, "items.png", GL_RGBA);
+	if (!res) return false;
+	Scene[0].addEnemy(SOLDADO, 12, 17, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(PLANTABOMBA, 15, 10, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(GOLEM, 10, 4, Data.GetID(IMG_GOLEM));
+	/*Plant.SetTile(15, 10);
+	Plant.SetWidthHeight(18, 17);
+	Ciclope.SetTile(10, 4);
+	Ciclope.SetWidthHeight(24, 25);
+	Ciclope.SetState(STATE_SLEEP);
+	*/
+
 
 	//sound init
 
@@ -99,20 +118,7 @@ bool cGame::Init()
 	Player.SetState(STATE_LOOKDOWN);
 	//Player.SetPosition(11*16, 16*16+8);
 	Player.setCurrentSceneId(0);
-	//Enemies initialization
-	res = Data.LoadImage(IMG_ENEMIES, "Enemies.png", GL_RGBA);
-	res = Data.LoadImage(IMG_GOLEM, "Golem.png", GL_RGBA);
-	res = Data.LoadImage(IMG_ITEMS, "items.png", GL_RGBA);
-	if (!res) return false;
-	Soldier.SetTile(12, 18);
-	Soldier.SetLife(3);
-	Soldier.SetWidthHeight(16, 28);
-	Soldier.SetState(STATE_WALKLEFT);
-	Plant.SetTile(15, 10);
-	Plant.SetWidthHeight(18, 17);
-	Ciclope.SetTile(10, 4);
-	Ciclope.SetWidthHeight(24, 25);
-	Ciclope.SetState(STATE_SLEEP);
+
 	return res;
 }
 
@@ -163,7 +169,7 @@ bool cGame::Process()
 	
 	//Game Logic
 	Player.Logic(Scene[id].GetMap(), w );
-	Soldier.Logic(Scene[id].GetMap(), w);
+	//Soldier.Logic(Scene[id].GetMap(), w);
 	Scene[id].logic(&Player);
 	return res;
 }
@@ -219,9 +225,9 @@ void cGame::Render()
 	Player.Draw(Data.GetID(IMG_PLAYER));
 	Player.DrawLife(Data.GetID(IMG_LIFE), cx, cy);
 	Player.DrawObject(Data.GetID(IMG_ITEMS), cx, cy);
-	Soldier.Draw(Data.GetID(IMG_ENEMIES));
-	Plant.Draw(Data.GetID(IMG_ENEMIES));
-	Ciclope.Draw(Data.GetID(IMG_GOLEM));
+	//Soldier.Draw(Data.GetID(IMG_ENEMIES));
+	//Plant.Draw(Data.GetID(IMG_ENEMIES));
+	//Ciclope.Draw(Data.GetID(IMG_GOLEM));
 
 
 	//TODO temporal lines to test

@@ -4,7 +4,7 @@
 PlantaBomba::PlantaBomba(){}
 PlantaBomba::~PlantaBomba(){}
 
-void PlantaBomba::Draw(int tex_id)
+void PlantaBomba::Draw()
 {
 
 	//if (tex_id == 2) {
