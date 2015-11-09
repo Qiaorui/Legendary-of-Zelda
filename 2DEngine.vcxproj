@@ -44,9 +44,9 @@
     <OutDir>Debug\</OutDir>
     <IntDir>Debug\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\code\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\code\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
-    <ExecutablePath>D:\code\Legendary-of-Zelda\GL Files\dll;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Users\Alex\git\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Alex\git\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>C:\Users\Alex\git\Legendary-of-Zelda\GL Files\dll;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Release\</OutDir>
