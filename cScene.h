@@ -46,7 +46,7 @@ public:
 private:
 	vector<int> map;
 	vector<Sender> senders;
-	vector<Enemy> enemies;
+	vector<Enemy*> enemies;
 	//int map[SCENE_WIDTH * SCENE_HEIGHT];	//scene
 	int id_DL;								//actual level display list
 	int width;

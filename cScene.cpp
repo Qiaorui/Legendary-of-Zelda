@@ -152,7 +152,7 @@ void cScene::Draw(int tex_id)
 	}
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		enemies[i].Draw();
+		enemies[i]->Draw();
 	}
 
 }
@@ -195,23 +195,37 @@ void cScene::logic(cPlayer* player) {
 }
 
 void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
+	
+	int id = enemies.size();
+	
 	switch (enemyType)
 	{
 	case SOLDADO:
-		if (enemyType == SOLDADO) {
-			Soldado soldier;
-			soldier.SetTile(x, y);
-			soldier.SetLife(3);
-			soldier.SetWidthHeight(16, 28);
-			soldier.SetState(STATE_LOOKDOWN);
-			soldier.setImage(tex_id);
-			enemies.push_back(soldier);
-		}
-		break;
-	case PLANTABOMBA:
+
+
+			enemies.push_back(new Soldado);
+			enemies[id]->SetTile(x,y);
+			enemies[id]->SetLife(3);
+			enemies[id]->SetWidthHeight(16, 28);
+			enemies[id]->SetState(STATE_LOOKDOWN);
+			enemies[id]->setImage(tex_id);
 
 		break;
+	case PLANTABOMBA:
+			enemies.push_back(new PlantaBomba);
+			enemies[id]->SetTile(x,y);
+			enemies[id]->SetLife(3);
+			enemies[id]->SetWidthHeight(18,17);
+			enemies[id]->SetState(STATE_LOOKDOWN);
+			enemies[id]->setImage(tex_id);
+		break;
 	case GOLEM:
+			enemies.push_back(new Golem);
+			enemies[id]->SetTile(x,y);
+			enemies[id]->SetLife(3);
+			enemies[id]->SetWidthHeight(24, 25);
+			enemies[id]->SetState(STATE_LOOKDOWN);
+			enemies[id]->setImage(tex_id);
 		break;
 	default:
 		break;
