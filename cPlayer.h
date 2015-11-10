@@ -4,7 +4,7 @@
 #include "Sound.h"
 #include "Espada.h"
 #include "Flecha.h"
-
+#include "Enemy.h"
 
 #define PLAYER_START_CX		3
 #define PLAYER_START_CY		2
@@ -31,6 +31,7 @@ public:
 	void setItemTexId(int id);
 	void setWeapon(int weapon);
 	void changeWeapon();
+    void logic(vector<int> map, int width , vector<Enemy*> enemies);
 
 private:
 	Espada espada;

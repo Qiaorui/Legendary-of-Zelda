@@ -54,7 +54,7 @@ void PlantaBomba::DrawRect(int tex_id, float xo, float yo, float xf, float yf, i
 }
 
 
-void PlantaBomba::Logic(vector<int> map, int width, cPlayer* player) {
+void PlantaBomba::Logic(vector<int> map, int width, cBicho* player) {
 	++delaymove;
 	if (delaymove >= FRAME_DELAY) {
 		int x, y;

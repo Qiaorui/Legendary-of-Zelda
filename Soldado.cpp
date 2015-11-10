@@ -111,7 +111,7 @@ void Soldado::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 }
 
 
-void Soldado::Logic(vector<int> map, int width, cPlayer* player) {
+void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 	//comprobar si colisiona con link//////////
 	cRect body;
 	player->GetArea(&body);

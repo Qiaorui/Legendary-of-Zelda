@@ -244,3 +244,8 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 	}
 
 }
+
+
+vector<Enemy*> cScene::getEnemies(){
+	return enemies;
+}

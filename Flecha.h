@@ -15,7 +15,7 @@ class Flecha :
 public:
 	Flecha();
 	~Flecha();
-	//void Logic(vector<int> map, int width, vector<Enemy*> enemies);
+	void Logic(vector<int> map, int width, vector<cBicho*> enemies);
 	void Draw();
 
 

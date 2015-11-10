@@ -10,8 +10,8 @@ Flecha::Flecha()
 Flecha::~Flecha()
 {
 }
-/*
-void Flecha::Logic(vector<int> map, int width, vector<Enemy*> enemies)
+
+void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 {
 	int x, y;
 	GetPosition(&x, &y);
@@ -36,7 +36,7 @@ void Flecha::Logic(vector<int> map, int width, vector<Enemy*> enemies)
 
 
 }
-*/
+
 
 void Flecha::Draw() { 
 

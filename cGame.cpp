@@ -191,7 +191,7 @@ bool cGame::Process()
 	}
 	
 	//Game Logic
-	Player.Logic(Scene[id].GetMap(), w );
+	Player.logic(Scene[id].GetMap(), w , Scene[id].getEnemies());
 	//Soldier.Logic(Scene[id].GetMap(), w);
 	Scene[id].logic(&Player);
 	return res;

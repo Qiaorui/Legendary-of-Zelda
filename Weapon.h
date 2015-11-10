@@ -1,5 +1,5 @@
 #pragma once
-//#include "Enemy.h"
+
 #include "cBicho.h"
 
 class Weapon :
@@ -8,7 +8,7 @@ class Weapon :
 public:
 	Weapon();
 	~Weapon();
-	//virtual void Logic(vector<int> map, int width, vector<Enemy*> enemies);
+	virtual void Logic(vector<int> map, int width, vector<cBicho*> enemies);
 	virtual void Draw();
 	void setAtk(int atk);
 	int getAtk();

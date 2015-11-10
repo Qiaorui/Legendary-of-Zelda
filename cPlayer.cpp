@@ -2,7 +2,9 @@
 
 #include "cPlayer.h"
 
-cPlayer::cPlayer() {}
+cPlayer::cPlayer() {
+	espada.SetWidthHeight(10,10);
+}
 cPlayer::~cPlayer(){}
 
 void cPlayer::Draw(int tex_id)
@@ -250,6 +252,9 @@ void DrawObject(int tex_id, int cx, int cy) { // has to be really imprioved, onl
 }
 
 void cPlayer::DrawStatus(int cx, int cy){ // has to be really imprioved, only to try how to do it!
+		//TODO temporary fix
+	DrawObject(item_tex_id, cx, cy);
+
 
 	float bitx = 43.0f / 170.0f;
 	float bity = 39.0f/ 57.0f;
@@ -270,8 +275,7 @@ void cPlayer::DrawStatus(int cx, int cy){ // has to be really imprioved, only to
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 
-	//TODO temporary fix
-	DrawObject(item_tex_id, cx, cy);
+
 }
 
 
@@ -292,19 +296,24 @@ void cPlayer::SwordAttack()
 	if (state == STATE_LOOKDOWN) {
 		SetState(STATE_SWORD_DOWN);
 		seq = 0;
+		espada.SetPosition(x,y-16);
 	}
 	else if (state == STATE_LOOKUP) {
 		SetState(STATE_SWORD_UP);
 		seq = 0;
+		espada.SetPosition(x,y+16);
 	}
 	else if (state == STATE_LOOKRIGHT) {
 		SetState(STATE_SWORD_RIGHT);
 		seq = 0;
+		espada.SetPosition(x+16,y);
 	}
 	else if (state == STATE_LOOKLEFT) {
 		SetState(STATE_SWORD_LEFT);
 		seq = 0;
+		espada.SetPosition(x-16,y);
 	}
+	espada.setActive(true);
 }
 
 void cPlayer::BowAttack()
@@ -351,5 +360,14 @@ void cPlayer::changeWeapon() {
 	default:
 		break;
 	}
+
+}
+
+void cPlayer::logic(vector<int> map, int width , vector<Enemy*> enemies){
+	vector<cBicho*> bichos;
+	for(int i =0; i < enemies.size(); ++i) {
+		bichos.push_back(enemies[i]);
+	}
+	if(espada.isActive()) espada.Logic(map, width, bichos);
 
 }
