@@ -96,13 +96,7 @@ bool cGame::Init()
 	Scene[0].addEnemy(SOLDADO, 12, 17, Data.GetID(IMG_ENEMIES));
 	Scene[0].addEnemy(PLANTABOMBA, 15, 10, Data.GetID(IMG_ENEMIES));
 	Scene[0].addEnemy(GOLEM, 10, 4, Data.GetID(IMG_GOLEM));
-	/*Plant.SetTile(15, 10);
-	Plant.SetWidthHeight(18, 17);
-	Ciclope.SetTile(10, 4);
-	Ciclope.SetWidthHeight(24, 25);
-	Ciclope.SetState(STATE_SLEEP);
-	*/
-
+	
 
 	//sound init
 
@@ -116,6 +110,9 @@ bool cGame::Init()
 	Player.SetLife(3);
 	Player.SetWidthHeight(16,25);
 	Player.SetState(STATE_LOOKDOWN);
+	Player.setWeapon(SWORD);
+	Player.setLifeTexId(Data.GetID(IMG_LIFE));
+	Player.setItemTexId(Data.GetID(IMG_ITEMS));
 	//Player.SetPosition(11*16, 16*16+8);
 	Player.setCurrentSceneId(0);
 
@@ -159,37 +156,24 @@ bool cGame::Process()
 	w = Scene[id].getWidth();
 	h = Scene[id].getHeight();
 
-	if(keys[GLUT_KEY_UP])			Player.MoveUp(Scene[id].GetMap(), w );
-	else if (keys[GLUT_KEY_DOWN])	Player.MoveDown(Scene[id].GetMap(), w );
-	else if(keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene[id].GetMap(), w );
+	if (Player.isAlive()) {
+		if(keys[GLUT_KEY_UP])			Player.MoveUp(Scene[id].GetMap(), w );
+		else if (keys[GLUT_KEY_DOWN])	Player.MoveDown(Scene[id].GetMap(), w );
+		else if(keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene[id].GetMap(), w );
 	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w );
 	else Player.Stop();
 	if (keys[GLUT_KEY_SPACEBAR]) {
-		
-		int x, y;
-		Player.GetTile(&x, &y);
-		if (Player.GetState() == STATE_LOOKDOWN) {
-			Scene[id].addItem(ESPADA, x , y-1, 0);
-		}
-		else if (Player.GetState() == STATE_LOOKUP) {
-			Scene[id].addItem(ESPADA, x , y+1, 0);
-		}
-		else if (Player.GetState() == STATE_LOOKRIGHT) {
-			Scene[id].addItem(ESPADA, x + 1, y, 0);
-		}
-		else if (Player.GetState() == STATE_LOOKLEFT) {
-			Scene[id].addItem(ESPADA, x - 1, y, 0);
-		}
 		Player.SwordAttack();
 	}
 	else if (keys[98]) {
 		Sound::getInstance()->playBow();
 		Player.BowAttack();
 	}
+	}
+	
 	
 	//Game Logic
-	//Player.Logic(Scene[id].GetMap(), w );
-	//Soldier.Logic(Scene[id].GetMap(), w);
+	Player.logic(Scene[id].GetMap(), w , Scene[id].getEnemies());
 	Scene[id].logic(&Player);
 	return res;
 }
@@ -243,31 +227,7 @@ void cGame::Render()
 	}
 	
 	Player.Draw(Data.GetID(IMG_PLAYER));
-	Player.DrawLife(Data.GetID(IMG_LIFE), cx, cy);
-	Player.DrawObject(Data.GetID(IMG_ITEMS), cx, cy);
-	//Soldier.Draw(Data.GetID(IMG_ENEMIES));
-	//Plant.Draw(Data.GetID(IMG_ENEMIES));
-	//Ciclope.Draw(Data.GetID(IMG_GOLEM));
-
-
-	//TODO temporal lines to test
-	/*
-	glBegin(GL_LINES);
-	glColor3f(1,0,0);
-	glVertex2d(x,y+h);
-	glVertex2d(x+w,y+h);
-	glVertex2d(x+w,y);
-	glVertex2d(x+w,y+h);
-	glColor3f(1, 1, 0);
-	glVertex2d(x - GAME_WIDTH / 2, y);
-	glVertex2d(x + GAME_WIDTH / 2, y);
-	glColor3f(0, 1, 0);
-	glVertex2d(x, y - GAME_HEIGHT/2);
-	glVertex2d(x, y + GAME_HEIGHT/2);
-	glEnd();
-	glColor3f(1, 1, 1);
-	*/
-	//TODO
+	Player.DrawStatus(cx, cy);
 
 	glutSwapBuffers();
 }

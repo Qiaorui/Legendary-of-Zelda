@@ -4,6 +4,7 @@
 
 Soldado::Soldado(){
 	delaymove = 15;
+	visible = true;
 }
 
 Soldado::~Soldado(){}
@@ -111,7 +112,7 @@ void Soldado::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 }
 
 
-void Soldado::Logic(vector<int> map, cPlayer* player) {
+void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 	//comprobar si colisiona con link//////////
 	cRect body;
 	player->GetArea(&body);
@@ -128,8 +129,7 @@ void Soldado::Logic(vector<int> map, cPlayer* player) {
 	else if (Collides(&body)) {
 		Sound::getInstance()->playDamage();
 		int l;
-		player->GetLife(&l);
-		player->SetLife(l - 1);
+		player->hurt(1);
 		delaymove = 0;
 	}
 	++delaymove;
@@ -157,5 +157,7 @@ void Soldado::Logic(vector<int> map, cPlayer* player) {
 		SetPosition(x, y);
 		delaymove = 15;
 	}
+
+	Enemy::Logic(map,width, player);
 	
 }

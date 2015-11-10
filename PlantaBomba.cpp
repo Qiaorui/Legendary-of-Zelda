@@ -1,7 +1,9 @@
 #include "PlantaBomba.h"
 
 
-PlantaBomba::PlantaBomba(){}
+PlantaBomba::PlantaBomba(){
+	visible = true;
+}
 PlantaBomba::~PlantaBomba(){}
 
 void PlantaBomba::Draw()
@@ -54,7 +56,7 @@ void PlantaBomba::DrawRect(int tex_id, float xo, float yo, float xf, float yf, i
 }
 
 
-void PlantaBomba::Logic(vector<int> map, int width) {
+void PlantaBomba::Logic(vector<int> map, int width, cBicho* player) {
 	++delaymove;
 	if (delaymove >= FRAME_DELAY) {
 		int x, y;
@@ -80,5 +82,7 @@ void PlantaBomba::Logic(vector<int> map, int width) {
 		SetPosition(x, y);
 		delaymove = 0;
 	}
+	
+	Enemy::Logic(map,width, player);
 
 }

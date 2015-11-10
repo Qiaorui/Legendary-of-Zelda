@@ -21,7 +21,12 @@ void Enemy::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, 
 }
 
 
-void Enemy::Logic(vector<int> map, cPlayer* player) {
+void Enemy::Logic(vector<int> map, int width, cBicho* player) {
+	if (!alive) {
+		visible = false;
+		active = false;
+	}
+	
 
 }
 

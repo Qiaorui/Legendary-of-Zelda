@@ -1,6 +1,8 @@
 #pragma once
+
+
 #include "cBicho.h"
-#include "cPlayer.h"
+
 
 class Enemy :
 	public cBicho
@@ -14,7 +16,7 @@ public:
 	~Enemy();
 	virtual void Draw();
 	virtual void DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame);
-	virtual void Logic(vector<int> map, cPlayer* player);
+	virtual void Logic(vector<int> map, int width, cBicho* player);
 	void setImage(int tex_id);
 
 private:

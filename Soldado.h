@@ -1,5 +1,5 @@
 #pragma once
-#include "cPlayer.h"
+
 #include "Enemy.h"
 
 class Soldado :
@@ -11,7 +11,7 @@ public:
 	void Draw();
 	void DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame);
 
-	void Logic(vector<int> map, cPlayer* player);
+	void Logic(vector<int> map, int width, cBicho* player);
 
 
 private:

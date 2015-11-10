@@ -4,28 +4,28 @@
 
 Espada::Espada()
 {
-	delayespada = 10;
-	active = 1;
+	attackDelay = 10;
+	active = true;
 }
 
 
 Espada::~Espada()
 {
+
 }
 
-void Espada::Logic(vector<int> map, cPlayer* player, vector<Enemy*> enemies)
+void Espada::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 {
-	int  l;
+
 	bool colision = false;
-	if (delayespada >= 10) {
+	if (attackDelay >= 10) {
 		for (int i = 0; i < enemies.size(); ++i)
 		{
 			cRect body;
 			enemies[i]->GetArea(&body);
 			if (Collides(&body)) {
-				delayespada = 0;
-				enemies[i]->GetLife(&l);
-				enemies[i]->SetLife(l - 1);
+				attackDelay = 0;
+				enemies[i]->hurt(attackPower);
 				id = i;
 				Sound::getInstance()->playHit();
 				colision = true;
@@ -36,13 +36,17 @@ void Espada::Logic(vector<int> map, cPlayer* player, vector<Enemy*> enemies)
 	else {
 		int ex, ey, ix, iy;
 		enemies[id]->GetPosition(&ex, &ey);
-		player->GetPosition(&ix, &iy);
+		//player->GetPosition(&ix, &iy);
+		ix = x + w / 2;
+		iy = y + h / 2;
 		if (ex < ix) ex = ex - 1;
 		else ex = ex + 1;
 		if (ey < iy) ey = ey - 1;
 		else ey = ey + 1;
 		enemies[id]->SetPosition(ex, ey);
-		++delayespada;
-		if (delayespada == 10)active = false;
+		++attackDelay;
+		if (attackDelay == 10)active = false;
 	}
+
+
 }

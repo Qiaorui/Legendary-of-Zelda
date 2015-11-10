@@ -148,11 +148,11 @@ void cScene::Draw(int tex_id)
 	glDisable(GL_TEXTURE_2D);
 	for (int i = 0; i < senders.size(); i++)
 	{
-		senders[i].draw();
+		if(senders[i].isVisible()) senders[i].draw();
 	}
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		enemies[i]->Draw();
+		if(enemies[i]->isVisible()) enemies[i]->Draw();
 	}
 
 }
@@ -189,40 +189,22 @@ void cScene::addSender(int x, int y, int scene, int ToX, int ToY, int state, flo
 void cScene::logic(cPlayer* player) {
 	for (int i = 0; i < senders.size(); i++)
 	{
-		senders[i].logic(player);
+		if(senders[i].isActive()) senders[i].logic(player);
 	}
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		enemies[i]->Logic(GetMap(), player);
+		if(enemies[i]->isActive()) enemies[i]->Logic(map, width, player);
 	}
-	for (int i = 0; i < items.size(); i++)
+
+	/*for (int i = 0; i < items.size(); i++)
 	{
  		items[i]->Logic(GetMap(), player, enemies);
-		if (!items[i]->active) items.erase(items.begin() + i);
-	}
+		if (!items[i]->isActive()) items.erase(items.begin() + i);
+	}*/
 
 }
 
-void cScene::addItem(int itemType, int x, int y, int tex_id) {
 
-	int id = items.size();
-
-	switch (itemType)
-	{
-	case ESPADA:
-		items.push_back(new Espada);
-		items[id]->SetTile(x, y);
-		items[id]->SetWidthHeight(10, 10);
-		break;
-
-	case FLECHA:
-		items.push_back(new Flecha);
-		items[id]->SetTile(x, y);
-		items[id]->SetWidthHeight(10, 10);
-		break;
-	}
-
-}
 
 void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 	
@@ -261,4 +243,9 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 		break;
 	}
 
+}
+
+
+vector<Enemy*> cScene::getEnemies(){
+	return enemies;
 }

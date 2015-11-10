@@ -6,8 +6,7 @@
 #include "Soldado.h"
 #include "Golem.h"
 #include "PlantaBomba.h"
-#include "Espada.h"
-#include "Flecha.h"
+
 //#define SCENE_Xo		(2*TILE_SIZE)
 //#define SCENE_Yo		TILE_SIZE
 //#define SCENE_Xo		0
@@ -25,8 +24,7 @@
 #define SOLDADO 0
 #define PLANTABOMBA 1
 #define GOLEM 2
-#define ESPADA 3
-#define FLECHA 4
+
 
 
 class cScene
@@ -45,14 +43,14 @@ public:
 	void addSender(int x, int y, int scene, int ToX, int ToY, int state, float xo, float xf, float yo, float yf, int w, int h, int tex_id);
 	void logic(cPlayer* player);
 	void addEnemy(int enemyType, int x, int y, int tex_id);
-	void addItem(int itemType, int x, int y, int tex_id);
+	vector<Enemy*> getEnemies();
+
 
 
 private:
 	vector<int> map;
 	vector<Sender> senders;
 	vector<Enemy*> enemies;
-	vector<Item*> items;
 	//int map[SCENE_WIDTH * SCENE_HEIGHT];	//scene
 	int id_DL;								//actual level display list
 	int width;

@@ -4,6 +4,7 @@
 
 Flecha::Flecha()
 {
+
 }
 
 
@@ -11,17 +12,17 @@ Flecha::~Flecha()
 {
 }
 
-void Flecha::Logic(vector<int> map, cPlayer* player, vector<Enemy*> enemies)
+void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 {
 	int x, y;
 	GetPosition(&x, &y);
 	switch (GetState()) {
 
 	case STATE_BOW_DOWN:
-		++y;
+		--y;
 		break;
 	case STATE_BOW_UP:
-		--y;
+		++y;
 		break;
 	case STATE_BOW_RIGHT:
 		++x;
@@ -37,11 +38,12 @@ void Flecha::Logic(vector<int> map, cPlayer* player, vector<Enemy*> enemies)
 
 }
 
-void Flecha::DrawObject(int tex_id, int x, int y) { // has to be really imprioved, only to try how to do it!
 
+void Flecha::Draw() { 
+
+	/*    we fix this late....
 	float bitx = 16.0f / 608.0f;
 	float bity = 16.0f / 152.0f;
-
 	float x0 = bitx;
 	float y0 = 0;
 	glEnable(GL_TEXTURE_2D);
@@ -53,4 +55,7 @@ void Flecha::DrawObject(int tex_id, int x, int y) { // has to be really impriove
 	glTexCoord2f(x0, y0);	glVertex2i(x - 100, y + 120); //left up
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
+	*/
 }
+
+

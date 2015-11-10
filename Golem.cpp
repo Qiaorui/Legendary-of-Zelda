@@ -2,7 +2,9 @@
 
 
 
-Golem::Golem(){}
+Golem::Golem(){
+	visible = true;
+}
 
 Golem::~Golem(){}
 void Golem::Draw()
@@ -112,7 +114,7 @@ void Golem::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, 
 
 
 
-void Golem::Logic(vector<int> map, int width) {
+void Golem::Logic(vector<int> map, int width, cBicho* player) {
 	++delaymove;
 	if (delaymove >= FRAME_DELAY) {
 		int x, y;
@@ -138,5 +140,8 @@ void Golem::Logic(vector<int> map, int width) {
 		SetPosition(x, y);
 		delaymove = 0;
 	}
+
+	
+	Enemy::Logic(map,width, player);
 
 }

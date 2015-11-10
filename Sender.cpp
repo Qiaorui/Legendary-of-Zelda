@@ -8,6 +8,8 @@ Sender::Sender(int scene, int x, int y, int state)
 	sentToX = x;
 	sentToY = y;
 	newDirection = state;
+	active = true;
+	visible = true;
 }
 
 
