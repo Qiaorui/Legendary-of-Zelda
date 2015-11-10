@@ -3,7 +3,10 @@
 #include "cPlayer.h"
 
 cPlayer::cPlayer() {
-	espada.SetWidthHeight(10,10);
+	//espada.SetWidthHeight(10,10);
+	//flecha.SetWidthHeight(10,10);
+	espada.setAtk(2);
+	flecha.setAtk(1);
 }
 cPlayer::~cPlayer(){}
 
@@ -296,22 +299,26 @@ void cPlayer::SwordAttack()
 	if (state == STATE_LOOKDOWN) {
 		SetState(STATE_SWORD_DOWN);
 		seq = 0;
-		espada.SetPosition(x,y-16);
+		espada.SetPosition(x-5,y-11);
+		espada.SetWidthHeight(32,16);
 	}
 	else if (state == STATE_LOOKUP) {
 		SetState(STATE_SWORD_UP);
 		seq = 0;
-		espada.SetPosition(x,y+16);
+		espada.SetPosition(x-11,y+14);
+		espada.SetWidthHeight(32,16);
 	}
 	else if (state == STATE_LOOKRIGHT) {
 		SetState(STATE_SWORD_RIGHT);
 		seq = 0;
-		espada.SetPosition(x+16,y);
+		espada.SetPosition(x+10,y-8);
+		espada.SetWidthHeight(16,32);
 	}
 	else if (state == STATE_LOOKLEFT) {
 		SetState(STATE_SWORD_LEFT);
 		seq = 0;
-		espada.SetPosition(x-16,y);
+		espada.SetPosition(x-16,y-8);
+		espada.SetWidthHeight(16,32);
 	}
 	espada.setActive(true);
 }

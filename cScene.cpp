@@ -148,11 +148,11 @@ void cScene::Draw(int tex_id)
 	glDisable(GL_TEXTURE_2D);
 	for (int i = 0; i < senders.size(); i++)
 	{
-		senders[i].draw();
+		if(senders[i].isVisible()) senders[i].draw();
 	}
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		enemies[i]->Draw();
+		if(enemies[i]->isVisible()) enemies[i]->Draw();
 	}
 
 }
@@ -189,11 +189,11 @@ void cScene::addSender(int x, int y, int scene, int ToX, int ToY, int state, flo
 void cScene::logic(cPlayer* player) {
 	for (int i = 0; i < senders.size(); i++)
 	{
-		senders[i].logic(player);
+		if(senders[i].isActive()) senders[i].logic(player);
 	}
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		enemies[i]->Logic(map, width, player);
+		if(enemies[i]->isActive()) enemies[i]->Logic(map, width, player);
 	}
 
 	/*for (int i = 0; i < items.size(); i++)

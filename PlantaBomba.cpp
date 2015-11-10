@@ -1,7 +1,9 @@
 #include "PlantaBomba.h"
 
 
-PlantaBomba::PlantaBomba(){}
+PlantaBomba::PlantaBomba(){
+	visible = true;
+}
 PlantaBomba::~PlantaBomba(){}
 
 void PlantaBomba::Draw()
@@ -80,5 +82,7 @@ void PlantaBomba::Logic(vector<int> map, int width, cBicho* player) {
 		SetPosition(x, y);
 		delaymove = 0;
 	}
+	
+	Enemy::Logic(map,width, player);
 
 }

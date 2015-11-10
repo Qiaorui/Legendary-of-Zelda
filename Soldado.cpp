@@ -4,6 +4,7 @@
 
 Soldado::Soldado(){
 	delaymove = 15;
+	visible = true;
 }
 
 Soldado::~Soldado(){}
@@ -156,5 +157,7 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 		SetPosition(x, y);
 		delaymove = 15;
 	}
+
+	Enemy::Logic(map,width, player);
 	
 }

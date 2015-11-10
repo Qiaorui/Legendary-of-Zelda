@@ -2,7 +2,9 @@
 
 
 
-Golem::Golem(){}
+Golem::Golem(){
+	visible = true;
+}
 
 Golem::~Golem(){}
 void Golem::Draw()
@@ -138,5 +140,8 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 		SetPosition(x, y);
 		delaymove = 0;
 	}
+
+	
+	Enemy::Logic(map,width, player);
 
 }

@@ -6,7 +6,6 @@ cBicho::cBicho(void)
 {
 	seq=0;
 	delay=0;
-
 	//jumping = false;
 }
 cBicho::~cBicho(void){}
@@ -32,7 +31,7 @@ void cBicho::GetPosition(int *posx,int *posy)
 void cBicho::SetLife(int life)
 {
 	this->life = life;
-
+	alive = life > 0;
 }
 
 
@@ -420,6 +419,8 @@ bool cBicho::isAlive() {
 	return alive;
 }
 void cBicho::hurt(int point) {
-	life -= point;
-	if (life <= 0) alive = false;
+	life = life - point;
+	if (life <= 0) {
+		alive = false;
+	}
 }
