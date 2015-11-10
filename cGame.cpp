@@ -116,6 +116,9 @@ bool cGame::Init()
 	Player.SetLife(3);
 	Player.SetWidthHeight(16,25);
 	Player.SetState(STATE_LOOKDOWN);
+	Player.setWeapon(SWORD);
+	Player.setLifeTexId(Data.GetID(IMG_LIFE));
+	Player.setItemTexId(Data.GetID(IMG_ITEMS));
 	//Player.SetPosition(11*16, 16*16+8);
 	Player.setCurrentSceneId(0);
 
@@ -165,7 +168,7 @@ bool cGame::Process()
 	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w );
 	else Player.Stop();
 	if (keys[GLUT_KEY_SPACEBAR]) {
-		
+		/*
 		int x, y;
 		Player.GetTile(&x, &y);
 		if (Player.GetState() == STATE_LOOKDOWN) {
@@ -179,7 +182,7 @@ bool cGame::Process()
 		}
 		else if (Player.GetState() == STATE_LOOKLEFT) {
 			Scene[id].addItem(ESPADA, x - 1, y, 0);
-		}
+		}*/
 		Player.SwordAttack();
 	}
 	else if (keys[98]) {
@@ -188,7 +191,7 @@ bool cGame::Process()
 	}
 	
 	//Game Logic
-	//Player.Logic(Scene[id].GetMap(), w );
+	Player.Logic(Scene[id].GetMap(), w );
 	//Soldier.Logic(Scene[id].GetMap(), w);
 	Scene[id].logic(&Player);
 	return res;
@@ -243,8 +246,7 @@ void cGame::Render()
 	}
 	
 	Player.Draw(Data.GetID(IMG_PLAYER));
-	Player.DrawLife(Data.GetID(IMG_LIFE), cx, cy);
-	Player.DrawObject(Data.GetID(IMG_ITEMS), cx, cy);
+	Player.DrawStatus(cx, cy);
 	//Soldier.Draw(Data.GetID(IMG_ENEMIES));
 	//Plant.Draw(Data.GetID(IMG_ENEMIES));
 	//Ciclope.Draw(Data.GetID(IMG_GOLEM));

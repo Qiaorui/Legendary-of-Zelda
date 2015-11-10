@@ -17,12 +17,12 @@ DEBUG/
 *.db
 .vs/
 .gitattributes
+*.cd
 
 !*.cpp
 !*.h
 !corona.*
 !/resource/*
 !2DEngine.vcproj
-!2DEngine.vcxproj
 !GL*/**
 

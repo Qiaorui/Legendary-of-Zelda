@@ -1,4 +1,5 @@
-#include "cScene.h"
+
+
 #include "cPlayer.h"
 
 cPlayer::cPlayer() {}
@@ -230,19 +231,36 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	glDisable(GL_TEXTURE_2D);
 }
 
-void cPlayer::DrawLife(int tex_id, int cx, int cy){ // has to be really imprioved, only to try how to do it!
+void DrawObject(int tex_id, int cx, int cy) { // has to be really imprioved, only to try how to do it!
 
-	float bitx = 43.0f / 170.0f;
-	float bity = 39.0f/ 57.0f;
-	int l;
-	
-	GetLife(&l);
-	float x0 = 7.0f / 170.0f;
-	float y0 = 11.0f / 57.0f;
+	float bitx = 16.0f / 608.0f;
+	float bity = 16.0f / 152.0f;
+
+	float x0 = bitx;
+	float y0 = 0;
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex_id);
 	glBegin(GL_QUADS);
-	for (int i = 0; i < l; ++i) {
+	glTexCoord2f(x0, y0 + bity);	glVertex2i(cx - 100, cy + 100);  //Left Down
+	glTexCoord2f(x0 + bitx, y0 + bity);	glVertex2i(cx - 80, cy + 100); //right down
+	glTexCoord2f(x0 + bitx, y0);	glVertex2i(cx - 80, cy + 120); //right up
+	glTexCoord2f(x0, y0);	glVertex2i(cx - 100, cy + 120); //left up
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
+
+void cPlayer::DrawStatus(int cx, int cy){ // has to be really imprioved, only to try how to do it!
+
+	float bitx = 43.0f / 170.0f;
+	float bity = 39.0f/ 57.0f;
+	int life = getLife();
+	
+	float x0 = 7.0f / 170.0f;
+	float y0 = 11.0f / 57.0f;
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, life_tex_id);
+	glBegin(GL_QUADS);
+	for (int i = 0; i < life; ++i) {
 		glTexCoord2f(x0, y0 + bity);	glVertex2i(cx + 80, cy + 105);  //Left Down
 		glTexCoord2f(x0 + bitx,y0 + bity);	glVertex2i(cx + 65, cy + 105); //right down
 		glTexCoord2f(x0 + bitx, y0);	glVertex2i(cx + 65, cy + 120); //right up
@@ -251,25 +269,12 @@ void cPlayer::DrawLife(int tex_id, int cx, int cy){ // has to be really impriove
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
+
+	//TODO temporary fix
+	DrawObject(item_tex_id, cx, cy);
 }
 
-void cPlayer::DrawObject(int tex_id, int cx, int cy) { // has to be really imprioved, only to try how to do it!
 
-	float bitx = 16.0f / 608.0f;
-	float bity = 16.0f / 152.0f;	
-
-	float x0 = bitx;
-	float y0 = 0;
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, tex_id);
-	glBegin(GL_QUADS);
-		glTexCoord2f(x0, y0 + bity);	glVertex2i(cx - 100, cy + 100);  //Left Down
-		glTexCoord2f(x0 + bitx, y0 + bity);	glVertex2i(cx - 80, cy + 100); //right down
-		glTexCoord2f(x0 + bitx, y0);	glVertex2i(cx - 80, cy + 120); //right up
-		glTexCoord2f(x0, y0);	glVertex2i(cx - 100, cy + 120); //left up
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-}
 
 
 int cPlayer::getCurrentSceneId() {
@@ -322,4 +327,29 @@ void cPlayer::BowAttack()
 		SetState(STATE_BOW_LEFT);
 		seq = 0;
 	}
+}
+
+
+void cPlayer::setLifeTexId(int id) {
+	life_tex_id = id;
+}
+void cPlayer::setItemTexId(int id) {
+	item_tex_id = id;
+}
+
+void cPlayer::setWeapon(int weapon) {
+	usingWeapon = weapon;
+}
+void cPlayer::changeWeapon() {
+	switch (usingWeapon)
+	{
+	case SWORD:
+		usingWeapon = BOW;
+		break;
+	case BOW:
+		usingWeapon = SWORD;
+	default:
+		break;
+	}
+
 }

@@ -6,8 +6,8 @@
 
 #define FRAME_DELAY		8
 #define STEP_LENGTH		2
-#define JUMP_HEIGHT		96
-#define JUMP_STEP		4
+//#define JUMP_HEIGHT		96
+//#define JUMP_STEP		4
 
 #define STATE_LOOKLEFT		0
 #define STATE_LOOKRIGHT		1
@@ -21,10 +21,7 @@
 #define STATE_SWORD_UP      9
 #define STATE_SWORD_RIGHT   10
 #define STATE_SWORD_LEFT    11 
-#define STATE_BOW_DOWN    12
-#define STATE_BOW_UP      13
-#define STATE_BOW_RIGHT   14
-#define STATE_BOW_LEFT    15
+
 #define STATE_SLEEP       16
 #define STATE_OPEN        17
 
@@ -49,8 +46,8 @@ public:
 
 	void SetPosition(int x,int y);
 	void GetPosition(int *x,int *y);
-	void SetLife(int l);
-	void GetLife(int *l);
+	void SetLife(int life);
+	int  getLife();
 	void SetTile(int tx,int ty);
 	void GetTile(int *tx,int *ty);
 	void SetWidthHeight(int w,int h);
@@ -67,24 +64,39 @@ public:
 	void MoveDown(vector<int> map, int width);
 	//void Jump(int *map);
 	void Stop();
-	void Logic(vector<int> map, int i, int j);
+	void Logic(vector<int> map, int width);
 
 	int  GetState();
 	void SetState(int s);
 
 	void NextFrame(int max);
 	int  GetFrame();
-	boolean active;
+	void setVisible(bool b);
+	bool isVisible();
+	void setActive(bool b);
+	bool isActive();
+	void setAlive(bool b);
+	bool isAlive();
+	void hurt(int point);
+	
+
+protected:
+	bool alive;
+	bool active;
+	bool visible;
+	
+	int x, y;
+	int w, h;
 
 private:
-	int x,y;
-	int w,h;
-	int l;
+
+	int seq, delay;
+	int life;
 	int state;
 
-	bool jumping;
-	int jump_alfa;
-	int jump_y;
+	//bool jumping;
+	//int jump_alfa;
+	//int jump_y;
 
-	int seq,delay;
+
 };

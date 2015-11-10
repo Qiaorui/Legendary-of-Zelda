@@ -44,8 +44,8 @@
     <OutDir>Debug\</OutDir>
     <IntDir>Debug\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\code\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\code\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Release\</OutDir>
@@ -100,11 +100,11 @@
     <ClCompile Include="Flecha.cpp" />
     <ClCompile Include="GLUTMain.cpp" />
     <ClCompile Include="Golem.cpp" />
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="PlantaBomba.cpp" />
     <ClCompile Include="Sender.cpp" />
     <ClCompile Include="Soldado.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cBicho.h" />
@@ -118,14 +118,11 @@
     <ClInclude Include="Flecha.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Golem.h" />
-    <ClInclude Include="Item.h" />
     <ClInclude Include="PlantaBomba.h" />
     <ClInclude Include="Sender.h" />
     <ClInclude Include="Soldado.h" />
     <ClInclude Include="Sound.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

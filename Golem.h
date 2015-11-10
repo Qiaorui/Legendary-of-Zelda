@@ -9,7 +9,8 @@ public:
 	~Golem();
 	void Draw();
 	void DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame);
-	void Logic(vector<int> map, int width);
+
+	void Logic(vector<int> map, int width, cPlayer* player);
 
 private:
 

@@ -7,7 +7,7 @@ cBicho::cBicho(void)
 	seq=0;
 	delay=0;
 
-	jumping = false;
+	//jumping = false;
 }
 cBicho::~cBicho(void){}
 
@@ -17,7 +17,7 @@ cBicho::cBicho(int posx,int posy,int width,int height, int life)
 	y = posy;
 	w = width;
 	h = height;
-	l = life;
+	this->life = life;
 }
 void cBicho::SetPosition(int posx,int posy)
 {
@@ -31,12 +31,14 @@ void cBicho::GetPosition(int *posx,int *posy)
 }
 void cBicho::SetLife(int life)
 {
-	l = life;
+	this->life = life;
 
 }
-void cBicho::GetLife(int *life)
+
+
+int cBicho::getLife()
 {
-	*life = l;
+	return life;
 	
 }
 void cBicho::SetTile(int tx,int ty)
@@ -336,7 +338,7 @@ void cBicho::Jump(int *map)
 }
 */
 
-void cBicho::Logic(vector<int> map, int width, int j)
+void cBicho::Logic(vector<int> map, int width)
 {
 	/*
 	float alfa;
@@ -392,4 +394,32 @@ int cBicho::GetState()
 void cBicho::SetState(int s)
 {
 	state = s;
+}
+
+void cBicho::setVisible(bool b) {
+	visible = b;
+}
+
+bool cBicho::isVisible() {
+	return visible;
+}
+
+
+void cBicho::setActive(bool b) {
+	active = b;
+}
+
+bool cBicho::isActive() {
+	return active;
+}
+
+void cBicho::setAlive(bool b) {
+	alive = b;
+}
+bool cBicho::isAlive() {
+	return alive;
+}
+void cBicho::hurt(int point) {
+	life -= point;
+	if (life <= 0) alive = false;
 }
