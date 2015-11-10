@@ -3,7 +3,7 @@
 
 
 Soldado::Soldado(){
-	delaymove = 10;
+	delaymove = 15;
 }
 
 Soldado::~Soldado(){}
@@ -115,7 +115,7 @@ void Soldado::Logic(vector<int> map, cPlayer* player) {
 	//comprobar si colisiona con link//////////
 	cRect body;
 	player->GetArea(&body);
-	if (delaymove < 10) {
+	if (delaymove < 15) {
 		int ex, ey, px, py;
 		player->GetPosition(&px, &py);
 		GetPosition(&ex, &ey);
@@ -133,7 +133,7 @@ void Soldado::Logic(vector<int> map, cPlayer* player) {
 		delaymove = 0;
 	}
 	++delaymove;
-	if (delaymove >= FRAME_DELAY + 10) {
+	if (delaymove >= FRAME_DELAY + 15) {
 		int x, y;
 		GetPosition(&x, &y);
 		switch (rand() % 4) {
@@ -155,7 +155,7 @@ void Soldado::Logic(vector<int> map, cPlayer* player) {
 			break;
 		}
 		SetPosition(x, y);
-		delaymove = 10;
+		delaymove = 15;
 	}
 	
 }

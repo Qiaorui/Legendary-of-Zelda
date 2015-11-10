@@ -15,6 +15,7 @@ public:
 	void playSword();
 	void playBow();
 	void playDamage();
+	void playHit();
 
 private:
 	static Sound *instance;

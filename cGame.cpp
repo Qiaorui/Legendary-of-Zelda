@@ -164,11 +164,31 @@ bool cGame::Process()
 	else if(keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene[id].GetMap(), w );
 	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w );
 	else Player.Stop();
-	if (keys[GLUT_KEY_SPACEBAR])	Player.SwordAttack();
-	else if (keys[98])              Player.BowAttack();
+	if (keys[GLUT_KEY_SPACEBAR]) {
+		
+		int x, y;
+		Player.GetTile(&x, &y);
+		if (Player.GetState() == STATE_LOOKDOWN) {
+			Scene[id].addItem(ESPADA, x , y-1, 0);
+		}
+		else if (Player.GetState() == STATE_LOOKUP) {
+			Scene[id].addItem(ESPADA, x , y+1, 0);
+		}
+		else if (Player.GetState() == STATE_LOOKRIGHT) {
+			Scene[id].addItem(ESPADA, x + 1, y, 0);
+		}
+		else if (Player.GetState() == STATE_LOOKLEFT) {
+			Scene[id].addItem(ESPADA, x - 1, y, 0);
+		}
+		Player.SwordAttack();
+	}
+	else if (keys[98]) {
+		Sound::getInstance()->playBow();
+		Player.BowAttack();
+	}
 	
 	//Game Logic
-	Player.Logic(Scene[id].GetMap(), w );
+	//Player.Logic(Scene[id].GetMap(), w );
 	//Soldier.Logic(Scene[id].GetMap(), w);
 	Scene[id].logic(&Player);
 	return res;

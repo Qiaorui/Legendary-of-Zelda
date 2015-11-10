@@ -44,9 +44,8 @@
     <OutDir>Debug\</OutDir>
     <IntDir>Debug\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Alex\git\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Alex\git\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
-    <ExecutablePath>C:\Users\Alex\git\Legendary-of-Zelda\GL Files\dll;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Release\</OutDir>
@@ -97,8 +96,11 @@
     <ClCompile Include="cScene.cpp" />
     <ClCompile Include="cTexture.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Espada.cpp" />
+    <ClCompile Include="Flecha.cpp" />
     <ClCompile Include="GLUTMain.cpp" />
     <ClCompile Include="Golem.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="PlantaBomba.cpp" />
     <ClCompile Include="Sender.cpp" />
     <ClCompile Include="Soldado.cpp" />
@@ -112,12 +114,18 @@
     <ClInclude Include="cScene.h" />
     <ClInclude Include="cTexture.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Espada.h" />
+    <ClInclude Include="Flecha.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Golem.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="PlantaBomba.h" />
     <ClInclude Include="Sender.h" />
     <ClInclude Include="Soldado.h" />
     <ClInclude Include="Sound.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

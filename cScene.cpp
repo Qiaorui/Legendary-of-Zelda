@@ -195,6 +195,32 @@ void cScene::logic(cPlayer* player) {
 	{
 		enemies[i]->Logic(GetMap(), player);
 	}
+	for (int i = 0; i < items.size(); i++)
+	{
+ 		items[i]->Logic(GetMap(), player, enemies);
+		if (!items[i]->active) items.erase(items.begin() + i);
+	}
+
+}
+
+void cScene::addItem(int itemType, int x, int y, int tex_id) {
+
+	int id = items.size();
+
+	switch (itemType)
+	{
+	case ESPADA:
+		items.push_back(new Espada);
+		items[id]->SetTile(x, y);
+		items[id]->SetWidthHeight(10, 10);
+		break;
+
+	case FLECHA:
+		items.push_back(new Flecha);
+		items[id]->SetTile(x, y);
+		items[id]->SetWidthHeight(10, 10);
+		break;
+	}
 
 }
 

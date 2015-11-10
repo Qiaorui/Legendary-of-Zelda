@@ -336,7 +336,7 @@ void cBicho::Jump(int *map)
 }
 */
 
-void cBicho::Logic(vector<int> map, int width)
+void cBicho::Logic(vector<int> map, int width, int j)
 {
 	/*
 	float alfa;

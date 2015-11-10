@@ -60,7 +60,7 @@ void cPlayer::Draw(int tex_id)
 			yo = 3.0f*bity;
 			NextFrame(3);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->playBow();
+				//Sound::getInstance()->playBow();
 			}
 			break;
 			//4..6
@@ -68,14 +68,14 @@ void cPlayer::Draw(int tex_id)
 			yo = 2.0f*bity;
 			NextFrame(3);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->playBow();
+				//Sound::getInstance()->playBow();
 			}
 			break;
 		case STATE_BOW_UP:		xo = 9 * bitx + GetFrame()*bitx;
 			yo = 4.0f*bity;
 			NextFrame(3);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->playBow();
+				//Sound::getInstance()->playBow();
 			}
 			break;
 
@@ -83,7 +83,7 @@ void cPlayer::Draw(int tex_id)
 			yo = bity;
 			NextFrame(3);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->playBow();
+				//Sound::getInstance()->playBow();
 			}
 			break;
 			//player has atacking movement, so has to add frame

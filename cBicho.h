@@ -67,14 +67,14 @@ public:
 	void MoveDown(vector<int> map, int width);
 	//void Jump(int *map);
 	void Stop();
-	void Logic(vector<int> map, int width);
+	void Logic(vector<int> map, int i, int j);
 
 	int  GetState();
 	void SetState(int s);
 
 	void NextFrame(int max);
 	int  GetFrame();
-	
+	boolean active;
 
 private:
 	int x,y;

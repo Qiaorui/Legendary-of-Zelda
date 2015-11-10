@@ -37,3 +37,6 @@ void Sound::playBow() {
 void Sound::playDamage() {
 	engine->play2D("resource/LTTP_Link_Hurt.wav", false);
 }
+void Sound::playHit() {
+	engine->play2D("resource/LTTP_Enemy_Hit.wav", false);
+}
