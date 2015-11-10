@@ -234,6 +234,8 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
+
+	if (flecha.isActive())flecha.Draw(tex_id);
 }
 
 void DrawObject(int tex_id, int cx, int cy) { // has to be really imprioved, only to try how to do it!
@@ -343,6 +345,10 @@ void cPlayer::BowAttack()
 		SetState(STATE_BOW_LEFT);
 		seq = 0;
 	}
+	flecha.SetPosition(x+10 , y+10 );
+	flecha.SetWidthHeight(10, 10);
+	flecha.setActive(true);
+	flecha.SetState(GetState());
 }
 
 
@@ -376,5 +382,5 @@ void cPlayer::logic(vector<int> map, int width , vector<Enemy*> enemies){
 		bichos.push_back(enemies[i]);
 	}
 	if(espada.isActive()) espada.Logic(map, width, bichos);
-
+	if(flecha.isActive())flecha.Logic(map, width, bichos);
 }

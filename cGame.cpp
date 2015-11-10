@@ -167,7 +167,7 @@ bool cGame::Process()
 	}
 	else if (keys[98]) {
 		Sound::getInstance()->playBow();
-		Player.BowAttack();
+		if(timer>10)Player.BowAttack();
 	}
 	}
 	
@@ -175,6 +175,7 @@ bool cGame::Process()
 	//Game Logic
 	Player.logic(Scene[id].GetMap(), w , Scene[id].getEnemies());
 	Scene[id].logic(&Player);
+	++timer;
 	return res;
 }
 

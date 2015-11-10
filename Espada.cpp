@@ -5,7 +5,7 @@
 Espada::Espada()
 {
 	attackDelay = 10;
-	active = true;
+	active = false;
 }
 
 

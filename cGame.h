@@ -41,5 +41,6 @@ private:
 	//Golem Ciclope;
 	//PlantaBomba Plant;
 	cData Data;
+	int timer;
 };
 
