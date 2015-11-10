@@ -20,7 +20,7 @@ public:
 	void setImage(int tex_id);
 
 private:
-
+	int i= 0;
 
 };
 

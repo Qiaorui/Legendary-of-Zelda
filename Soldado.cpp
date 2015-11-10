@@ -77,7 +77,8 @@ void Soldado::Draw()
 		xf = xo + bitxl;
 	}
 	yf = yo - bity;
-	DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
+	if(alive)DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
+	else Enemy::Draw();
 	//}
 	//else {
 	//	DrawLife(tex_id);
