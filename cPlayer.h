@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cBicho.h"
+
 #include "Sound.h"
 #include "Espada.h"
 #include "Flecha.h"
@@ -33,6 +33,9 @@ public:
 	void changeWeapon();
 
 private:
+	Espada espada;
+	Flecha flecha;
+
 	int usingWeapon;
 	int life_tex_id;
 	int item_tex_id;

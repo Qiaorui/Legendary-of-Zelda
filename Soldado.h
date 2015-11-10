@@ -1,5 +1,5 @@
 #pragma once
-#include "cPlayer.h"
+
 #include "Enemy.h"
 
 class Soldado :

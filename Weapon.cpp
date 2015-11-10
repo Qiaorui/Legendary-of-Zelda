@@ -11,11 +11,11 @@ Weapon::~Weapon()
 {
 }
 
-
+/*
 void Weapon::Logic(vector<int> map, int width, vector<Enemy*> enemies) {
 
 }
-
+*/
 
 void Weapon::Draw() {
 

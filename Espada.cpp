@@ -12,7 +12,7 @@ Espada::Espada()
 Espada::~Espada()
 {
 }
-
+/*
 void Espada::Logic(vector<int> map, int width, vector<Enemy*> enemies)
 {
 
@@ -49,3 +49,4 @@ void Espada::Logic(vector<int> map, int width, vector<Enemy*> enemies)
 
 
 }
+*/

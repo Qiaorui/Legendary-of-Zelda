@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Weapon.h"
-#include "Enemy.h"
+
 
 
 #define STATE_BOW_DOWN    12
@@ -15,7 +15,7 @@ class Flecha :
 public:
 	Flecha();
 	~Flecha();
-	void Logic(vector<int> map, int width, vector<Enemy*> enemies);
+	//void Logic(vector<int> map, int width, vector<Enemy*> enemies);
 	void Draw();
 
 
