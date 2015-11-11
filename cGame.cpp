@@ -92,10 +92,13 @@ bool cGame::Init()
 	res = Data.LoadImage(IMG_ENEMIES, "Enemies.png", GL_RGBA);
 	res = Data.LoadImage(IMG_GOLEM, "Golem.png", GL_RGBA);
 	res = Data.LoadImage(IMG_ITEMS, "items.png", GL_RGBA);
+	res = Data.LoadImage(IMG_BOSS, "Boss.png", GL_RGBA);
+
 	if (!res) return false;
 	Scene[0].addEnemy(SOLDADO, 12, 17, Data.GetID(IMG_ENEMIES));
 	Scene[0].addEnemy(PLANTABOMBA, 15, 10, Data.GetID(IMG_ENEMIES));
 	Scene[0].addEnemy(GOLEM, 5, 10, Data.GetID(IMG_GOLEM));
+	Scene[0].addEnemy(BOSS, 20, 10, Data.GetID(IMG_BOSS));
 	
 
 	//sound init

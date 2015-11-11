@@ -14,7 +14,7 @@
 #define IMG_EAST_PALACE 4
 #define IMG_GOLEM 5
 #define IMG_ITEMS 6
-
+#define IMG_BOSS 7
 /*
 #define IMG_ENEMY1	2
 #define IMG_ENEMY2	3

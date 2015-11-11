@@ -240,6 +240,14 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 			enemies[id]->SetState(STATE_SLEEP);
 			enemies[id]->setImage(tex_id);
 		break;
+	case BOSS:
+		enemies.push_back(new Boss);
+		enemies[id]->SetTile(x, y);
+		enemies[id]->SetLife(10);
+		enemies[id]->SetWidthHeight(32, 53);
+		enemies[id]->SetState(STATE_LOOKDOWN);
+		enemies[id]->setImage(tex_id);
+		break;
 	default:
 		break;
 	}

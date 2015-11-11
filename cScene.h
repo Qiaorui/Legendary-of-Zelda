@@ -6,6 +6,7 @@
 #include "Soldado.h"
 #include "Golem.h"
 #include "PlantaBomba.h"
+#include "Boss.h"
 
 //#define SCENE_Xo		(2*TILE_SIZE)
 //#define SCENE_Yo		TILE_SIZE
@@ -24,7 +25,7 @@
 #define SOLDADO 0
 #define PLANTABOMBA 1
 #define GOLEM 2
-
+#define BOSS 3
 
 
 class cScene
