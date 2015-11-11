@@ -4,6 +4,7 @@
 
 Enemy::Enemy()
 {
+	smokeDelay = 0;
 }
 
 
@@ -22,7 +23,7 @@ void Enemy::Draw() {
 
 	GetPosition(&x, &y);
 	GetWidthHeight(&w, &h);
-	int j = i / 10;
+	int j = smokeDelay / 10;
 	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 3);
@@ -38,8 +39,8 @@ void Enemy::Draw() {
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
-	++i;
-	if (i == 22) visible = false;
+	++smokeDelay;
+	if (smokeDelay == 22) visible = false;
 }
 
 void Enemy::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame) {
@@ -49,10 +50,10 @@ void Enemy::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, 
 
 
 void Enemy::Logic(vector<int> map, int width, cBicho* player) {
-	/*if (!alive) {
-		visible = false;
+	if (!alive) {
+		//visible = false;
 		active = false;
-	}*/
+	}
 	
 
 }

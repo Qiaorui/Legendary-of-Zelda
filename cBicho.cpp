@@ -6,8 +6,8 @@ cBicho::cBicho(void)
 {
 	seq=0;
 	delay=0;
-	speed = 1;
-
+	speed = 2;
+	actionFinished = true;
 	//jumping = false;
 }
 cBicho::~cBicho(void){}
@@ -129,42 +129,7 @@ bool cBicho::CollidesMapWall(vector<int> map, int direction, int width)
 	return false;
 }
 
-/*  Useless code
-bool cBicho::CollidesMapFloor(int *map)
-{
-	int tile_x,tile_y;
-	int width_tiles;
-	bool on_base;
-	int i;
 
-	tile_x = x / TILE_SIZE;
-	tile_y = y / TILE_SIZE;
-
-	width_tiles = w / TILE_SIZE;
-	if( (x % TILE_SIZE) != 0) width_tiles++;
-
-	on_base = false;
-	i=0;
-	while((i<width_tiles) && !on_base)
-	{
-		if( (y % TILE_SIZE) == 0 )
-		{
-			if(map[ (tile_x + i) + ((tile_y - 1) * SCENE_WIDTH) ] != 0)
-				on_base = true;
-		}
-		else
-		{
-			if(map[ (tile_x + i) + (tile_y * SCENE_WIDTH) ] != 0)
-			{
-				y = (tile_y + 1) * TILE_SIZE;
-				on_base = true;
-			}
-		}
-		i++;
-	}
-	return on_base;
-}
-*/
 
 
 void cBicho::DrawRect(int tex_id,float xo,float yo,float xf,float yf)
@@ -195,7 +160,7 @@ void cBicho::MoveLeft(vector<int> map, int width)
 	if( (x % TILE_SIZE) == 0)
 	{
 		xaux = x;
-		x -= STEP_LENGTH;
+		x -= speed;
 
 		if(CollidesMapWall(map,LEFT,width))
 		{
@@ -206,7 +171,7 @@ void cBicho::MoveLeft(vector<int> map, int width)
 	//Advance, no problem
 	else
 	{
-		x -= STEP_LENGTH;
+		x -= speed;
 		if(state != STATE_WALKLEFT)
 		{
 			state = STATE_WALKLEFT;
@@ -223,7 +188,7 @@ void cBicho::MoveRight(vector<int> map, int width)
 	if( (x % TILE_SIZE) == 0)
 	{
 		xaux = x;
-		x += STEP_LENGTH;
+		x += speed;
 
 		if(CollidesMapWall(map,RIGHT,width))
 		{
@@ -234,8 +199,8 @@ void cBicho::MoveRight(vector<int> map, int width)
 	//Advance, no problem
 	else
 	{
-		x += STEP_LENGTH;
-
+		x += speed;
+		
 		if(state != STATE_WALKRIGHT)
 		{
 			state = STATE_WALKRIGHT;
@@ -254,7 +219,7 @@ void cBicho::MoveUp(vector<int> map, int width)
 	if ((y % TILE_SIZE) == 0)
 	{
 		yaux = y;
-		y += STEP_LENGTH;
+		y += speed;
 
 		if (CollidesMapWall(map,UP,width))
 		{
@@ -265,7 +230,7 @@ void cBicho::MoveUp(vector<int> map, int width)
 	//Advance, no problem
 	else
 	{
-		y += STEP_LENGTH;
+		y += speed;
 
 		if (state != STATE_WALKUP)
 		{
@@ -285,7 +250,7 @@ void cBicho::MoveDown(vector<int> map, int width)
 	if ((y % TILE_SIZE) == 0)
 	{
 		yaux = y;
-		y -= STEP_LENGTH;
+		y -= speed;
 
 		if (CollidesMapWall(map, DOWN, width))
 		{
@@ -296,7 +261,7 @@ void cBicho::MoveDown(vector<int> map, int width)
 	//Advance, no problem
 	else
 	{
-		y -= STEP_LENGTH;
+		y -= speed;
 
 		if (state != STATE_WALKDOWN)
 		{
@@ -317,6 +282,7 @@ void cBicho::Stop()
 	case STATE_WALKUP:	    state = STATE_LOOKUP;		break;
 	case STATE_WALKDOWN:	state = STATE_LOOKDOWN;	    break;
 	}
+
 	/*if(state == STATE_SWORD_DOWN && seq==6)	state = STATE_LOOKDOWN;	
 	else if(state == STATE_SWORD_LEFT && seq ==6)state = STATE_LOOKLEFT;		
 	else if (state == STATE_SWORD_RIGHT && seq == 6)	state = STATE_LOOKRIGHT;
@@ -324,20 +290,7 @@ void cBicho::Stop()
 	
 }
 
-/*
-void cBicho::Jump(int *map)
-{
-	if(!jumping)
-	{
-		if(CollidesMapFloor(map))
-		{
-			jumping = true;
-			jump_alfa = 0;
-			jump_y = y;
-		}
-	}
-}
-*/
+
 
 void cBicho::Logic(vector<int> map, int width)
 {
@@ -375,9 +328,7 @@ void cBicho::Logic(vector<int> map, int width)
 void cBicho::NextFrame(int max)
 {
 	delay++;
-	int framedelay = FRAME_DELAY;
-	if (state == STATE_SWORD_DOWN || state == STATE_SWORD_LEFT || state == STATE_SWORD_RIGHT || state == STATE_SWORD_UP) framedelay = 4;
-	if(delay >= framedelay)
+	if(delay >= FRAME_DELAY)
 	{
 		seq++;
 		seq%=max;
@@ -425,4 +376,15 @@ void cBicho::hurt(int point) {
 	if (life <= 0) {
 		alive = false;
 	}
+}
+
+void cBicho::cleanFrame() {
+	seq = 0;
+}
+
+void cBicho::setActionFinished(bool b) {
+	actionFinished = b;
+}
+bool cBicho::isActionFinished() {
+	return actionFinished;
 }

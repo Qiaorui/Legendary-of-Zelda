@@ -12,8 +12,10 @@ public:
 	virtual void Draw();
 	void setAtk(int atk);
 	int getAtk();
+	void attack();
 
 protected:
+	int enemy_id;
 	int tex_id;
 	int attackDelay;
 	int attackPower;

@@ -10,6 +10,6 @@ public:
 	void Logic(vector<int> map, int width, vector<cBicho*> enemies) ;
 
 private :
-	int id;
+
 };
 

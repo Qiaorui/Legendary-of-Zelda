@@ -27,3 +27,11 @@ void Weapon::setAtk(int atk) {
 int Weapon::getAtk() {
 	return attackPower;
 }
+
+void Weapon::attack() {
+	active = true;
+	actionFinished = false;
+	attackDelay = 0;
+	cleanFrame();
+	enemy_id = -1;
+}

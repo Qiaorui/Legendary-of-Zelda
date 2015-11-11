@@ -12,75 +12,76 @@ Golem::Golem(){
 Golem::~Golem(){}
 void Golem::Draw()
 {
+	if (alive) {
+		//if (tex_id == 2) {
+		float xo, yo, xf, yf;
+		xf = yf = -1;
+		//BLOCK_SIZE = 16, FILE_SIZE = 432
+		// 16 / 432 = 0.037
+		//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
+		float  bitx = 24.0f / 454.0f;;
+		//BLOCK_SIZE = 16, FILE_SIZE = 303
+		// 16 / 303 = 0.053
+		float bity = 25.0f / 340.0f;
+		int frame = GetFrame();
 
-	//if (tex_id == 2) {
-	float xo, yo, xf, yf;
-	xf = yf = -1;
-	//BLOCK_SIZE = 16, FILE_SIZE = 432
-	// 16 / 432 = 0.037
-	//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
-	float  bitx = 24.0f / 454.0f;;
-	//BLOCK_SIZE = 16, FILE_SIZE = 303
-	// 16 / 303 = 0.053
-	float bity = 25.0f / 340.0f;
-	int frame = GetFrame();
+		switch (GetState())
+		{
+			//1
+		case STATE_LOOKLEFT:	xo = 240.0f / 454.0f;
+			yo = 25.0f / 340.0f;
+			break;
+			//4
+		case STATE_LOOKRIGHT:	xo = 48.0f / 454.0f;
+			yo = 25.0f / 340.0f;
+			break;
+			//1..3
+		case STATE_WALKLEFT:	xo = 240.0f / 454.0f + (GetFrame()*(bitx));
+			yo = 25.0f / 340.0f;
+			NextFrame(2);
+			break;
+			//4..6
+		case STATE_WALKRIGHT:	xo = 48.0f / 454.0f + (GetFrame()*(bitx));
+			yo = 25.0f / 340.0f;
+			NextFrame(2);
+			break;
 
-	switch (GetState())
-	{
-		//1
-	case STATE_LOOKLEFT:	xo = 240.0f / 454.0f;
-		yo = 25.0f / 340.0f;
-		break;
-		//4
-	case STATE_LOOKRIGHT:	xo = 48.0f / 454.0f;
-		yo = 25.0f / 340.0f;
-		break;
-		//1..3
-	case STATE_WALKLEFT:	xo = 240.0f / 454.0f + (GetFrame()*(bitx));
-		yo = 25.0f / 340.0f;
-		NextFrame(2); 
-		break;
-		//4..6
-	case STATE_WALKRIGHT:	xo = 48.0f / 454.0f + (GetFrame()*(bitx));
-		yo = 25.0f / 340.0f;
-		NextFrame(2); 
-		break;
+		case STATE_LOOKUP:      xo = 192.0f / 454.0f;
+			yo = 25.0f / 340.0f;
+			break;
 
-	case STATE_LOOKUP:      xo = 192.0f / 454.0f;
-		yo = 25.0f / 340.0f;
-		break;
+		case STATE_LOOKDOWN:    xo = 120.0f / 454.0f;
+			yo = 25.0f / 340.0f;
+			break;
 
-	case STATE_LOOKDOWN:    xo = 120.0f / 454.0f;
-		yo = 25.0f / 340.0f;
-		break;
+		case STATE_WALKUP:	 xo = 168.0f / 454.0f + (GetFrame()*(bitx));
+			yo = 25.0f / 340.0f;
+			NextFrame(2);
+			break;
 
-	case STATE_WALKUP:	 xo = 168.0f / 454.0f + (GetFrame()*(bitx));
-		yo = 25.0f / 340.0f;
-		NextFrame(2); 
-		break;
-
-	case STATE_WALKDOWN:    xo = 96.0f / 454.0f + (GetFrame()*(bitx));
-		yo = 25.0f / 340.0f;
-		NextFrame(2); 
-		break;
-	case STATE_SLEEP:    xo = 0;
-		yo = 25.0f / 340.0f;
-		NextFrame(2); // si se pone 4 gira la cabeza
-		break;
-	case STATE_OPEN:    xo = 24.0f / 454.0f;
-		yo = 25.0f / 340.0f;
-		NextFrame(2); // si se pone 4 gira la cabeza
-		break;
+		case STATE_WALKDOWN:    xo = 96.0f / 454.0f + (GetFrame()*(bitx));
+			yo = 25.0f / 340.0f;
+			NextFrame(2);
+			break;
+		case STATE_SLEEP:    xo = 0;
+			yo = 25.0f / 340.0f;
+			NextFrame(2); // si se pone 4 gira la cabeza
+			break;
+		case STATE_OPEN:    xo = 24.0f / 454.0f;
+			yo = 25.0f / 340.0f;
+			NextFrame(2); // si se pone 4 gira la cabeza
+			break;
 
 
-		//default:			xo = 91.0f/432.0f; yo = bity; break;
+			//default:			xo = 91.0f/432.0f; yo = bity; break;
+		}
+
+		//When we are not atacking 
+		xf = xo + bitx;
+		yf = yo - bity;
+
+		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
-
-	//When we are not atacking 
-	xf = xo + bitx;
-	yf = yo - bity;
-	
-	if (alive)DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	else Enemy::Draw();
 	//}
 	//else {

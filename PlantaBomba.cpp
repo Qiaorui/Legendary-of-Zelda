@@ -8,26 +8,27 @@ PlantaBomba::~PlantaBomba(){}
 
 void PlantaBomba::Draw()
 {
+	if (alive) {
+		//if (tex_id == 2) {
+		float xo, yo, xf, yf;
+		//BLOCK_SIZE = 16, FILE_SIZE = 432
+		// 16 / 432 = 0.037
+		//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
+		float  bitx = 18.0f / 840.0f;
+		//BLOCK_SIZE = 16, FILE_SIZE = 303
+		// 16 / 303 = 0.053
+		float bity = 17.0f / 567.0f;
+		int frame = GetFrame();
 
-	//if (tex_id == 2) {
-	float xo, yo, xf, yf;
-	//BLOCK_SIZE = 16, FILE_SIZE = 432
-	// 16 / 432 = 0.037
-	//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
-	float  bitx = 18.0f / 840.0f;
-	//BLOCK_SIZE = 16, FILE_SIZE = 303
-	// 16 / 303 = 0.053
-	float bity = 17.0f / 567.0f;
-	int frame = GetFrame();
-
-		if(GetFrame() ==2) xo = 504.0f / 840.0f + (GetFrame()*(bitx)) +1.0f/840.0f;
+		if (GetFrame() == 2) xo = 504.0f / 840.0f + (GetFrame()*(bitx)) + 1.0f / 840.0f;
 		else xo = 504.0f / 840.0f + (GetFrame()*(bitx));
 		yo = 120.0f / 567.0f;
 		NextFrame(3); // con 4 gira la cabeza
 		yf = yo - bity;
 		xf = xo + bitx;
-		if (alive)DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
-		else Enemy::Draw();
+		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
+	}
+	else Enemy::Draw();
 	
 }
 

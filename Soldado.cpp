@@ -11,73 +11,74 @@ Soldado::~Soldado(){}
 
 void Soldado::Draw()
 {
-	
-	//if (tex_id == 2) {
-	float xo, yo, xf, yf;
-	xf = yf = -1;
-	//BLOCK_SIZE = 16, FILE_SIZE = 432
-	// 16 / 432 = 0.037
-	//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
-	float  bitxl = 18.0f / 840.0f;
-	float bitxp = 16.0f / 840.0f;
-	//BLOCK_SIZE = 16, FILE_SIZE = 303
-	// 16 / 303 = 0.053
-	float bity =  28.0f / 567.0f;
-	float  bitx = 0.0f;
-	int frame = GetFrame();
+	if (alive) {
+		//if (tex_id == 2) {
+		float xo, yo, xf, yf;
+		xf = yf = -1;
+		//BLOCK_SIZE = 16, FILE_SIZE = 432
+		// 16 / 432 = 0.037
+		//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
+		float  bitxl = 18.0f / 840.0f;
+		float bitxp = 16.0f / 840.0f;
+		//BLOCK_SIZE = 16, FILE_SIZE = 303
+		// 16 / 303 = 0.053
+		float bity = 28.0f / 567.0f;
+		float  bitx = 0.0f;
+		int frame = GetFrame();
 
-	switch (GetState())
-	{
-		//1
-	case STATE_LOOKLEFT:	xo = 183.0f / 840.0f;
-		yo = 71.0f / 567.0f;
-		break;
-		//4
-	case STATE_LOOKRIGHT:	xo = 95.0f / 840.0f;
-		yo = 71.0f / 567.0f;
-		break;
-		//1..3
-	case STATE_WALKLEFT:	xo = 183.0f / 840.0f + (GetFrame()*(bitxl + 4.0f / 840.0f));
-		yo = 71.0f / 567.0f;
-		NextFrame(2); // con 4 gira la cabeza
-		break;
-		//4..6
-	case STATE_WALKRIGHT:	xo = 95.0f / 840.0f + (GetFrame()*(bitxl + 2.0f / 840.0f));
-		yo = 71.0f / 567.0f;
-		NextFrame(2); // con 4 gira la cabeza
-		break;
+		switch (GetState())
+		{
+			//1
+		case STATE_LOOKLEFT:	xo = 183.0f / 840.0f;
+			yo = 71.0f / 567.0f;
+			break;
+			//4
+		case STATE_LOOKRIGHT:	xo = 95.0f / 840.0f;
+			yo = 71.0f / 567.0f;
+			break;
+			//1..3
+		case STATE_WALKLEFT:	xo = 183.0f / 840.0f + (GetFrame()*(bitxl + 4.0f / 840.0f));
+			yo = 71.0f / 567.0f;
+			NextFrame(2); // con 4 gira la cabeza
+			break;
+			//4..6
+		case STATE_WALKRIGHT:	xo = 95.0f / 840.0f + (GetFrame()*(bitxl + 2.0f / 840.0f));
+			yo = 71.0f / 567.0f;
+			NextFrame(2); // con 4 gira la cabeza
+			break;
 
-	case STATE_LOOKUP:      xo = 265.0f / 840.0f;
-		yo = 71.0f / 567.0f;
-		break;
+		case STATE_LOOKUP:      xo = 265.0f / 840.0f;
+			yo = 71.0f / 567.0f;
+			break;
 
-	case STATE_LOOKDOWN:    xo = 16.0f/840.0f;
-		yo = 71.0f/567.0f;
-		break;
+		case STATE_LOOKDOWN:    xo = 16.0f / 840.0f;
+			yo = 71.0f / 567.0f;
+			break;
 
-	case STATE_WALKUP:	 xo = 265.0f / 840.0f + (GetFrame()*(bitxp + 4.0f / 840.0f));
-		yo = 71.0f / 567.0f;
-		NextFrame(2); // con 4 gira la cabeza
-		break;
+		case STATE_WALKUP:	 xo = 265.0f / 840.0f + (GetFrame()*(bitxp + 4.0f / 840.0f));
+			yo = 71.0f / 567.0f;
+			NextFrame(2); // con 4 gira la cabeza
+			break;
 
-	case STATE_WALKDOWN:    xo = 16.0f / 840.0f + (GetFrame()*(bitxp + 4.0f / 840.0f));
-		yo = 71.0f / 567.0f;
-		NextFrame(2); // si se pone 4 gira la cabeza
-		break;
+		case STATE_WALKDOWN:    xo = 16.0f / 840.0f + (GetFrame()*(bitxp + 4.0f / 840.0f));
+			yo = 71.0f / 567.0f;
+			NextFrame(2); // si se pone 4 gira la cabeza
+			break;
 
 
-		//default:			xo = 91.0f/432.0f; yo = bity; break;
+			//default:			xo = 91.0f/432.0f; yo = bity; break;
+		}
+
+		//When we are not atacking 
+		if (GetState() == STATE_LOOKDOWN || GetState() == STATE_LOOKUP || GetState() == STATE_WALKUP || GetState() == STATE_WALKDOWN) {
+			xf = xo + bitxp;
+		}
+		else {
+			xf = xo + bitxl;
+		}
+		yf = yo - bity;
+		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
-
-	//When we are not atacking 
-	if (GetState() == STATE_LOOKDOWN || GetState() == STATE_LOOKUP || GetState() == STATE_WALKUP || GetState() == STATE_WALKDOWN){
-		xf = xo + bitxp;
-	}
-	else {
-		xf = xo + bitxl;
-	}
-	yf = yo - bity;
-	if(alive)DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	else Enemy::Draw();
 	//}
 	//else {

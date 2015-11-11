@@ -4,10 +4,8 @@
 #include "Globals.h"
 #include "Sound.h"
 
-#define FRAME_DELAY		8
-#define STEP_LENGTH		2
-//#define JUMP_HEIGHT		96
-//#define JUMP_STEP		4
+//#define STEP_LENGTH		2
+
 
 #define STATE_LOOKLEFT		0
 #define STATE_LOOKRIGHT		1
@@ -22,8 +20,7 @@
 #define STATE_SWORD_RIGHT   10
 #define STATE_SWORD_LEFT    11 
 
-#define STATE_SLEEP       16
-#define STATE_OPEN        17
+
 
 #define UP 0
 #define DOWN 1
@@ -78,12 +75,17 @@ public:
 	void setAlive(bool b);
 	bool isAlive();
 	void hurt(int point);
-	
+	void cleanFrame();
+	void setActionFinished(bool b);
+	bool isActionFinished();
+
 
 protected:
+	int FRAME_DELAY = 8;
 	bool alive;
 	bool active;
 	bool visible;
+	bool actionFinished;
 	int speed;
 	int x, y;
 	int w, h;

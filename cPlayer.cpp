@@ -5,8 +5,10 @@
 cPlayer::cPlayer() {
 	//espada.SetWidthHeight(10,10);
 	//flecha.SetWidthHeight(10,10);
+	FRAME_DELAY = 4;
 	espada.setAtk(2);
 	flecha.setAtk(1);
+	flecha.SetWidthHeight(10, 10);
 }
 cPlayer::~cPlayer(){}
 
@@ -295,34 +297,32 @@ void cPlayer::setCurrentSceneId(int scene_id) {
 
 void cPlayer::SwordAttack()
 {
-	if (!espada.isActive()) {
+	if (!espada.isActive() && espada.isActionFinished()) {
 		int state = GetState();
-		int seq = GetFrame();
+		//int seq = GetFrame();
 		if (state == STATE_LOOKDOWN) {
 			SetState(STATE_SWORD_DOWN);
-			seq = 0;
 			espada.SetPosition(x - 5, y - 11);
 			espada.SetWidthHeight(32, 16);
 		}
 		else if (state == STATE_LOOKUP) {
 			SetState(STATE_SWORD_UP);
-			seq = 0;
 			espada.SetPosition(x - 11, y + 14);
 			espada.SetWidthHeight(32, 16);
 		}
 		else if (state == STATE_LOOKRIGHT) {
 			SetState(STATE_SWORD_RIGHT);
-			seq = 0;
-			espada.SetPosition(x + 10, y - 8);
+			espada.SetPosition(x + 14, y - 8);
 			espada.SetWidthHeight(16, 32);
 		}
 		else if (state == STATE_LOOKLEFT) {
 			SetState(STATE_SWORD_LEFT);
-			seq = 0;
 			espada.SetPosition(x - 16, y - 8);
 			espada.SetWidthHeight(16, 32);
 		}
-		espada.setActive(true);
+		actionFinished = false;
+		cleanFrame();
+		espada.attack();
 		Sound::getInstance()->playSword();
 	}
 }
@@ -354,7 +354,7 @@ void cPlayer::BowAttack()
 		}
 		Sound::getInstance()->playBow();
 		flecha.SetPosition(x + 10, y + 10);
-		flecha.SetWidthHeight(10, 10);
+
 		flecha.setActive(true);
 		flecha.setVisible(true);
 	}
@@ -386,6 +386,7 @@ void cPlayer::changeWeapon() {
 }
 
 void cPlayer::logic(vector<int> map, int width , vector<Enemy*> enemies){
+
 	vector<cBicho*> bichos;
 	for(int i =0; i < enemies.size(); ++i) {
 		bichos.push_back(enemies[i]);

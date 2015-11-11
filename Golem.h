@@ -1,6 +1,10 @@
 #pragma once
 #include "Enemy.h"
 
+#define STATE_SLEEP       16
+#define STATE_OPEN        17
+
+
 class Golem :
 	public Enemy
 {

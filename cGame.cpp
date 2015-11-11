@@ -160,25 +160,25 @@ bool cGame::Process()
 	h = Scene[id].getHeight();
 
 	if (Player.isAlive()) {
-		if(keys[GLUT_KEY_UP])			Player.MoveUp(Scene[id].GetMap(), w );
-		else if (keys[GLUT_KEY_DOWN])	Player.MoveDown(Scene[id].GetMap(), w );
-		else if(keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene[id].GetMap(), w );
-	else if(keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w );
-	else Player.Stop();
-	if (keys[GLUT_KEY_SPACEBAR]) {
-		Player.SwordAttack();
-	}
-	else if (keys[98]) {
-		
-		if(timer>10)Player.BowAttack();
-	}
+		if (keys[GLUT_KEY_UP])			Player.MoveUp(Scene[id].GetMap(), w);
+		else if (keys[GLUT_KEY_DOWN])	Player.MoveDown(Scene[id].GetMap(), w);
+		else if (keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene[id].GetMap(), w);
+		else if (keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w);
+		else Player.Stop();
+		if (keys[GLUT_KEY_SPACEBAR]) {
+			Player.SwordAttack();
+		}
+		else if (keys[98]) {
+
+			//if (timer>10)Player.BowAttack();
+		}
 	}
 	
 	
 	//Game Logic
 	Player.logic(Scene[id].GetMap(), w , Scene[id].getEnemies());
 	Scene[id].logic(&Player);
-	++timer;
+	//++timer;
 	return res;
 }
 

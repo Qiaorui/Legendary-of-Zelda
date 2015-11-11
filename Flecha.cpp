@@ -6,7 +6,8 @@ Flecha::Flecha()
 {
 	attackDelay = 10;
 	active = false;
-	speed = 2;
+	speed = 4;
+	distance = 0;
 }
 
 
@@ -26,17 +27,17 @@ void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 			if (Collides(&body)) {
 				attackDelay = 0;
 				enemies[i]->hurt(attackPower);
-				id = i;
+				enemy_id = i;
 				colision = true;
 				visible = false;
-				distance = 0;
+				//distance = 0;
 			}
 
 		}
 	}
 	else {
 		int ex, ey, ix, iy;
-		enemies[id]->GetPosition(&ex, &ey);
+		enemies[enemy_id]->GetPosition(&ex, &ey);
 		//player->GetPosition(&ix, &iy);
 		ix = x + w / 2;
 		iy = y + h / 2;
@@ -44,7 +45,7 @@ void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 		else ex = ex + 1;
 		if (ey < iy) ey = ey - 1;
 		else ey = ey + 1;
-		enemies[id]->SetPosition(ex, ey);
+		enemies[enemy_id]->SetPosition(ex, ey);
 		++attackDelay;
 		if (attackDelay == 10)active = false;
 	}
