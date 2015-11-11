@@ -166,7 +166,7 @@ bool cGame::Process()
 		Player.SwordAttack();
 	}
 	else if (keys[98]) {
-		Sound::getInstance()->playBow();
+		
 		if(timer>10)Player.BowAttack();
 	}
 	}

@@ -29,6 +29,7 @@ void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 				id = i;
 				colision = true;
 				visible = false;
+				distance = 0;
 			}
 
 		}
@@ -50,16 +51,40 @@ void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 	switch (GetState()) {
 
 	case STATE_BOW_DOWN:
+		 if (distance > 200) {
+			active = false;
+			visible = false;
+			distance = 0;
+		}
 		y -= speed;
+		distance += speed;
 		break;
 	case STATE_BOW_UP:
+		if (distance > 200) {
+			active = false;
+			visible = false;
+			distance = 0;
+		}
 		y += speed;
+		distance += speed;
 		break;
 	case STATE_BOW_RIGHT:
+	 if (distance > 200) {
+			active = false;
+			visible = false;
+			distance = 0;
+		}
 		x += speed;
+		distance += speed;
 		break;
 	case STATE_BOW_LEFT:
+		 if (distance > 200) {
+			active = false;
+			visible = false;
+			distance = 0;
+		}
 		x -= speed;
+		distance += speed;
 		break;
 	}
 

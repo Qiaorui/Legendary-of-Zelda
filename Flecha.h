@@ -21,6 +21,6 @@ public:
 
 private:
 	int id;
-
+	int distance;
 };
 

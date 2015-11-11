@@ -100,7 +100,6 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->playSword();
 				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
@@ -112,7 +111,6 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->playSword();
 				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
@@ -124,7 +122,6 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(6);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->playSword();
 				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
@@ -136,7 +133,7 @@ void cPlayer::Draw(int tex_id)
 			yf = yo - (2.0f*bity);
 			NextFrame(7);
 			if (GetFrame() == 1) {
-				Sound::getInstance()->playSword();
+				
 				//engine->play2D("resource/LTTP_Sword1.wav", false);
 				//engine->play2D("resource/MC_Link_Sword2.wav", false);
 			}
@@ -326,6 +323,7 @@ void cPlayer::SwordAttack()
 			espada.SetWidthHeight(16, 32);
 		}
 		espada.setActive(true);
+		Sound::getInstance()->playSword();
 	}
 }
 
@@ -354,6 +352,7 @@ void cPlayer::BowAttack()
 			seq = 0;
 			flecha.SetState(STATE_BOW_LEFT);
 		}
+		Sound::getInstance()->playBow();
 		flecha.SetPosition(x + 10, y + 10);
 		flecha.SetWidthHeight(10, 10);
 		flecha.setActive(true);
