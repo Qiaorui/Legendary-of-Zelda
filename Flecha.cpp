@@ -96,7 +96,7 @@ void Flecha::Draw(int tex_id) {
 		break;
 	}
 	xf = xo + bitx;
-	yf = yo - bity;
+	yf = yo - bity; // has to be fixed because sometimes is no state bow
 	w = 28;
 	h = 28;
 	glEnable(GL_TEXTURE_2D);

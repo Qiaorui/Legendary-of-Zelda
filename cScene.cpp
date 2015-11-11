@@ -153,6 +153,7 @@ void cScene::Draw(int tex_id)
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		if(enemies[i]->isVisible()) enemies[i]->Draw();
+		else enemies.erase(enemies.begin() + i);
 	}
 
 }
@@ -236,7 +237,7 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 			enemies[id]->SetTile(x,y);
 			enemies[id]->SetLife(3);
 			enemies[id]->SetWidthHeight(24, 25);
-			enemies[id]->SetState(STATE_WALKDOWN);
+			enemies[id]->SetState(STATE_SLEEP);
 			enemies[id]->setImage(tex_id);
 		break;
 	default:

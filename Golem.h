@@ -13,6 +13,7 @@ public:
 	void Logic(vector<int> map, int width, cBicho* player);
 
 private:
-
+	int mode;
+	int delayattack;
 };
 

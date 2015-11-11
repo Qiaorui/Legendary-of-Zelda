@@ -26,7 +26,8 @@ void PlantaBomba::Draw()
 		NextFrame(3); // con 4 gira la cabeza
 		yf = yo - bity;
 		xf = xo + bitx;
-	DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
+		if (alive)DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
+		else Enemy::Draw();
 	
 }
 
@@ -53,6 +54,8 @@ void PlantaBomba::DrawRect(int tex_id, float xo, float yo, float xf, float yf, i
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
+
+	
 }
 
 

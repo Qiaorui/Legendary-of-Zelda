@@ -95,7 +95,7 @@ bool cGame::Init()
 	if (!res) return false;
 	Scene[0].addEnemy(SOLDADO, 12, 17, Data.GetID(IMG_ENEMIES));
 	Scene[0].addEnemy(PLANTABOMBA, 15, 10, Data.GetID(IMG_ENEMIES));
-	Scene[0].addEnemy(GOLEM, 10, 4, Data.GetID(IMG_GOLEM));
+	Scene[0].addEnemy(GOLEM, 5, 10, Data.GetID(IMG_GOLEM));
 	
 
 	//sound init

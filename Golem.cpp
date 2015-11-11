@@ -4,6 +4,9 @@
 
 Golem::Golem(){
 	visible = true;
+	delayattack = 15;
+	delaymove = 0;
+	mode = 0;
 }
 
 Golem::~Golem(){}
@@ -77,7 +80,8 @@ void Golem::Draw()
 	xf = xo + bitx;
 	yf = yo - bity;
 	
-	DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
+	if (alive)DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
+	else Enemy::Draw();
 	//}
 	//else {
 	//	DrawLife(tex_id);
@@ -115,32 +119,51 @@ void Golem::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, 
 
 
 void Golem::Logic(vector<int> map, int width, cBicho* player) {
-	++delaymove;
-	if (delaymove >= FRAME_DELAY) {
-		int x, y;
-		GetPosition(&x, &y);
-		switch (rand() % 4) {
-		case 0:
-			++x;
-			SetState(STATE_WALKRIGHT);
-			break;
-		case 1:
-			--x;
-			SetState(STATE_WALKLEFT);
-			break;
-		case 2:
-			++y;
-			SetState(STATE_WALKUP);
-			break;
-		case 3:
-			--y;
-			SetState(STATE_WALKDOWN);
-			break;
+	int xgolem, ygolem;
+	int xp, yp;
+	GetPosition(&xgolem, &ygolem);
+	player->GetPosition(&xp, &yp);
+	if (yp - ygolem < 30 && xp == xgolem && GetState() == STATE_SLEEP) mode = 1;
+	if (mode == 1) {
+		if (delaymove < 5) {
+			SetState(STATE_OPEN);
+			++delaymove;
 		}
-		SetPosition(x, y);
-		delaymove = 0;
+		else if (delaymove < 60) {
+			SetState(STATE_WALKDOWN);
+			SetPosition(xgolem, ygolem - 1);
+			++delaymove;
+		}
+		else {
+			mode = 2;
+			SetState(STATE_LOOKDOWN);
+			delaymove = 0;
+		}
 	}
-
+	
+	
+			
+	
+	
+	cRect body;
+	player->GetArea(&body);
+	if (delayattack < 15) {
+		int ex, ey, px, py;
+		player->GetPosition(&px, &py);
+		GetPosition(&ex, &ey);
+		if (px < ex) px = px - 1;
+		else px = px + 1;
+		if (py < ey) py = py - 1;
+		else py = py + 1;
+		player->SetPosition(px, py);
+	}
+	else if (Collides(&body)) {
+		Sound::getInstance()->playDamage();
+		int l;
+		player->hurt(1);
+		delayattack = 0;
+	}
+	++delayattack;
 	
 	Enemy::Logic(map,width, player);
 
