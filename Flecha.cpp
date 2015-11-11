@@ -28,6 +28,7 @@ void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 				enemies[i]->hurt(attackPower);
 				id = i;
 				colision = true;
+				visible = false;
 			}
 
 		}

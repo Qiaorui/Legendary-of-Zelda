@@ -235,7 +235,9 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 
 	glDisable(GL_TEXTURE_2D);
 
-	if (flecha.isActive())flecha.Draw(tex_id);
+	if (flecha.isVisible()) {
+		flecha.Draw(tex_id);
+	}
 }
 
 void DrawObject(int tex_id, int cx, int cy) { // has to be really imprioved, only to try how to do it!
@@ -296,62 +298,67 @@ void cPlayer::setCurrentSceneId(int scene_id) {
 
 void cPlayer::SwordAttack()
 {
- 	int state = GetState();
-	int seq = GetFrame();
-	if (state == STATE_LOOKDOWN) {
-		SetState(STATE_SWORD_DOWN);
-		seq = 0;
-		espada.SetPosition(x-5,y-11);
-		espada.SetWidthHeight(32,16);
+	if (!espada.isActive()) {
+		int state = GetState();
+		int seq = GetFrame();
+		if (state == STATE_LOOKDOWN) {
+			SetState(STATE_SWORD_DOWN);
+			seq = 0;
+			espada.SetPosition(x - 5, y - 11);
+			espada.SetWidthHeight(32, 16);
+		}
+		else if (state == STATE_LOOKUP) {
+			SetState(STATE_SWORD_UP);
+			seq = 0;
+			espada.SetPosition(x - 11, y + 14);
+			espada.SetWidthHeight(32, 16);
+		}
+		else if (state == STATE_LOOKRIGHT) {
+			SetState(STATE_SWORD_RIGHT);
+			seq = 0;
+			espada.SetPosition(x + 10, y - 8);
+			espada.SetWidthHeight(16, 32);
+		}
+		else if (state == STATE_LOOKLEFT) {
+			SetState(STATE_SWORD_LEFT);
+			seq = 0;
+			espada.SetPosition(x - 16, y - 8);
+			espada.SetWidthHeight(16, 32);
+		}
+		espada.setActive(true);
 	}
-	else if (state == STATE_LOOKUP) {
-		SetState(STATE_SWORD_UP);
-		seq = 0;
-		espada.SetPosition(x-11,y+14);
-		espada.SetWidthHeight(32,16);
-	}
-	else if (state == STATE_LOOKRIGHT) {
-		SetState(STATE_SWORD_RIGHT);
-		seq = 0;
-		espada.SetPosition(x+10,y-8);
-		espada.SetWidthHeight(16,32);
-	}
-	else if (state == STATE_LOOKLEFT) {
-		SetState(STATE_SWORD_LEFT);
-		seq = 0;
-		espada.SetPosition(x-16,y-8);
-		espada.SetWidthHeight(16,32);
-	}
-	espada.setActive(true);
 }
 
 void cPlayer::BowAttack()
 {
-	int state = GetState();
-	int seq = GetFrame();
-	if (state == STATE_LOOKDOWN) {
-		SetState(STATE_BOW_DOWN);
-		seq = 0;
-		flecha.SetState(STATE_BOW_DOWN);
+	if (!flecha.isActive()) {
+		int state = GetState();
+		int seq = GetFrame();
+		if (state == STATE_LOOKDOWN) {
+			SetState(STATE_BOW_DOWN);
+			seq = 0;
+			flecha.SetState(STATE_BOW_DOWN);
+		}
+		else if (state == STATE_LOOKUP) {
+			SetState(STATE_BOW_UP);
+			seq = 0;
+			flecha.SetState(STATE_BOW_UP);
+		}
+		else if (state == STATE_LOOKRIGHT) {
+			SetState(STATE_BOW_RIGHT);
+			seq = 0;
+			flecha.SetState(STATE_BOW_RIGHT);
+		}
+		else if (state == STATE_LOOKLEFT) {
+			SetState(STATE_BOW_LEFT);
+			seq = 0;
+			flecha.SetState(STATE_BOW_LEFT);
+		}
+		flecha.SetPosition(x + 10, y + 10);
+		flecha.SetWidthHeight(10, 10);
+		flecha.setActive(true);
+		flecha.setVisible(true);
 	}
-	else if (state == STATE_LOOKUP) {
-		SetState(STATE_BOW_UP);
-		seq = 0;
-		flecha.SetState(STATE_BOW_UP);
-	}
-	else if (state == STATE_LOOKRIGHT) {
-		SetState(STATE_BOW_RIGHT);
-		seq = 0;
-		flecha.SetState(STATE_BOW_RIGHT);
-	}
-	else if (state == STATE_LOOKLEFT) {
-		SetState(STATE_BOW_LEFT);
-		seq = 0;
-		flecha.SetState(STATE_BOW_LEFT);
-	}
-	flecha.SetPosition(x+10 , y+10 );
-	flecha.SetWidthHeight(10, 10);
-	flecha.setActive(true);
 }
 
 
