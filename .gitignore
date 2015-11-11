@@ -1,5 +1,5 @@
 
-*.vcxproj
+
 *.obj
 Backup*
 *.filters
@@ -24,7 +24,7 @@ DEBUG/
 !*.h
 !corona.*
 !/resource/*
-!2DEngine.vcproj
 !GL*/**
+!2DEngine.vcxproj
 *.user
 *.db

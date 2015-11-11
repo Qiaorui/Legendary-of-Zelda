@@ -84,7 +84,7 @@ protected:
 	bool alive;
 	bool active;
 	bool visible;
-	
+	int speed;
 	int x, y;
 	int w, h;
 

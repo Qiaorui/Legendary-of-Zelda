@@ -6,6 +6,7 @@ Flecha::Flecha()
 {
 	attackDelay = 10;
 	active = false;
+	speed = 2;
 }
 
 
@@ -16,8 +17,6 @@ Flecha::~Flecha()
 
 void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 {
-	int x, y;
-	GetPosition(&x, &y);
 	bool colision = false;
 	if (attackDelay >= 10) {
 		for (int i = 0; i < enemies.size(); ++i)
@@ -30,24 +29,7 @@ void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 				id = i;
 				colision = true;
 			}
-			else {
-				switch (GetState()) {
 
-				case STATE_BOW_DOWN:
-					--y;
-					break;
-				case STATE_BOW_UP:
-					++y;
-					break;
-				case STATE_BOW_RIGHT:
-					++x;
-					break;
-				case STATE_BOW_LEFT:
-					--x;
-					break;
-				}
-				SetPosition(x, y);
-			}
 		}
 	}
 	else {
@@ -64,6 +46,22 @@ void Flecha::Logic(vector<int> map, int width, vector<cBicho*> enemies)
 		++attackDelay;
 		if (attackDelay == 10)active = false;
 	}
+	switch (GetState()) {
+
+	case STATE_BOW_DOWN:
+		y -= speed;
+		break;
+	case STATE_BOW_UP:
+		y += speed;
+		break;
+	case STATE_BOW_RIGHT:
+		x += speed;
+		break;
+	case STATE_BOW_LEFT:
+		x -= speed;
+		break;
+	}
+
 
 
 }

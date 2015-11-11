@@ -332,23 +332,26 @@ void cPlayer::BowAttack()
 	if (state == STATE_LOOKDOWN) {
 		SetState(STATE_BOW_DOWN);
 		seq = 0;
+		flecha.SetState(STATE_BOW_DOWN);
 	}
 	else if (state == STATE_LOOKUP) {
 		SetState(STATE_BOW_UP);
 		seq = 0;
+		flecha.SetState(STATE_BOW_UP);
 	}
 	else if (state == STATE_LOOKRIGHT) {
 		SetState(STATE_BOW_RIGHT);
 		seq = 0;
+		flecha.SetState(STATE_BOW_RIGHT);
 	}
 	else if (state == STATE_LOOKLEFT) {
 		SetState(STATE_BOW_LEFT);
 		seq = 0;
+		flecha.SetState(STATE_BOW_LEFT);
 	}
 	flecha.SetPosition(x+10 , y+10 );
 	flecha.SetWidthHeight(10, 10);
 	flecha.setActive(true);
-	flecha.SetState(GetState());
 }
 
 
