@@ -429,6 +429,7 @@ void cPlayer::changeWeapon() {
 		default:
 			break;
 		}
+		Sound::getInstance()->playWeaponChange();
 		commandDelay = 20;
 	}
 }

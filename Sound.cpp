@@ -48,3 +48,10 @@ void Sound::playDamage() {
 void Sound::playHit() {
 	engine->play2D("resource/LTTP_Enemy_Hit.wav", false);
 }
+void Sound::playItem() {
+	engine->play2D("resource/LTTP_Item.wav", false);
+}
+
+void Sound::playWeaponChange() {
+	engine->play2D("resource/change-weapon.wav", false);
+}

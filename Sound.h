@@ -18,6 +18,8 @@ public:
 	void playBow();
 	void playDamage();
 	void playHit();
+	void playItem();
+	void playWeaponChange();
 
 private:
 	static Sound *instance;
