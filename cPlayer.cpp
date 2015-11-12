@@ -263,7 +263,6 @@ void cPlayer::DrawStatus(int cx, int cy){ // has to be really imprioved, only to
 
 	float maxX = 608.0f;
 	float maxY = 152.0f;
-
 	float xo, yo;
 	int lifeh, lifew;
 	float xf, yf;
@@ -273,9 +272,8 @@ void cPlayer::DrawStatus(int cx, int cy){ // has to be really imprioved, only to
 	int paddingY = 110;
 	int life = getLife();
 	int maxLife = getMaxLife();
-	yo = 92.0f;
-
-
+	yf = (92.0f - lifeh) / maxY;
+	yo = 92.0f / maxY;
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, item_tex_id);
 	glBegin(GL_QUADS);
@@ -290,18 +288,17 @@ void cPlayer::DrawStatus(int cx, int cy){ // has to be really imprioved, only to
 			xo = 58.0f;
 		}
 		xf = (xo + lifew) / maxX;
-		yf = (yo - lifeh) / maxY;
 		xo = xo / maxX;
-		yo = yo / maxY;
 		glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX,		 cy + paddingY); //Left Down
 		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX+lifew, cy + paddingY); //right down
 		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX+lifew, cy + paddingY+lifeh); //right up
 		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX,		 cy + paddingY+lifeh); //left up
-		paddingX -= 10;
+		paddingX += 10;
 		life -= 2;
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
+
 
 }
 
