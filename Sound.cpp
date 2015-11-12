@@ -17,6 +17,7 @@ Sound* Sound::getInstance() {
 
 
 void Sound::playBgm(int id) {
+	engine->stopAllSounds();
 	switch (id)
 	{
 	case SOUND_OVERLOAD:
