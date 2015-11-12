@@ -5,6 +5,7 @@
 cPlayer::cPlayer() {
 	//espada.SetWidthHeight(10,10);
 	//flecha.SetWidthHeight(10,10);
+	commandDelay = 0;
 	FRAME_DELAY = 4;
 	espada.setAtk(2);
 	flecha.setAtk(1);
@@ -239,40 +240,22 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	}
 }
 
-void DrawObject(int tex_id, int cx, int cy) { // has to be really imprioved, only to try how to do it!
-
-	float bitx = 16.0f / 608.0f;
-	float bity = 16.0f / 152.0f;
-
-	float x0 = bitx;
-	float y0 = 0;
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, tex_id);
-	glBegin(GL_QUADS);
-	glTexCoord2f(x0, y0 + bity);	glVertex2i(cx - 100, cy + 100);  //Left Down
-	glTexCoord2f(x0 + bitx, y0 + bity);	glVertex2i(cx - 80, cy + 100); //right down
-	glTexCoord2f(x0 + bitx, y0);	glVertex2i(cx - 80, cy + 120); //right up
-	glTexCoord2f(x0, y0);	glVertex2i(cx - 100, cy + 120); //left up
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-}
-
-void cPlayer::DrawStatus(int cx, int cy){ // has to be really imprioved, only to try how to do it!
-		//TODO temporary fix
-	DrawObject(item_tex_id, cx, cy);
-
+void cPlayer::DrawStatus(int cx, int cy){ 
 	float maxX = 608.0f;
 	float maxY = 152.0f;
+
+
+	//Life Section
 	float xo, yo;
-	int lifeh, lifew;
+	int itemh, itemw;
 	float xf, yf;
-	lifeh = 7;
-	lifew = 7;
+	itemh = 7;
+	itemw = 7;
 	int paddingX = 60;
-	int paddingY = 110;
+	int paddingY = 90;
 	int life = getLife();
 	int maxLife = getMaxLife();
-	yf = (92.0f - lifeh) / maxY;
+	yf = (92.0f - itemh) / maxY;
 	yo = 92.0f / maxY;
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, item_tex_id);
@@ -287,18 +270,54 @@ void cPlayer::DrawStatus(int cx, int cy){ // has to be really imprioved, only to
 		else {
 			xo = 58.0f;
 		}
-		xf = (xo + lifew) / maxX;
+		xf = (xo + itemw) / maxX;
 		xo = xo / maxX;
 		glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX,		 cy + paddingY); //Left Down
-		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX+lifew, cy + paddingY); //right down
-		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX+lifew, cy + paddingY+lifeh); //right up
-		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX,		 cy + paddingY+lifeh); //left up
+		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX+itemw, cy + paddingY); //right down
+		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX+itemw, cy + paddingY+itemh); //right up
+		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX,		 cy + paddingY+itemh); //left up
 		paddingX += 10;
 		life -= 2;
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 
+	//Item Section
+	//DrawObject(item_tex_id, cx, cy);
+	itemw = itemh = 15;
+	switch (usingWeapon)
+	{
+	case SWORD:
+		xo = 37.0f;
+		yo = 72.0f;
+		break;
+	case BOW:
+		xo = 16.0f;
+		yo = 16.0f;
+		break;
+	default:
+		break;
+	}
+	xf = (xo + itemw) / maxX;
+	yf = (yo - itemh) / maxY;
+	xo = xo / maxX;
+	yo = yo / maxY;
+	paddingX = -80;
+	paddingY = 80;
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, item_tex_id);
+	glBegin(GL_QUADS);
+		glTexCoord2f(136.0/maxX, 148.0f/maxY);	glVertex2i(cx + paddingX-3, cy + paddingY-3); //Left Down
+		glTexCoord2f(214.0/maxX, 148.0f / maxY);	glVertex2i(cx + paddingX+3 + itemw, cy + paddingY-3); //right down
+		glTexCoord2f(214.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX+3 + itemw, cy + paddingY+3 + itemh); //right up
+		glTexCoord2f(136.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX-3, cy + paddingY+3 + itemh); //left up
+
+		glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX, cy + paddingY); //Left Down
+		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX + itemw, cy + paddingY); //right down
+		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX + itemw, cy + paddingY + itemh); //right up
+		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX, cy + paddingY + itemh); //left up
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
 
 }
 
@@ -405,20 +424,24 @@ void cPlayer::setWeapon(int weapon) {
 	usingWeapon = weapon;
 }
 void cPlayer::changeWeapon() {
-	switch (usingWeapon)
-	{
-	case SWORD:
-		usingWeapon = BOW;
-		break;
-	case BOW:
-		usingWeapon = SWORD;
-	default:
-		break;
+	if (commandDelay == 0) {
+		switch (usingWeapon)
+		{
+		case SWORD:
+			usingWeapon = BOW;
+			break;
+		case BOW:
+			usingWeapon = SWORD;
+		default:
+			break;
+		}
+		commandDelay = 20;
 	}
-
 }
 
 void cPlayer::logic(vector<int> map, int width , vector<Enemy*> enemies){
+	if (commandDelay > 0) --commandDelay;
+	
 
 	vector<cBicho*> bichos;
 	for(int i =0; i < enemies.size(); ++i) {
@@ -426,4 +449,17 @@ void cPlayer::logic(vector<int> map, int width , vector<Enemy*> enemies){
 	}
 	if(espada.isActive()) espada.Logic(map, width, bichos);
 	if(flecha.isActive())flecha.Logic(map, width, bichos);
+}
+
+void cPlayer::attack() {
+	switch (usingWeapon)
+	{
+	case SWORD:
+		SwordAttack();
+	case BOW:
+		BowAttack();
+	default:
+		break;
+	}
+
 }

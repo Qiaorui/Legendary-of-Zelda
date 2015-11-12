@@ -32,6 +32,7 @@ public:
 	void setWeapon(int weapon);
 	void changeWeapon();
     void logic(vector<int> map, int width , vector<Enemy*> enemies);
+	void attack();
 
 private:
 	Espada espada;
@@ -41,5 +42,6 @@ private:
 	//int life_tex_id;
 	int item_tex_id;
 	int current_scene_id;
+	int commandDelay;
 
 };

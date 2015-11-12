@@ -153,6 +153,7 @@ void cScene::Draw(int tex_id)
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		if(enemies[i]->isVisible()) enemies[i]->Draw();
+		if (!enemies[i]->isVisible()) enemies.erase(enemies.begin() + i);
 	}
 
 }
@@ -194,7 +195,6 @@ void cScene::logic(cPlayer* player) {
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		if(enemies[i]->isActive()) enemies[i]->Logic(map, width, player);
-		//if (!enemies[i]->isVisible()) enemies.erase(enemies.begin() + i);
 	}
 
 	/*for (int i = 0; i < items.size(); i++)

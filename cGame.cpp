@@ -166,10 +166,11 @@ bool cGame::Process()
 		else if (keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w);
 		else Player.Stop();
 		if (keys[GLUT_KEY_SPACEBAR]) {
-			Player.SwordAttack();
+			Player.attack();
 		}
 		else if (keys[98]) {
-			Player.BowAttack();
+			Player.changeWeapon();
+			//Player.BowAttack();
 		}
 	}
 	
