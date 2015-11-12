@@ -21,6 +21,13 @@ void Sound::playBgm(int id) {
 	{
 	case SOUND_OVERLOAD:
 		engine->play2D("resource/04.-overworld.mp3", true);
+		break;
+	case SOUND_DUNGEON:
+		engine->play2D("resource/15.-sanctuary-dungeon.mp3", true);
+		break;
+	case SOUND_BOSS_ROOM:
+		engine->play2D("resource/18.-boss-bgm.mp3", true);
+		break;
 	default:
 		break;
 	}

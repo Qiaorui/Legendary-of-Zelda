@@ -25,8 +25,7 @@ public:
 	//void DrawObject(int tex_id, int cx, int cy);
 	void SwordAttack();
 	void BowAttack();
-	void setCurrentSceneId(int scene_id);
-	int getCurrentSceneId();
+
 	//void setLifeTexId(int id);
 	void setItemTexId(int id);
 	void setWeapon(int weapon);
@@ -41,7 +40,7 @@ private:
 	int usingWeapon;
 	//int life_tex_id;
 	int item_tex_id;
-	int current_scene_id;
+
 	int commandDelay;
 
 };

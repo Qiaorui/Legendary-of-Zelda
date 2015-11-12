@@ -79,8 +79,10 @@ public:
 	void cleanFrame();
 	void setActionFinished(bool b);
 	bool isActionFinished();
+	void stepBack();
 
-
+	void setCurrentSceneId(int scene_id);
+	int getCurrentSceneId();
 protected:
 	int FRAME_DELAY = 8;
 	bool alive;
@@ -90,7 +92,7 @@ protected:
 	int speed;
 	int x, y;
 	int w, h;
-
+	int current_scene_id;
 private:
 
 	int seq, delay;

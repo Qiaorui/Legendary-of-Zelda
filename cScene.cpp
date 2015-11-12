@@ -148,7 +148,7 @@ void cScene::Draw(int tex_id)
 	glDisable(GL_TEXTURE_2D);
 	for (int i = 0; i < senders.size(); i++)
 	{
-		if(senders[i].isVisible()) senders[i].draw();
+		if(senders[i].isVisible()) senders[i].draw(tex_id);
 	}
 	for (int i = 0; i < enemies.size(); i++)
 	{
@@ -178,12 +178,13 @@ void cScene::setHeight(int h) {
 	height = h;
 }
 
-void cScene::addSender(int x, int y, int scene, int ToX, int ToY, int state, float xo, float xf, float yo, float yf, int w, int h, int tex_id) {
+int cScene::addSender(int x, int y, int scene, int ToX, int ToY, int state, float xo, float xf, float yo, float yf, int w, int h) {
 	Sender sender(scene, ToX, ToY, state);
 	sender.SetTile(x, y);
 	sender.SetWidthHeight(w, h);
-	sender.setImage(xo, xf, yo, yf, tex_id);
+	sender.setImage(xo, xf, yo, yf);
 	senders.push_back(sender);
+	return senders.size() - 1;
 }
 
 
@@ -257,4 +258,9 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 
 vector<Enemy*> cScene::getEnemies(){
 	return enemies;
+}
+
+void cScene::setSenderCloseImage(int index, float xo, float xf, float yo, float yf) {
+	senders[index].setCloseImage(xo, xf, yo, yf);
+	senders[index].switchState();
 }

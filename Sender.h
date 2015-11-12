@@ -1,26 +1,25 @@
 #pragma once
-#include "cBicho.h"
-#include "cPlayer.h"
+#include "Trigger.h"
 
 class Sender :
-	public cBicho
+	public Trigger
 {
 public:
+	Sender();
 	Sender(int scene, int x, int y, int state);
-	void setImage(float xo, float xf, float yo, float yf, int tex_id);
-	void draw();
-	void logic(cPlayer* player);
+	void setCloseImage(float xo, float xf, float yo, float yf);
+	void draw(int tex_id);
+	void logic(cBicho* player);
+	void switchState();
+	bool Collides(cRect *rc);
 	~Sender();
 
 private:
+	float closexo, closexf, closeyo, closeyf;
 	int sentToScene;
 	int sentToX;
 	int sentToY;
 	int newDirection;
-	float xo;
-	float xf;
-	float yo;
-	float yf;
-	int tex_id;
+
 };
 

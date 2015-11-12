@@ -44,8 +44,8 @@
     <OutDir>Debug\</OutDir>
     <IntDir>Debug\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\code\Legendary-of-Zelda\GL Files\include\GL;C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\code\Legendary-of-Zelda\GL Files\lib;C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Release\</OutDir>
@@ -106,6 +106,7 @@
     <ClCompile Include="Sender.cpp" />
     <ClCompile Include="Soldado.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +127,7 @@
     <ClInclude Include="Sender.h" />
     <ClInclude Include="Soldado.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="Trigger.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -393,3 +393,30 @@ bool cBicho::isActionFinished() {
 int  cBicho::getMaxLife() {
 	return maxLife;
 }
+
+
+int cBicho::getCurrentSceneId() {
+	return current_scene_id;
+}
+
+void cBicho::setCurrentSceneId(int scene_id) {
+	current_scene_id = scene_id;
+}
+
+void cBicho::stepBack() {
+	switch (state)
+	{
+	case STATE_WALKDOWN:
+		y += speed;
+		break;
+	case STATE_WALKUP:
+		y -= speed;
+		break;
+	case STATE_WALKLEFT:
+		x += speed;
+	case STATE_WALKRIGHT:
+		x -= speed;
+	default:
+		break;
+	}
+}

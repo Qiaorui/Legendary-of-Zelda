@@ -324,13 +324,7 @@ void cPlayer::DrawStatus(int cx, int cy){
 
 
 
-int cPlayer::getCurrentSceneId() {
-	return current_scene_id;
-}
 
-void cPlayer::setCurrentSceneId(int scene_id) {
-	current_scene_id = scene_id;
-}
 
 void cPlayer::SwordAttack()
 {

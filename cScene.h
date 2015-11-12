@@ -41,7 +41,8 @@ public:
 	int getHeight();
 	void setWidth(int w);
 	void setHeight(int h);
-	void addSender(int x, int y, int scene, int ToX, int ToY, int state, float xo, float xf, float yo, float yf, int w, int h, int tex_id);
+	int addSender(int x, int y, int scene, int ToX, int ToY, int state, float xo, float xf, float yo, float yf, int w, int h);
+	void setSenderCloseImage(int index, float xo, float xf, float yo, float yf);
 	void logic(cPlayer* player);
 	void addEnemy(int enemyType, int x, int y, int tex_id);
 	vector<Enemy*> getEnemies();
