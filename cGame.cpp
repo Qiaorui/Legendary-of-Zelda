@@ -91,12 +91,20 @@ bool cGame::Init()
 	res = Data.LoadImage(IMG_FIRE, "fire.png", GL_RGBA);
 
 	if (!res) return false;
-	Scene[0].addEnemy(SOLDADO, 12, 17, Data.GetID(IMG_ENEMIES));
-	Scene[0].addEnemy(PLANTABOMBA, 15, 10, Data.GetID(IMG_ENEMIES));
-	Scene[0].addEnemy(GOLEM, 5, 10, Data.GetID(IMG_GOLEM));
-	Scene[0].addEnemy(BOSS, 20, 10, Data.GetID(IMG_BOSS));
-	
-
+	Scene[0].addEnemy(SOLDADO, 3, 21, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(SOLDADO, 3, 4, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(SOLDADO, 28, 21, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(SOLDADO, 28, 4, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(PLANTABOMBA, 23, 21, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(PLANTABOMBA, 32, 15, Data.GetID(IMG_ENEMIES));
+	Scene[1].addEnemy(GOLEM, 4, 12, Data.GetID(IMG_GOLEM));
+	Scene[1].addEnemy(GOLEM, 20, 12, Data.GetID(IMG_GOLEM));
+	Scene[1].addEnemy(GOLEM, 12, 12, Data.GetID(IMG_GOLEM));
+	Scene[2].addEnemy(BOSS, 20, 10, Data.GetID(IMG_BOSS));
+	Scene[2].addEnemy(GOLEM, 4, 12, Data.GetID(IMG_GOLEM));
+	Scene[2].addEnemy(GOLEM, 20, 12, Data.GetID(IMG_GOLEM));
+	Scene[2].addEnemy(SOLDADO, 3, 21, Data.GetID(IMG_ENEMIES));
+	Scene[2].addEnemy(SOLDADO, 3, 4, Data.GetID(IMG_ENEMIES));
 	//sound init
 
 	Sound::getInstance()->playBgm(SOUND_OVERLOAD);

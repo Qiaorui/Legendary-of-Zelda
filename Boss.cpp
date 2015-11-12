@@ -4,7 +4,7 @@
 
 Boss::Boss()
 {
-	up = right = down = left = 0;
+
 }
 
 
@@ -47,6 +47,8 @@ void Boss::Draw()
 		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
 	else Enemy::Draw();
+		
+	
 	//}
 	//else {
 	//	DrawLife(tex_id);
@@ -87,9 +89,7 @@ void Boss::Logic(vector<int> map, int width, cBicho* player) {
 	
 	Enemy::Logic(map, width, player);
 
-	right += 1;
-	
-	
+
 		FireAttack();
 	
 	if (fireball.isActive())fireball.Logic(map, width, player);
@@ -106,7 +106,7 @@ void Boss::FireAttack()
 			fireball.setAtk(1);
 		
 		if (correct) {
-			Sound::getInstance()->playBow();
+			Sound::getInstance()->playFireBall();
 			actionFinished = false;
 			cleanFrame();
 			fireball.attack();
@@ -116,5 +116,8 @@ void Boss::FireAttack()
 
 void Boss::hurt(int point) {
 	cBicho::hurt(point);
-	if (!alive) Sound::getInstance()->playVictory();
+	if (!alive) {
+		Sound::getInstance()->StopSounds();
+		Sound::getInstance()->playVictory();
+	}
 }

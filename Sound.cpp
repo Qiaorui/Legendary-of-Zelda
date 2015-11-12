@@ -60,11 +60,19 @@ void Sound::playDoor() {
 	engine->play2D("resource/LTTP_Door.wav",false);
 }
 
-void Sound::playVictory() {
-	engine->stopAllSounds();
-	engine->play2D("resource/Final Fantasy VII - Victory Fanfare.mp3",false);
-}
 void Sound::playLose() {
 	engine->stopAllSounds();
 	engine->play2D("resource/LTTP_Link_Dying.wav", false);
+}
+void Sound::playFireBall() {
+	engine->play2D("resource/FlameArrow.mp3", false);
+}
+
+void Sound::playVictory() {
+	engine->play2D("resource/VictoryFanfare.mp3", false);
+}
+
+void Sound::StopSounds() {
+	engine->stopAllSounds();
+
 }

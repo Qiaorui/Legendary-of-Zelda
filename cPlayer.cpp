@@ -251,8 +251,8 @@ void cPlayer::DrawStatus(int cx, int cy){
 	float xf, yf;
 	itemh = 7;
 	itemw = 7;
-	int paddingX = 60;
-	int paddingY = 90;
+	int paddingX = 80;
+	int paddingY = 110;
 	int life = getLife();
 	int maxLife = getMaxLife();
 	yf = (92.0f - itemh) / maxY;
@@ -273,10 +273,10 @@ void cPlayer::DrawStatus(int cx, int cy){
 		xf = (xo + itemw) / maxX;
 		xo = xo / maxX;
 		glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX,		 cy + paddingY); //Left Down
-		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX+itemw, cy + paddingY); //right down
-		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX+itemw, cy + paddingY+itemh); //right up
-		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX,		 cy + paddingY+itemh); //left up
-		paddingX += 10;
+		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX+itemw+7, cy + paddingY); //right down
+		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX+itemw+7, cy + paddingY+itemh+7); //right up
+		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX,		 cy + paddingY+itemh+7); //left up
+		paddingX += 15;
 		life -= 2;
 	}
 	glEnd();
@@ -302,20 +302,20 @@ void cPlayer::DrawStatus(int cx, int cy){
 	yf = (yo - itemh) / maxY;
 	xo = xo / maxX;
 	yo = yo / maxY;
-	paddingX = -80;
-	paddingY = 80;
+	paddingX = -120;
+	paddingY = 100;
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, item_tex_id);
 	glBegin(GL_QUADS);
 		glTexCoord2f(136.0/maxX, 148.0f/maxY);	glVertex2i(cx + paddingX-3, cy + paddingY-3); //Left Down
-		glTexCoord2f(214.0/maxX, 148.0f / maxY);	glVertex2i(cx + paddingX+3 + itemw, cy + paddingY-3); //right down
-		glTexCoord2f(214.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX+3 + itemw, cy + paddingY+3 + itemh); //right up
-		glTexCoord2f(136.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX-3, cy + paddingY+3 + itemh); //left up
+		glTexCoord2f(214.0/maxX, 148.0f / maxY);	glVertex2i(cx + paddingX+3 + itemw+7, cy + paddingY-3); //right down
+		glTexCoord2f(214.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX+3 + itemw+7, cy + paddingY+3 + itemh+7); //right up
+		glTexCoord2f(136.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX-3, cy + paddingY+3 + itemh+7); //left up
 
 		glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX, cy + paddingY); //Left Down
-		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX + itemw, cy + paddingY); //right down
-		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX + itemw, cy + paddingY + itemh); //right up
-		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX, cy + paddingY + itemh); //left up
+		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX + itemw+7, cy + paddingY); //right down
+		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX + itemw+7, cy + paddingY + itemh+7); //right up
+		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX, cy + paddingY + itemh+7); //left up
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 

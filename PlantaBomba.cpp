@@ -92,7 +92,7 @@ void PlantaBomba::FireAttack()
 			Fire[i]->setAtk(1);
 
 			if (correct) {
-				Sound::getInstance()->playBow();
+				Sound::getInstance()->playFireBall();
 				actionFinished = false;
 				cleanFrame();
 				Fire[i]->attack();

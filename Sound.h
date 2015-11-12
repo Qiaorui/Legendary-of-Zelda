@@ -23,6 +23,10 @@ public:
 	void playDoor();
 	void playVictory();
 	void playLose();
+	void playFireBall();
+	void StopSounds();
+	
+
 
 private:
 	static Sound *instance;
