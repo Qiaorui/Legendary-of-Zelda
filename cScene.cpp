@@ -262,5 +262,5 @@ vector<Enemy*> cScene::getEnemies(){
 
 void cScene::setSenderCloseImage(int index, float xo, float xf, float yo, float yf) {
 	senders[index].setCloseImage(xo, xf, yo, yf);
-	senders[index].switchState();
+	//senders[index].switchState();
 }
