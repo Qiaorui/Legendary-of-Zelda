@@ -261,26 +261,47 @@ void cPlayer::DrawStatus(int cx, int cy){ // has to be really imprioved, only to
 		//TODO temporary fix
 	DrawObject(item_tex_id, cx, cy);
 
+	float maxX = 608.0f;
+	float maxY = 152.0f;
 
-	float bitx = 43.0f / 170.0f;
-	float bity = 39.0f/ 57.0f;
+	float xo, yo;
+	int lifeh, lifew;
+	float xf, yf;
+	lifeh = 7;
+	lifew = 7;
+	int paddingX = 60;
+	int paddingY = 110;
 	int life = getLife();
-	
-	float x0 = 7.0f / 170.0f;
-	float y0 = 11.0f / 57.0f;
+	int maxLife = getMaxLife();
+	yo = 92.0f;
+
+
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, life_tex_id);
+	glBindTexture(GL_TEXTURE_2D, item_tex_id);
 	glBegin(GL_QUADS);
-	for (int i = 0; i < life; ++i) {
-		glTexCoord2f(x0, y0 + bity);	glVertex2i(cx + 80, cy + 105);  //Left Down
-		glTexCoord2f(x0 + bitx,y0 + bity);	glVertex2i(cx + 65, cy + 105); //right down
-		glTexCoord2f(x0 + bitx, y0);	glVertex2i(cx + 65, cy + 120); //right up
-		glTexCoord2f(x0, y0);	glVertex2i(cx + 80, cy + 120); //left up
-		cx += 20;
+	for (int i = 0; i < maxLife; i+=2) {
+		if (life / 2 > 0) {
+			xo = 42.0f;
+		}
+		else if (life > 0) {
+			xo = 50.0f;
+		}
+		else {
+			xo = 58.0f;
+		}
+		xf = (xo + lifew) / maxX;
+		yf = (yo - lifeh) / maxY;
+		xo = xo / maxX;
+		yo = yo / maxY;
+		glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX,		 cy + paddingY); //Left Down
+		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX+lifew, cy + paddingY); //right down
+		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX+lifew, cy + paddingY+lifeh); //right up
+		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX,		 cy + paddingY+lifeh); //left up
+		paddingX -= 10;
+		life -= 2;
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
-
 
 }
 
@@ -375,10 +396,10 @@ void cPlayer::BowAttack()
 	}
 }
 
-
+/*
 void cPlayer::setLifeTexId(int id) {
 	life_tex_id = id;
-}
+}*/
 void cPlayer::setItemTexId(int id) {
 	item_tex_id = id;
 }

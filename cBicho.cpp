@@ -30,8 +30,9 @@ void cBicho::GetPosition(int *posx,int *posy)
 	*posx = x;
 	*posy = y;
 }
-void cBicho::SetLife(int life)
+void cBicho::SetMaxLife(int life)
 {
+	maxLife = life;
 	this->life = life;
 	alive = life > 0;
 }
@@ -387,4 +388,8 @@ void cBicho::setActionFinished(bool b) {
 }
 bool cBicho::isActionFinished() {
 	return actionFinished;
+}
+
+int  cBicho::getMaxLife() {
+	return maxLife;
 }

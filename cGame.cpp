@@ -107,14 +107,14 @@ bool cGame::Init()
 	
 	//Player initialization
 	res = Data.LoadImage(IMG_PLAYER,"linkSpritepro2.png",GL_RGBA);
-	res = Data.LoadImage(IMG_LIFE, "corazones_vida.png", GL_RGBA);
+	//res = Data.LoadImage(IMG_LIFE, "corazones_vida.png", GL_RGBA);
 	if(!res) return false;
 	Player.SetTile(11,16);
-	Player.SetLife(3);
+	Player.SetMaxLife(6);
 	Player.SetWidthHeight(16,25);
 	Player.SetState(STATE_LOOKDOWN);
 	Player.setWeapon(SWORD);
-	Player.setLifeTexId(Data.GetID(IMG_LIFE));
+	//Player.setLifeTexId(Data.GetID(IMG_LIFE));
 	Player.setItemTexId(Data.GetID(IMG_ITEMS));
 	//Player.SetPosition(11*16, 16*16+8);
 	Player.setCurrentSceneId(0);

@@ -218,7 +218,7 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 
 			enemies.push_back(new Soldado);
 			enemies[id]->SetTile(x,y);
-			enemies[id]->SetLife(3);
+			enemies[id]->SetMaxLife(3);
 			enemies[id]->SetWidthHeight(16, 28);
 			enemies[id]->SetState(STATE_WALKDOWN);
 			enemies[id]->setImage(tex_id);
@@ -227,7 +227,7 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 	case PLANTABOMBA:
 			enemies.push_back(new PlantaBomba);
 			enemies[id]->SetTile(x,y);
-			enemies[id]->SetLife(3);
+			enemies[id]->SetMaxLife(3);
 			enemies[id]->SetWidthHeight(18,17);
 			enemies[id]->SetState(STATE_LOOKDOWN);
 			enemies[id]->setImage(tex_id);
@@ -235,7 +235,7 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 	case GOLEM:
 			enemies.push_back(new Golem);
 			enemies[id]->SetTile(x,y);
-			enemies[id]->SetLife(3);
+			enemies[id]->SetMaxLife(3);
 			enemies[id]->SetWidthHeight(24, 25);
 			enemies[id]->SetState(STATE_SLEEP);
 			enemies[id]->setImage(tex_id);
@@ -243,7 +243,7 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 	case BOSS:
 		enemies.push_back(new Boss);
 		enemies[id]->SetTile(x, y);
-		enemies[id]->SetLife(10);
+		enemies[id]->SetMaxLife(10);
 		enemies[id]->SetWidthHeight(32, 53);
 		enemies[id]->SetState(STATE_LOOKDOWN);
 		enemies[id]->setImage(tex_id);

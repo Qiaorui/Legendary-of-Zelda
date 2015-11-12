@@ -27,7 +27,7 @@ public:
 	void BowAttack();
 	void setCurrentSceneId(int scene_id);
 	int getCurrentSceneId();
-	void setLifeTexId(int id);
+	//void setLifeTexId(int id);
 	void setItemTexId(int id);
 	void setWeapon(int weapon);
 	void changeWeapon();
@@ -38,7 +38,7 @@ private:
 	Flecha flecha;
 
 	int usingWeapon;
-	int life_tex_id;
+	//int life_tex_id;
 	int item_tex_id;
 	int current_scene_id;
 

@@ -9,7 +9,7 @@
 //Image identifiers
 #define IMG_OVERLOAD	0
 #define IMG_PLAYER	1
-#define IMG_LIFE	2
+//#define IMG_LIFE	2
 #define IMG_ENEMIES	3
 #define IMG_EAST_PALACE 4
 #define IMG_GOLEM 5

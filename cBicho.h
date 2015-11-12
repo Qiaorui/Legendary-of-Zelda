@@ -43,8 +43,9 @@ public:
 
 	void SetPosition(int x,int y);
 	void GetPosition(int *x,int *y);
-	void SetLife(int life);
+	void SetMaxLife(int life);
 	int  getLife();
+	int  getMaxLife();
 	void SetTile(int tx,int ty);
 	void GetTile(int *tx,int *ty);
 	void SetWidthHeight(int w,int h);
@@ -93,6 +94,7 @@ protected:
 private:
 
 	int seq, delay;
+	int maxLife;
 	int life;
 	int state;
 
