@@ -113,3 +113,8 @@ void Boss::FireAttack()
 		}
 	}
 }
+
+void Boss::hurt(int point) {
+	cBicho::hurt(point);
+	if (!alive) Sound::getInstance()->playVictory();
+}

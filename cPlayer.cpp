@@ -460,3 +460,8 @@ void cPlayer::attack() {
 	}
 
 }
+
+void cPlayer::hurt(int point) {
+	cBicho::hurt(point);
+	if (!alive) Sound::getInstance()->playLose();
+}

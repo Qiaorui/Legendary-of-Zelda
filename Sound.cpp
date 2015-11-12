@@ -55,3 +55,16 @@ void Sound::playItem() {
 void Sound::playWeaponChange() {
 	engine->play2D("resource/change-weapon.wav", false);
 }
+
+void Sound::playDoor() {
+	engine->play2D("resource/LTTP_Door.wav",false);
+}
+
+void Sound::playVictory() {
+	engine->stopAllSounds();
+	engine->play2D("resource/Final Fantasy VII - Victory Fanfare.mp3",false);
+}
+void Sound::playLose() {
+	engine->stopAllSounds();
+	engine->play2D("resource/LTTP_Link_Dying.wav", false);
+}

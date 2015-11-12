@@ -25,7 +25,7 @@ public:
 	//void DrawObject(int tex_id, int cx, int cy);
 	void SwordAttack();
 	void BowAttack();
-
+	void hurt(int point);
 	//void setLifeTexId(int id);
 	void setItemTexId(int id);
 	void setWeapon(int weapon);

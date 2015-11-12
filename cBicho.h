@@ -75,7 +75,7 @@ public:
 	bool isActive();
 	void setAlive(bool b);
 	bool isAlive();
-	void hurt(int point);
+	virtual void hurt(int point);
 	void cleanFrame();
 	void setActionFinished(bool b);
 	bool isActionFinished();

@@ -40,6 +40,7 @@ void Sender::logic(cBicho* player) {
 	if (Collides(&body)) {
 		if (!wall) {
 			Sound::getInstance()->playBgm(sentToScene);
+			Sound::getInstance()->playDoor();
 			player->setCurrentSceneId(sentToScene);
 			player->SetTile(sentToX, sentToY);
 			player->SetState(newDirection);

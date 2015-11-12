@@ -20,6 +20,9 @@ public:
 	void playHit();
 	void playItem();
 	void playWeaponChange();
+	void playDoor();
+	void playVictory();
+	void playLose();
 
 private:
 	static Sound *instance;

@@ -11,8 +11,10 @@ public:
 	void DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame);
 	void Logic(vector<int> map, int width, cBicho* player);
 	void FireAttack();
-	int up, down, right, left; //direcciones de fuego
+	void hurt(int point);
+
 private:
+	int up, down, right, left; //direcciones de fuego
 	int mode;
 	int delayattack;
 	Fireball fireball;
