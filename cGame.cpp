@@ -106,7 +106,7 @@ bool cGame::Init()
 	Sound::getInstance()->playBgm(SOUND_OVERLOAD);
 	
 	//Player initialization
-	res = Data.LoadImage(IMG_PLAYER,"linkSpritepro.png",GL_RGBA);
+	res = Data.LoadImage(IMG_PLAYER,"linkSpritepro2.png",GL_RGBA);
 	res = Data.LoadImage(IMG_LIFE, "corazones_vida.png", GL_RGBA);
 	if(!res) return false;
 	Player.SetTile(11,16);
@@ -169,8 +169,7 @@ bool cGame::Process()
 			Player.SwordAttack();
 		}
 		else if (keys[98]) {
-
-			//if (timer>10)Player.BowAttack();
+			Player.BowAttack();
 		}
 	}
 	

@@ -8,7 +8,7 @@ cPlayer::cPlayer() {
 	FRAME_DELAY = 4;
 	espada.setAtk(2);
 	flecha.setAtk(1);
-	flecha.SetWidthHeight(10, 10);
+
 }
 cPlayer::~cPlayer(){}
 
@@ -298,65 +298,80 @@ void cPlayer::setCurrentSceneId(int scene_id) {
 void cPlayer::SwordAttack()
 {
 	if (!espada.isActive() && espada.isActionFinished()) {
-		int state = GetState();
-		//int seq = GetFrame();
-		if (state == STATE_LOOKDOWN) {
+		bool correct = true;
+		switch (GetState()) {
+		case STATE_LOOKDOWN:
 			SetState(STATE_SWORD_DOWN);
 			espada.SetPosition(x - 5, y - 11);
 			espada.SetWidthHeight(32, 16);
-		}
-		else if (state == STATE_LOOKUP) {
+			break;
+		case STATE_LOOKUP:
 			SetState(STATE_SWORD_UP);
 			espada.SetPosition(x - 11, y + 14);
 			espada.SetWidthHeight(32, 16);
-		}
-		else if (state == STATE_LOOKRIGHT) {
+			break;
+		case STATE_LOOKRIGHT:
 			SetState(STATE_SWORD_RIGHT);
 			espada.SetPosition(x + 14, y - 8);
 			espada.SetWidthHeight(16, 32);
-		}
-		else if (state == STATE_LOOKLEFT) {
+			break;
+		case STATE_LOOKLEFT:
 			SetState(STATE_SWORD_LEFT);
 			espada.SetPosition(x - 16, y - 8);
 			espada.SetWidthHeight(16, 32);
+			break;
+		default:
+			correct = false;
+			break;
 		}
-		actionFinished = false;
-		cleanFrame();
-		espada.attack();
-		Sound::getInstance()->playSword();
+		if (correct) {
+			actionFinished = false;
+			cleanFrame();
+			espada.attack();
+			Sound::getInstance()->playSword();
+		}
 	}
 }
 
 void cPlayer::BowAttack()
 {
-	if (!flecha.isActive()) {
-		int state = GetState();
-		int seq = GetFrame();
-		if (state == STATE_LOOKDOWN) {
+	if (!flecha.isActive() && flecha.isActionFinished()) {
+		bool correct = true;
+		switch (GetState()) {
+		case STATE_LOOKDOWN:
 			SetState(STATE_BOW_DOWN);
-			seq = 0;
+			flecha.SetWidthHeight(7, 15);
+			flecha.SetPosition(x + w / 2, y + h);
 			flecha.SetState(STATE_BOW_DOWN);
-		}
-		else if (state == STATE_LOOKUP) {
+			break;
+		case STATE_LOOKUP:
 			SetState(STATE_BOW_UP);
-			seq = 0;
+			flecha.SetWidthHeight(7, 15);
+			flecha.SetPosition(x + w / 2, y);
 			flecha.SetState(STATE_BOW_UP);
-		}
-		else if (state == STATE_LOOKRIGHT) {
+			break;
+		case STATE_LOOKRIGHT:
 			SetState(STATE_BOW_RIGHT);
-			seq = 0;
+			flecha.SetWidthHeight(15, 7);
+			flecha.SetPosition(x + 16, y + h / 2);
 			flecha.SetState(STATE_BOW_RIGHT);
-		}
-		else if (state == STATE_LOOKLEFT) {
+			break;
+		case STATE_LOOKLEFT:
 			SetState(STATE_BOW_LEFT);
-			seq = 0;
+			flecha.SetWidthHeight(15, 7);
+			flecha.SetPosition(x, y + h / 2);
 			flecha.SetState(STATE_BOW_LEFT);
+			break;
+		default:
+			correct = false;
+			break;
 		}
-		Sound::getInstance()->playBow();
-		flecha.SetPosition(x + 10, y + 10);
-
-		flecha.setActive(true);
-		flecha.setVisible(true);
+		if (correct) {
+			Sound::getInstance()->playBow();
+			actionFinished = false;
+			cleanFrame();
+			flecha.attack();
+		}
 	}
 }
 

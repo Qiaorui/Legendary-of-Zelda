@@ -12,36 +12,37 @@ Boss::~Boss()
 }
 void Boss::Draw()
 {
+	if (alive) {
+		//if (tex_id == 2) {
+		float xo, yo, xf, yf;
+		xf = yf = -1;
+		//BLOCK_SIZE = 16, FILE_SIZE = 432
+		// 16 / 432 = 0.037
+		//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
+		float  bitx = 32.0f / 233.0f;;
+		//BLOCK_SIZE = 16, FILE_SIZE = 303
+		// 16 / 303 = 0.053
+		float bity = 53.0f / 243.0f;
+		int frame = GetFrame();
 
-	//if (tex_id == 2) {
-	float xo, yo, xf, yf;
-	xf = yf = -1;
-	//BLOCK_SIZE = 16, FILE_SIZE = 432
-	// 16 / 432 = 0.037
-	//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
-	float  bitx = 32.0f / 233.0f;;
-	//BLOCK_SIZE = 16, FILE_SIZE = 303
-	// 16 / 303 = 0.053
-	float bity = 53.0f / 243.0f;
-	int frame = GetFrame();
+		switch (GetState())
+		{
 
-	switch (GetState())
-	{
-
-	case STATE_LOOKDOWN:    xo = GetFrame()*(bitx);
-		yo = bity;
-		NextFrame(4);
-		break;
+		case STATE_LOOKDOWN:    xo = GetFrame()*(bitx);
+			yo = bity;
+			NextFrame(4);
+			break;
 
 
-		//default:			xo = 91.0f/432.0f; yo = bity; break;
+			//default:			xo = 91.0f/432.0f; yo = bity; break;
+		}
+
+		//When we are not atacking 
+		xf = xo + bitx;
+		yf = yo - bity;
+
+		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
-
-	//When we are not atacking 
-	xf = xo + bitx;
-	yf = yo - bity;
-
-	if (alive)DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	else Enemy::Draw();
 	//}
 	//else {
