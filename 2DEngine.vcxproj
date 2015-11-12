@@ -44,8 +44,8 @@
     <OutDir>Debug\</OutDir>
     <IntDir>Debug\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\code\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\code\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\include\GL;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Alex\git2\Legendary-of-Zelda\GL Files\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>Release\</OutDir>
@@ -98,6 +98,7 @@
     <ClCompile Include="cTexture.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Espada.cpp" />
+    <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="Flecha.cpp" />
     <ClCompile Include="GLUTMain.cpp" />
     <ClCompile Include="Golem.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="cTexture.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Espada.h" />
+    <ClInclude Include="Fireball.h" />
     <ClInclude Include="Flecha.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Golem.h" />

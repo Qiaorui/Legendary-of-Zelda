@@ -4,11 +4,12 @@
 
 Boss::Boss()
 {
+	up = right = down = left = 0;
 }
 
 
 Boss::~Boss()
-{
+{	
 }
 void Boss::Draw()
 {
@@ -41,6 +42,8 @@ void Boss::Draw()
 		xf = xo + bitx;
 		yf = yo - bity;
 
+		if (fireball.isVisible()) fireball.Draw(7);
+
 		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
 	else Enemy::Draw();
@@ -63,7 +66,7 @@ void Boss::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, i
 	screen_x = x;
 	screen_y = y;
 
-
+	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, tex_id);
 	glBegin(GL_QUADS);
@@ -84,4 +87,29 @@ void Boss::Logic(vector<int> map, int width, cBicho* player) {
 	
 	Enemy::Logic(map, width, player);
 
+	right += 1;
+	
+	
+		FireAttack();
+	
+	if (fireball.isActive())fireball.Logic(map, width, player);
+}
+
+void Boss::FireAttack()
+{
+	if (!fireball.isActive() && fireball.isActionFinished()) {
+		bool correct = true;
+		
+			fireball.SetWidthHeight(30, 30);
+			fireball.SetPosition(x+5 , y+10 );
+			fireball.SetState(STATE_BOW_DOWN);
+			fireball.setAtk(1);
+		
+		if (correct) {
+			Sound::getInstance()->playBow();
+			actionFinished = false;
+			cleanFrame();
+			fireball.attack();
+		}
+	}
 }

@@ -3,6 +3,10 @@
 
 PlantaBomba::PlantaBomba(){
 	visible = true;
+	Fire.push_back(new Fireball);
+	Fire.push_back(new Fireball);
+	Fire.push_back(new Fireball);
+	Fire.push_back(new Fireball);
 }
 PlantaBomba::~PlantaBomba(){}
 
@@ -26,6 +30,9 @@ void PlantaBomba::Draw()
 		NextFrame(3); // con 4 gira la cabeza
 		yf = yo - bity;
 		xf = xo + bitx;
+		for (int i = 0; i < Fire.size(); ++i) {
+			if (Fire[i]->isVisible()) Fire[i]->Draw(7);
+		}
 		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
 	else Enemy::Draw();
@@ -61,32 +68,35 @@ void PlantaBomba::DrawRect(int tex_id, float xo, float yo, float xf, float yf, i
 
 
 void PlantaBomba::Logic(vector<int> map, int width, cBicho* player) {
-	++delaymove;
-	if (delaymove >= FRAME_DELAY) {
-		int x, y;
-		GetPosition(&x, &y);
-		switch (rand() % 4) {
-		case 0:
-			++x;
-			SetState(STATE_WALKRIGHT);
-			break;
-		case 1:
-			--x;
-			SetState(STATE_WALKLEFT);
-			break;
-		case 2:
-			++y;
-			SetState(STATE_WALKUP);
-			break;
-		case 3:
-			--y;
-			SetState(STATE_WALKDOWN);
-			break;
-		}
-		SetPosition(x, y);
-		delaymove = 0;
-	}
+	FireAttack();
+	
 	
 	Enemy::Logic(map,width, player);
+	for (int i = 0; i < Fire.size(); ++i) {
+		if (Fire[i]->isActive())Fire[i]->Logic(map, width, player);
+	}
+}
 
+void PlantaBomba::FireAttack()
+{
+	for (int i = 0; i < Fire.size(); ++i) {
+		if (!Fire[i]->isActive() && Fire[i]->isActionFinished()) {
+			bool correct = true;
+
+			Fire[i]->SetWidthHeight(10, 10);
+			Fire[i]->SetPosition(x + 5, y + 10);
+			if (i == 0)Fire[i]->SetState(STATE_BOW_DOWN);
+			else if (i == 1)Fire[i]->SetState(STATE_BOW_UP);
+			else if (i == 2)Fire[i]->SetState(STATE_BOW_RIGHT);
+			else if (i == 3)Fire[i]->SetState(STATE_BOW_LEFT);
+			Fire[i]->setAtk(1);
+
+			if (correct) {
+				Sound::getInstance()->playBow();
+				actionFinished = false;
+				cleanFrame();
+				Fire[i]->attack();
+			}
+		}
+	}
 }

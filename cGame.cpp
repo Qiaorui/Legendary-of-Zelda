@@ -93,6 +93,7 @@ bool cGame::Init()
 	res = Data.LoadImage(IMG_GOLEM, "Golem.png", GL_RGBA);
 	res = Data.LoadImage(IMG_ITEMS, "items.png", GL_RGBA);
 	res = Data.LoadImage(IMG_BOSS, "Boss.png", GL_RGBA);
+	res = Data.LoadImage(IMG_FIRE, "fire.png", GL_RGBA);
 
 	if (!res) return false;
 	Scene[0].addEnemy(SOLDADO, 12, 17, Data.GetID(IMG_ENEMIES));
