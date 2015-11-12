@@ -456,8 +456,10 @@ void cPlayer::attack() {
 	{
 	case SWORD:
 		SwordAttack();
+		break;
 	case BOW:
 		BowAttack();
+		break;
 	default:
 		break;
 	}
