@@ -98,10 +98,10 @@ void Fireball::Draw(int tex_id) {
 	glBindTexture(GL_TEXTURE_2D, tex_id);
 	glBegin(GL_QUADS);
 
-	glTexCoord2f(xo, yo);	glVertex2i(x, y - h);  //Left Down
-	glTexCoord2f(xf, yo);	glVertex2i(x + w, y - h); //right down
-	glTexCoord2f(xf, yf);	glVertex2i(x + w, y); //right up
-	glTexCoord2f(xo, yf);	glVertex2i(x, y); //left up
+	glTexCoord2f(xo, yo);	glVertex2i(x, y);  //Left Down
+	glTexCoord2f(xf, yo);	glVertex2i(x + w, y); //right down
+	glTexCoord2f(xf, yf);	glVertex2i(x + w, y+h); //right up
+	glTexCoord2f(xo, yf);	glVertex2i(x, y+h); //left up
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);

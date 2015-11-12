@@ -84,7 +84,7 @@ void PlantaBomba::FireAttack()
 			bool correct = true;
 
 			Fire[i]->SetWidthHeight(10, 10);
-			Fire[i]->SetPosition(x + 5, y + 10);
+			Fire[i]->SetPosition(x + w/2, y + h/2);
 			if (i == 0)Fire[i]->SetState(STATE_BOW_DOWN);
 			else if (i == 1)Fire[i]->SetState(STATE_BOW_UP);
 			else if (i == 2)Fire[i]->SetState(STATE_BOW_RIGHT);
