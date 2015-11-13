@@ -50,7 +50,7 @@ public:
 	void logic(cPlayer* player);
 	void addEnemy(int enemyType, int x, int y, int tex_id);
 	vector<Enemy*> getEnemies();
-
+	void drawMiniMap(int cx, int cy, int x, int y);
 
 
 private:

@@ -64,7 +64,7 @@ void main(int argc, char** argv)
 	
 	glutInitWindowPosition(pos_x,pos_y);
 	glutInitWindowSize(GAME_WIDTH,GAME_HEIGHT);
-	glutCreateWindow("Legendary of Zelda");
+	glutCreateWindow("Legendary of Zelda - Link to the Dark Soul");
 
 	/*glutGameModeString("800x600:32");
 	glutEnterGameMode();*/

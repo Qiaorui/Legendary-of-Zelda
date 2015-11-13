@@ -4,6 +4,9 @@
 
 cGame::cGame(void)
 {
+	delay = 0;
+	miniMap = false;
+
 }
 
 cGame::~cGame(void)
@@ -174,19 +177,27 @@ bool cGame::Process()
 	h = Scene[id].getHeight();
 
 	if (Player.isAlive()) {
+		++delay;
 		if (keys[GLUT_KEY_UP])			Player.MoveUp(Scene[id].GetMap(), w);
 		else if (keys[GLUT_KEY_DOWN])	Player.MoveDown(Scene[id].GetMap(), w);
 		else if (keys[GLUT_KEY_LEFT])	Player.MoveLeft(Scene[id].GetMap(), w);
 		else if (keys[GLUT_KEY_RIGHT])	Player.MoveRight(Scene[id].GetMap(), w);
 		else Player.Stop();
-		if (keys[GLUT_KEY_SPACEBAR]) {
+		if (keys[' ']) {
 			Player.attack();
 		}
-		else if (keys[98]) {
+		else if (keys['b']) {
 			Player.changeWeapon();
 			//Player.BowAttack();
 		}
+		if (keys['m']) {
+			if (delay >= 20) {
+				miniMap = !miniMap;
+				delay = 0;
+			}
+		}
 	}
+
 	
 	
 	//Game Logic
@@ -246,6 +257,10 @@ void cGame::Render()
 	
 	Player.Draw(Data.GetID(IMG_PLAYER));
 	Player.DrawStatus(cx, cy);
+
+	if (!miniMap) {
+		Scene[id].drawMiniMap(cx, cy, x, y);
+	}
 
 	glutSwapBuffers();
 }

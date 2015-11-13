@@ -37,10 +37,8 @@ private:
 	unsigned char keys[256];
 	cScene Scene[NUM_SCENE];
 	cPlayer Player;
-	//Soldado Soldier;
-	//Golem Ciclope;
-	//PlantaBomba Plant;
 	cData Data;
-	//int timer;
+	int delay;
+	bool miniMap;
 };
 

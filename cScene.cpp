@@ -324,3 +324,54 @@ void cScene::addBlock(int x, int y, float xo, float xf, float yo, float yf, int 
 	block.setImage(xo, xf, yo, yf);
 	blocks.push_back(block);
 }
+
+void cScene::drawMiniMap(int cx, int cy, int x, int y) {
+	int blocksize = 4;
+	int ini_x = cx - width * 2;
+	int ini_y = cy - height * 2;
+
+
+	glBegin(GL_QUADS);
+
+
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			if (map[i*width + j]) {
+				glColor3f(0, 0, 0);
+			}
+			else {
+				glColor3f(0, 0, 1);
+			}
+			glVertex2i(ini_x + j*blocksize, ini_y+i*blocksize);
+			glVertex2i(ini_x + j * blocksize + blocksize, ini_y + i * blocksize);
+			glVertex2i(ini_x + j * blocksize + blocksize, ini_y + i * blocksize + blocksize);
+			glVertex2i(ini_x + j * blocksize, ini_y + i * blocksize + blocksize);
+		}
+	}
+	glColor3f(1, 0, 0);
+	int ex, ey;
+	for (int i = 0; i < enemies.size(); i++) {
+		if (enemies[i]->isVisible()) {
+			enemies[i]->GetTile(&ex,&ey);
+			glVertex2i(ini_x + ex*blocksize, ini_y + ey*blocksize);
+			glVertex2i(ini_x + ex * blocksize + blocksize, ini_y + ey * blocksize);
+			glVertex2i(ini_x + ex * blocksize + blocksize, ini_y + ey * blocksize + blocksize);
+			glVertex2i(ini_x + ex * blocksize, ini_y + ey * blocksize + blocksize);
+		}
+	}
+	glColor3f(0, 1, 0);
+	x = x / 16;
+	y = y / 16;
+	glVertex2i(ini_x + x*blocksize, ini_y + y*blocksize);
+	glVertex2i(ini_x + x * blocksize + blocksize, ini_y + y * blocksize);
+	glVertex2i(ini_x + x * blocksize + blocksize, ini_y + y * blocksize + blocksize);
+	glVertex2i(ini_x + x * blocksize, ini_y + y * blocksize + blocksize);
+
+
+	glEnd();
+	glColor3f(1, 1, 1);
+
+
+}
