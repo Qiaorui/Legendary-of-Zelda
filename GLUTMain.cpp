@@ -59,11 +59,11 @@ void main(int argc, char** argv)
 	//Create centered window
 	res_x = glutGet(GLUT_SCREEN_WIDTH);
 	res_y = glutGet(GLUT_SCREEN_HEIGHT);
-	pos_x = (res_x>>1)-(GAME_WIDTH>>1);
-	pos_y = (res_y>>1)-(GAME_HEIGHT>>1);
+	pos_x = (res_x>>1)-(GAME_WIDTH);
+	pos_y = (res_y>>1)-(GAME_HEIGHT);
 	
 	glutInitWindowPosition(pos_x,pos_y);
-	glutInitWindowSize(GAME_WIDTH,GAME_HEIGHT);
+	glutInitWindowSize(GAME_WIDTH*2,GAME_HEIGHT*2);
 	glutCreateWindow("Legendary of Zelda - Link to the Dark Soul");
 
 	/*glutGameModeString("800x600:32");
