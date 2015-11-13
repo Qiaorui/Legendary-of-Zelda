@@ -6,6 +6,7 @@ Soldado::Soldado(){
 	commandDelay = 15;
 	visible = true;
 	move = false;
+	speed = 1;
 }
 
 Soldado::~Soldado(){}
@@ -121,33 +122,84 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 	}
 	else if (Collides(&body)) {
 		Sound::getInstance()->playDamage();
-		int l;
 		player->hurt(1);
 		commandDelay = 0;
 	}
 	++commandDelay;
 	if(abs(px-ex)<60 || abs(py - ey)<60){
+		/*
+		See->cBicho.h
+
+		#define UP 0
+		#define DOWN 1
+		#define LEFT 2
+		#define RIGHT 3
+		*/
+
 	if (commandDelay >= 2 + 15) {
 		move = false;
+		//right
 		if (px - ex > 10) {
-			++ex;
-			SetState(STATE_WALKRIGHT);
+			if (CollidesMapWall(map, RIGHT, width)) {
+				if (py > ey) {
+					MoveUp(map, width);
+				}
+				else {
+					MoveDown(map, width);
+				}
+			}
+			else {
+				MoveRight(map, width);
+			}
 			move = true;
 		}
+		//left
 		else if (px - ex < -10) {
-			--ex;
-			SetState(STATE_WALKLEFT);
+			if (CollidesMapWall(map,LEFT, width)) {
+				if (py > ey) {
+					MoveUp(map, width);
+				}
+				else {
+					MoveDown(map, width);
+				}
+			}
+			else {
+				MoveLeft(map, width);
+			}
+
 			move = true;
 		}
+		//up
 		else if (py - ey > 10 && !move) {
-			++ey;
-			SetState(STATE_WALKUP);
+			if (CollidesMapWall(map, UP, width)) {
+				if (px > ex) {
+					MoveRight(map, width);
+				}
+				else {
+					MoveLeft(map, width);
+				}
+			}
+			else {
+				MoveUp(map, width);
+			}
+
 		}
+		//down
 		else if (py - ey < 10 && !move) {
-			--ey;
-			SetState(STATE_WALKDOWN);
+			if (CollidesMapWall(map, DOWN, width)) {
+				if (px > ex) {
+					MoveRight(map, width);
+				}
+				else {
+					MoveLeft(map, width);
+				}
+			}
+			else {
+				MoveDown(map, width);
+			}
 		}
-		SetPosition(ex, ey);
+		
+	
 		commandDelay = 15;
 	}
 		
