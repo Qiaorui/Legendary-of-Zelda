@@ -8,7 +8,6 @@ cBicho::cBicho(void)
 	delay=0;
 	speed = 2;
 	actionFinished = true;
-	//jumping = false;
 }
 cBicho::~cBicho(void){}
 
@@ -94,12 +93,9 @@ bool cBicho::CollidesMapWall(vector<int> map, int direction, int width)
 	switch (direction) {
 	case UP:
 		tile_y += height_tiles;
-		//tile_x += width_tiles;
 		if(x % TILE_SIZE > 0) ++width_tiles;
 		break;
 	case DOWN:
-		//tile_y --;
-		//tile_x += width_tiles;
 		if (x % TILE_SIZE > 0) ++width_tiles;
 		break;
 	case LEFT:
@@ -284,47 +280,13 @@ void cBicho::Stop()
 	case STATE_WALKDOWN:	state = STATE_LOOKDOWN;	    break;
 	}
 
-	/*if(state == STATE_SWORD_DOWN && seq==6)	state = STATE_LOOKDOWN;	
-	else if(state == STATE_SWORD_LEFT && seq ==6)state = STATE_LOOKLEFT;		
-	else if (state == STATE_SWORD_RIGHT && seq == 6)	state = STATE_LOOKRIGHT;
-	else if (state == STATE_SWORD_UP && seq == 6)	state = STATE_LOOKUP;*/
-	
 }
 
 
 
 void cBicho::Logic(vector<int> map, int width)
 {
-	/*
-	float alfa;
-
-	if(jumping)
-	{
-		jump_alfa += JUMP_STEP;
-		
-		if(jump_alfa == 180)
-		{
-			jumping = false;
-			y = jump_y;
-		}
-		else
-		{
-			alfa = ((float)jump_alfa) * 0.017453f;
-			y = jump_y + (int)( ((float)JUMP_HEIGHT) * sin(alfa) );
-		
-			if(jump_alfa > 90)
-			{
-				//Over floor?
-				jumping = !CollidesMapFloor(map);
-			}
-		}
-	}
-	else
-	{
-		//Over floor?
-		if(!CollidesMapFloor(map))
-			y -= (2*STEP_LENGTH);
-	}*/
+	
 }
 void cBicho::NextFrame(int max)
 {

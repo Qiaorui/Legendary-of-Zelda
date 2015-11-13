@@ -3,8 +3,6 @@
 #include "cPlayer.h"
 
 cPlayer::cPlayer() {
-	//espada.SetWidthHeight(10,10);
-	//flecha.SetWidthHeight(10,10);
 	commandDelay = 0;
 	FRAME_DELAY = 4;
 	espada.setAtk(2);
@@ -15,148 +13,94 @@ cPlayer::~cPlayer(){}
 
 void cPlayer::Draw(int tex_id)
 {
-	//if (tex_id == 2) {
-		float xo, yo, xf, yf;
-		xf = yf = -1;
-		//BLOCK_SIZE = 16, FILE_SIZE = 432
-		// 16 / 432 = 0.037
-		//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
-		float bitx = 28.3f / 454.0f;
-		//BLOCK_SIZE = 16, FILE_SIZE = 303
-		// 16 / 303 = 0.053
-		float bity = 28.3f / 340.0f;
-		int frame = GetFrame();
+	float xo, yo, xf, yf;
+	xf = yf = -1;
+	float bitx = 28.3f / 454.0f;
+	float bity = 28.3f / 340.0f;
+	int frame = GetFrame();
 
-		switch (GetState())
-		{
-			//1
-		case STATE_LOOKLEFT:	xo = 0.0f;
-			yo = 3.0f*bity;
-			break;
-			//4
-		case STATE_LOOKRIGHT:	xo = 0.0f;
-			yo = 2.0f*bity;
-			break;
-			//1..3
-		case STATE_WALKLEFT:	xo = (GetFrame()*bitx);
-			yo = 3.0f*bity;
-			NextFrame(8);
-			break;
-			//4..6
-		case STATE_WALKRIGHT:	xo = (GetFrame()*bitx);
-			yo = 2.0f*bity;
-			NextFrame(8);
-			break;
+	switch (GetState())
+	{
+	case STATE_LOOKLEFT:	xo = 0.0f;
+		yo = 3.0f*bity;
+		break;
+	case STATE_LOOKRIGHT:	xo = 0.0f;
+		yo = 2.0f*bity;
+		break;
+	case STATE_WALKLEFT:	xo = (GetFrame()*bitx);
+		yo = 3.0f*bity;
+		NextFrame(8);
+		break;
+	case STATE_WALKRIGHT:	xo = (GetFrame()*bitx);
+		yo = 2.0f*bity;
+		NextFrame(8);
+		break;
+	case STATE_LOOKUP:      xo = 0.0f;
+		yo = 4.0f*bity;
+		break;
+	case STATE_LOOKDOWN:    xo = 0.0f;
+		yo = bity;
+		break;
+	case STATE_WALKUP:		xo = (GetFrame()*bitx);
+		yo = 4.0f*bity;
+		NextFrame(8);
+		break;
+	case STATE_WALKDOWN:    xo = (GetFrame()*bitx);
+		yo = bity;
+		NextFrame(8);
+		break;
+	case STATE_BOW_LEFT:	xo = 9 * bitx + GetFrame()*bitx;
+		yo = 3.0f*bity;
+		NextFrame(3);
+		break;
+		//4..6
+	case STATE_BOW_RIGHT:	xo = 9 * bitx + GetFrame()*bitx;
+		yo = 2.0f*bity;
+		NextFrame(3);
+		break;
+	case STATE_BOW_UP:		xo = 9 * bitx + GetFrame()*bitx;
+		yo = 4.0f*bity;
+		NextFrame(3);
+		break;
 
-		case STATE_LOOKUP:      xo = 0.0f;
-			yo = 4.0f*bity;
-			break;
+	case STATE_BOW_DOWN:    xo = 9 * bitx + GetFrame()*bitx;
+		yo = bity;
+		NextFrame(3);
+		break;
+	case STATE_SWORD_DOWN:  xo = (GetFrame()*(2 * bitx));
+		yo = 12.0f*bity;
+		xf = xo + 2.0f*bitx;
+		yf = yo - (2.0f*bity);
+		NextFrame(7);
+		break;
 
-		case STATE_LOOKDOWN:    xo = 0.0f;
-			yo = bity;
-			break;
+	case STATE_SWORD_LEFT:  xo = (GetFrame()*(2 * bitx));
+		yo = 6.0f*bity;
+		xf = xo + 2.0f*bitx;
+		yf = yo - (2.0f*bity);
+		NextFrame(7);
+		break;
 
-		case STATE_WALKUP:		xo = (GetFrame()*bitx);
-			yo = 4.0f*bity;
-			NextFrame(8);
-			break;
+	case STATE_SWORD_UP:    xo = (GetFrame()*(2 * bitx));
+		yo = 10.0f*bity;
+		xf = xo + 2.0f*bitx;
+		yf = yo - (2.0f*bity);
+		NextFrame(6);
+		break;
 
-		case STATE_WALKDOWN:    xo = (GetFrame()*bitx);
-			yo = bity;
-			NextFrame(8);
-			break;
-		case STATE_BOW_LEFT:	xo = 9 * bitx + GetFrame()*bitx;
-			yo = 3.0f*bity;
-			NextFrame(3);
-			if (GetFrame() == 1) {
-				//Sound::getInstance()->playBow();
-			}
-			break;
-			//4..6
-		case STATE_BOW_RIGHT:	xo = 9 * bitx + GetFrame()*bitx;
-			yo = 2.0f*bity;
-			NextFrame(3);
-			if (GetFrame() == 1) {
-				//Sound::getInstance()->playBow();
-			}
-			break;
-		case STATE_BOW_UP:		xo = 9 * bitx + GetFrame()*bitx;
-			yo = 4.0f*bity;
-			NextFrame(3);
-			if (GetFrame() == 1) {
-				//Sound::getInstance()->playBow();
-			}
-			break;
+	case STATE_SWORD_RIGHT: xo = (GetFrame()*(2 * bitx));
+		yo = 8.0f*bity;
+		xf = xo + 2.0f*bitx;
+		yf = yo - (2.0f*bity);
+		NextFrame(7);
+		break;
+	}
+	if (xf == -1 && yf == -1) {
+		xf = xo + bitx;
+		yf = yo - bity;
+	}
 
-		case STATE_BOW_DOWN:    xo = 9 * bitx + GetFrame()*bitx;
-			yo = bity;
-			NextFrame(3);
-			if (GetFrame() == 1) {
-				//Sound::getInstance()->playBow();
-			}
-			break;
-			//player has atacking movement, so has to add frame
-
-		case STATE_SWORD_DOWN:  xo = (GetFrame()*(2 * bitx));
-			yo = 12.0f*bity;
-			xf = xo + 2.0f*bitx;
-			yf = yo - (2.0f*bity);
-			NextFrame(7);
-			if (GetFrame() == 1) {
-				//engine->play2D("resource/LTTP_Sword1.wav", false);
-				//engine->play2D("resource/MC_Link_Sword2.wav", false);
-			}
-			break;
-
-		case STATE_SWORD_LEFT:  xo = (GetFrame()*(2 * bitx));
-			yo = 6.0f*bity;
-			xf = xo + 2.0f*bitx;
-			yf = yo - (2.0f*bity);
-			NextFrame(7);
-			if (GetFrame() == 1) {
-				//engine->play2D("resource/LTTP_Sword1.wav", false);
-				//engine->play2D("resource/MC_Link_Sword2.wav", false);
-			}
-			break;
-
-		case STATE_SWORD_UP:    xo = (GetFrame()*(2 * bitx));
-			yo = 10.0f*bity;
-			xf = xo + 2.0f*bitx;
-			yf = yo - (2.0f*bity);
-			NextFrame(6);
-			if (GetFrame() == 1) {
-				//engine->play2D("resource/LTTP_Sword1.wav", false);
-				//engine->play2D("resource/MC_Link_Sword2.wav", false);
-			}
-			break;
-
-		case STATE_SWORD_RIGHT: xo = (GetFrame()*(2 * bitx));
-			yo = 8.0f*bity;
-			xf = xo + 2.0f*bitx;
-			yf = yo - (2.0f*bity);
-			NextFrame(7);
-			if (GetFrame() == 1) {
-				
-				//engine->play2D("resource/LTTP_Sword1.wav", false);
-				//engine->play2D("resource/MC_Link_Sword2.wav", false);
-			}
-			break;
-
-			//default:			xo = 91.0f/432.0f; yo = bity; break;
-		}
-
-		//When we are not atacking 
-		if (xf == -1 && yf == -1) {
-			xf = xo + bitx;
-			yf = yo - bity;
-		}
-
-		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
-	//}
-	//else {
-	//	DrawLife(tex_id);
-	//}
-
+	DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 }
 
 void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame)
@@ -164,11 +108,11 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	int screen_x, screen_y;
 	int x, y;
 	int w, h;
-    
+
 	GetPosition(&x, &y);
 	GetWidthHeight(&w, &h);
-	screen_x = x ;
-	screen_y = y ;
+	screen_x = x;
+	screen_y = y;
 
 
 	float tmpxo, tmpxf, tmpyo, tmpyf;
@@ -206,8 +150,6 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 		tmpxo = -20.30f;
 		tmpxf = 20.30f;
 		if (GetFrame() == 5) SetState(STATE_LOOKUP);
-		//tmpyf = +14.15f;
-		//tmpxf = 28.3f;
 		break;
 	case STATE_BOW_DOWN:
 		if (GetFrame() == 2) SetState(STATE_LOOKDOWN);
@@ -227,7 +169,7 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	glBindTexture(GL_TEXTURE_2D, tex_id);
 	glBegin(GL_QUADS);
 
-	glTexCoord2f(xo, yo);	glVertex2i(screen_x + tmpxo, screen_y+tmpyo);  //Left Down
+	glTexCoord2f(xo, yo);	glVertex2i(screen_x + tmpxo, screen_y + tmpyo);  //Left Down
 	glTexCoord2f(xf, yo);	glVertex2i(screen_x + w + tmpxf, screen_y + tmpyo); //right down
 	glTexCoord2f(xf, yf);	glVertex2i(screen_x + w + tmpxf, screen_y + h + tmpyf); //right up
 	glTexCoord2f(xo, yf);	glVertex2i(screen_x + tmpxo, screen_y + h + tmpyf); //left up
@@ -240,7 +182,7 @@ void cPlayer::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 	}
 }
 
-void cPlayer::DrawStatus(int cx, int cy){ 
+void cPlayer::DrawStatus(int cx, int cy) {
 	float maxX = 608.0f;
 	float maxY = 152.0f;
 
@@ -260,7 +202,7 @@ void cPlayer::DrawStatus(int cx, int cy){
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, item_tex_id);
 	glBegin(GL_QUADS);
-	for (int i = 0; i < maxLife; i+=2) {
+	for (int i = 0; i < maxLife; i += 2) {
 		if (life / 2 > 0) {
 			xo = 42.0f;
 		}
@@ -272,10 +214,10 @@ void cPlayer::DrawStatus(int cx, int cy){
 		}
 		xf = (xo + itemw) / maxX;
 		xo = xo / maxX;
-		glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX,		 cy + paddingY); //Left Down
-		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX+itemw+7, cy + paddingY); //right down
-		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX+itemw+7, cy + paddingY+itemh+7); //right up
-		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX,		 cy + paddingY+itemh+7); //left up
+		glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX, cy + paddingY); //Left Down
+		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX + itemw + 7, cy + paddingY); //right down
+		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX + itemw + 7, cy + paddingY + itemh + 7); //right up
+		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX, cy + paddingY + itemh + 7); //left up
 		paddingX += 15;
 		life -= 2;
 	}
@@ -283,7 +225,6 @@ void cPlayer::DrawStatus(int cx, int cy){
 	glDisable(GL_TEXTURE_2D);
 
 	//Item Section
-	//DrawObject(item_tex_id, cx, cy);
 	itemw = itemh = 15;
 	switch (usingWeapon)
 	{
@@ -307,15 +248,15 @@ void cPlayer::DrawStatus(int cx, int cy){
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, item_tex_id);
 	glBegin(GL_QUADS);
-		glTexCoord2f(136.0/maxX, 148.0f/maxY);	glVertex2i(cx + paddingX-3, cy + paddingY-3); //Left Down
-		glTexCoord2f(214.0/maxX, 148.0f / maxY);	glVertex2i(cx + paddingX+3 + itemw+7, cy + paddingY-3); //right down
-		glTexCoord2f(214.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX+3 + itemw+7, cy + paddingY+3 + itemh+7); //right up
-		glTexCoord2f(136.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX-3, cy + paddingY+3 + itemh+7); //left up
+	glTexCoord2f(136.0 / maxX, 148.0f / maxY);	glVertex2i(cx + paddingX - 3, cy + paddingY - 3); //Left Down
+	glTexCoord2f(214.0 / maxX, 148.0f / maxY);	glVertex2i(cx + paddingX + 3 + itemw + 7, cy + paddingY - 3); //right down
+	glTexCoord2f(214.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX + 3 + itemw + 7, cy + paddingY + 3 + itemh + 7); //right up
+	glTexCoord2f(136.0 / maxX, 78.0 / maxY);	glVertex2i(cx + paddingX - 3, cy + paddingY + 3 + itemh + 7); //left up
 
-		glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX, cy + paddingY); //Left Down
-		glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX + itemw+7, cy + paddingY); //right down
-		glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX + itemw+7, cy + paddingY + itemh+7); //right up
-		glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX, cy + paddingY + itemh+7); //left up
+	glTexCoord2f(xo, yo);	glVertex2i(cx + paddingX, cy + paddingY); //Left Down
+	glTexCoord2f(xf, yo);	glVertex2i(cx + paddingX + itemw + 7, cy + paddingY); //right down
+	glTexCoord2f(xf, yf);	glVertex2i(cx + paddingX + itemw + 7, cy + paddingY + itemh + 7); //right up
+	glTexCoord2f(xo, yf);	glVertex2i(cx + paddingX, cy + paddingY + itemh + 7); //left up
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 
@@ -406,10 +347,7 @@ void cPlayer::BowAttack()
 	}
 }
 
-/*
-void cPlayer::setLifeTexId(int id) {
-	life_tex_id = id;
-}*/
+
 void cPlayer::setItemTexId(int id) {
 	item_tex_id = id;
 }

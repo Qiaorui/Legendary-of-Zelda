@@ -6,7 +6,6 @@ class Gear :
 public:
 	Gear();
 	~Gear();
-	//void logic(cBicho* bicho);
 	void logic(vector<cBicho*> bichos);
 	void setSender(int id);
 	int getSender();

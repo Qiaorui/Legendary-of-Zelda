@@ -11,6 +11,8 @@ Golem::Golem(){
 }
 
 Golem::~Golem(){}
+
+
 void Golem::Draw()
 {
 	if (alive) {
@@ -23,38 +25,30 @@ void Golem::Draw()
 
 		switch (GetState())
 		{
-			//1
 		case STATE_LOOKLEFT:	xo = 240.0f / 454.0f;
 			yo = 25.0f / 340.0f;
 			break;
-			//4
 		case STATE_LOOKRIGHT:	xo = 48.0f / 454.0f;
 			yo = 25.0f / 340.0f;
 			break;
-			//1..3
 		case STATE_WALKLEFT:	xo = 240.0f / 454.0f + (GetFrame()*(bitx));
 			yo = 25.0f / 340.0f;
 			NextFrame(2);
 			break;
-			//4..6
 		case STATE_WALKRIGHT:	xo = 48.0f / 454.0f + (GetFrame()*(bitx));
 			yo = 25.0f / 340.0f;
 			NextFrame(2);
 			break;
-
 		case STATE_LOOKUP:      xo = 192.0f / 454.0f;
 			yo = 25.0f / 340.0f;
 			break;
-
 		case STATE_LOOKDOWN:    xo = 120.0f / 454.0f;
 			yo = 25.0f / 340.0f;
 			break;
-
 		case STATE_WALKUP:	 xo = 168.0f / 454.0f + (GetFrame()*(bitx));
 			yo = 25.0f / 340.0f;
 			NextFrame(2);
 			break;
-
 		case STATE_WALKDOWN:    xo = 96.0f / 454.0f + (GetFrame()*(bitx));
 			yo = 25.0f / 340.0f;
 			NextFrame(2);
@@ -67,9 +61,6 @@ void Golem::Draw()
 			yo = 25.0f / 340.0f;
 			NextFrame(2); // si se pone 4 gira la cabeza
 			break;
-
-
-			
 		}
 
 
@@ -115,7 +106,7 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 	int xp, yp;
 	GetPosition(&xgolem, &ygolem);
 	player->GetPosition(&xp, &yp);
-	if ( ygolem - yp < 128 && abs(xp - xgolem) < 7 && GetState() == STATE_SLEEP) {
+	if (ygolem - yp < 128 && abs(xp - xgolem) < 7 && GetState() == STATE_SLEEP) {
 		mode = 1;
 	}
 	else {
@@ -127,10 +118,8 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 			++commandDelay;
 		}
 		else if (commandDelay < 100) {
-			/*SetState(STATE_WALKDOWN);
-			SetPosition(xgolem, ygolem - 1);*/
 			++commandDelay;
-			if (xp > xgolem+10) {
+			if (xp > xgolem + 10) {
 				if (CollidesMapWall(map, RIGHT, width)) {
 					if (yp > ygolem) {
 						MoveUp(map, width);
@@ -144,7 +133,7 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 				}
 			}
 			//left
-			else if (xp +10< xgolem) {
+			else if (xp + 10< xgolem) {
 				if (CollidesMapWall(map, LEFT, width)) {
 					if (yp > ygolem) {
 						MoveUp(map, width);
@@ -159,7 +148,7 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 
 			}
 			//up
-			else if (yp > ygolem+10) {
+			else if (yp > ygolem + 10) {
 				if (CollidesMapWall(map, UP, width)) {
 					if (xp > xgolem) {
 						MoveRight(map, width);
@@ -174,7 +163,7 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 
 			}
 			//down
-			else if (yp +10< ygolem) {
+			else if (yp + 10< ygolem) {
 				if (CollidesMapWall(map, DOWN, width)) {
 					if (xp > xgolem) {
 						MoveRight(map, width);
@@ -188,7 +177,7 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 				}
 			}
 		}
-		else if (commandDelay < 120){
+		else if (commandDelay < 120) {
 			mode = 2;
 			SetState(STATE_SLEEP);
 			++commandDelay;
@@ -197,7 +186,7 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 			commandDelay = 0;
 		}
 	}
-	
+
 
 	cRect body;
 	player->GetArea(&body);
@@ -218,7 +207,7 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 		delayattack = 0;
 	}
 	++delayattack;
-	
-	Enemy::Logic(map,width, player);
+
+	Enemy::Logic(map, width, player);
 
 }

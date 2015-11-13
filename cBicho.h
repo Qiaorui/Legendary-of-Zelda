@@ -4,8 +4,6 @@
 #include "Globals.h"
 #include "Sound.h"
 
-//#define STEP_LENGTH		2
-
 
 #define STATE_LOOKLEFT		0
 #define STATE_LOOKRIGHT		1
@@ -53,14 +51,12 @@ public:
 
 	bool Collides(cRect *rc);
 	bool CollidesMapWall(vector<int> map, int direction, int width);
-	//bool CollidesMapFloor(int *map);
 	void GetArea(cRect *rc);
 	void DrawRect(int tex_id,float xo,float yo,float xf,float yf);
 	void MoveRight(vector<int> map, int width);
 	void MoveLeft(vector<int> map, int width);
 	void MoveUp(vector<int> map, int width);
 	void MoveDown(vector<int> map, int width);
-	//void Jump(int *map);
 	void Stop();
 	void Logic(vector<int> map, int width);
 
@@ -100,10 +96,5 @@ private:
 	int maxLife;
 	int life;
 	int state;
-
-	//bool jumping;
-	//int jump_alfa;
-	//int jump_y;
-
 
 };

@@ -19,22 +19,6 @@ bool Gear::touch(cRect *rc)
 	return collidesX && collidesY;
 }
 
-/*
-void Gear::logic(cBicho* bicho) {
-	cRect body;
-	bicho->GetArea(&body);
-	if (touch(&body)) {
-		if (!touched) {
-			Sound::getInstance()->playOpen();
-			touched = true;
-		}
-		
-	}
-	else if (touched) {
-		touched = false;
-		Sound::getInstance()->playClose();
-	}
-}*/
 
 void Gear::logic(vector<cBicho*> bichos) {
 	bool b = false;

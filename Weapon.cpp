@@ -42,21 +42,20 @@ void Weapon::Logic(vector<int> map, int width, vector<cBicho*> enemies) {
 }
 
 void Weapon::Logic(vector<int> map, int width, cBicho* player) {
-	
-		cRect body;
-		player->GetArea(&body);
-		if (Collides(&body)&& enemy_id==-1) {
-			player->hurt(attackPower);
-			enemy_id = 1;
-			Sound::getInstance()->playHit();
-		}
-	
+
+	cRect body;
+	player->GetArea(&body);
+	if (Collides(&body) && enemy_id == -1) {
+		player->hurt(attackPower);
+		enemy_id = 1;
+		Sound::getInstance()->playHit();
+	}
+
 
 	if (enemy_id >= 1 && attackDelay < 11) {
 		int ex, ey, ix, iy, ew, eh;
 		player->GetPosition(&ex, &ey);
 		player->GetWidthHeight(&ew, &eh);
-		//player->GetPosition(&ix, &iy);
 		ix = x + w / 2;
 		iy = y + h / 2;
 		if (ex + ew / 2 < ix) ex = ex - 1;

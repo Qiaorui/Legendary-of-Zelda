@@ -31,47 +31,47 @@ bool sceneInitialize(cData& data, cScene* scene) {
 	if (!res) return false;
 	scene[0].initialize(36, 28);
 	scene[0].addSender(30, 26,															//position in tile
-						1, 12, 2, STATE_LOOKUP,											//scene id, position x, y, state
-						9 * 16 / 208.0f, 11 * 16/208.0f, 3 * 16/384.0f, 2 * 16/384.0f,  //xo,xf,yo,yf
-						32, 16);										
-	res = scene[0].LoadLevel(1,208.0f,384.0f);
+		1, 12, 2, STATE_LOOKUP,											//scene id, position x, y, state
+		9 * 16 / 208.0f, 11 * 16 / 208.0f, 3 * 16 / 384.0f, 2 * 16 / 384.0f,  //xo,xf,yo,yf
+		32, 16);
+	res = scene[0].LoadLevel(1, 208.0f, 384.0f);
 	if (!res) return false;
 	res = data.LoadImage(IMG_EAST_PALACE, "Eastern-Palace.png", GL_RGBA);
 	if (!res) return false;
-	scene[1].initialize(26,16);
+	scene[1].initialize(26, 16);
 	scene[1].addSender(12, 1,															//position in tile
-						0, 30, 24, STATE_LOOKDOWN,												//scene id, position x, y, state
-						0, 16 / 208.0f, 16 / 496.0f, 0,  //xo,xf,yo,yf
-							16, 16);			
+		0, 30, 24, STATE_LOOKDOWN,												//scene id, position x, y, state
+		0, 16 / 208.0f, 16 / 496.0f, 0,  //xo,xf,yo,yf
+		16, 16);
 	scene[1].addSender(13, 1,															//position in tile
 		0, 30, 24, STATE_LOOKDOWN,												//scene id, position x, y, state
-		0, 16 / 208.0f, 16 / 496.0f, 0 ,  //xo,xf,yo,yf
+		0, 16 / 208.0f, 16 / 496.0f, 0,  //xo,xf,yo,yf
 		16, 16);										// w h
 	int id = scene[1].addSender(12, 13,															//position in tile
 		2, 15, 3, STATE_LOOKUP,											//scene id, position x, y, state
 		11 * 16 / 208.0f, 13 * 16 / 208.0f, 2 * 16 / 496.0f, 0 * 16 / 496.0f,  //xo,xf,yo,yf
-		32, 32);									
-	
+		32, 32);
+
 	scene[1].setSenderCloseImage(id, 0, 32.0f / 208.0f, 144.0f / 496.0f, 112.0f / 496.0f);
-	scene[1].addGear(4, 6,
+	scene[1].addGear(12, 12,
 		id,
 		8 * 16 / 208.0f, 9 * 16 / 208.0f, 14 * 16 / 496.0f, 13 * 16 / 496.0f,
 		16, 16);
-	scene[1].addBlock(20,9,
+	scene[1].addBlock(20, 9,
 		0 * 16 / 208.0f, 1 * 16 / 208.0f, 7 * 16 / 496.0f, 6 * 16 / 496.0f,
 		16, 16);
-		
+
 	scene[1].addBlock(21, 9,
 		0 * 16 / 208.0f, 1 * 16 / 208.0f, 7 * 16 / 496.0f, 6 * 16 / 496.0f,
 		16, 16);
-	res = scene[1].LoadLevel(2,208.0f,496.0f);
+	res = scene[1].LoadLevel(2, 208.0f, 496.0f);
 	if (!res) return false;
 	scene[2].initialize(32, 32);
 	scene[2].addSender(15, 1,															//position in tile
 		1, 12, 12, STATE_LOOKDOWN,											//scene id, position x, y, state
 		3 * 16 / 208.0f, 5 * 16 / 208.0f, 0 * 16 / 496.0f, 2 * 16 / 496.0f,  //xo,xf,yo,yf
 		32, 32);								//w h
-		
+
 	res = scene[2].LoadLevel(3, 208.0f, 496.0f);
 	return res;
 }
@@ -112,33 +112,34 @@ bool cGame::Init()
 	Scene[0].addEnemy(SOLDADO, 28, 21, Data.GetID(IMG_ENEMIES));
 	Scene[0].addEnemy(SOLDADO, 28, 4, Data.GetID(IMG_ENEMIES));
 	Scene[0].addEnemy(PLANTABOMBA, 23, 21, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(PLANTABOMBA, 13, 14, Data.GetID(IMG_ENEMIES));
 	Scene[0].addEnemy(PLANTABOMBA, 32, 15, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(PLANTABOMBA, 8, 20, Data.GetID(IMG_ENEMIES));
+	Scene[0].addEnemy(PLANTABOMBA, 22, 19, Data.GetID(IMG_ENEMIES));
 	Scene[1].addEnemy(GOLEM, 4, 12, Data.GetID(IMG_GOLEM));
 	Scene[1].addEnemy(SOLDADO, 5, 7, Data.GetID(IMG_ENEMIES));
 	Scene[1].addEnemy(SOLDADO,20, 7, Data.GetID(IMG_ENEMIES));
-	//Scene[1].addEnemy(GOLEM, 20, 12, Data.GetID(IMG_GOLEM));
 	Scene[1].addEnemy(GOLEM, 12, 12, Data.GetID(IMG_GOLEM));
 	Scene[2].addEnemy(BOSS, 15, 20, Data.GetID(IMG_BOSS));
 	Scene[2].addEnemy(GOLEM, 12, 15, Data.GetID(IMG_GOLEM));
 	Scene[2].addEnemy(GOLEM, 18, 15, Data.GetID(IMG_GOLEM));
 	Scene[2].addEnemy(SOLDADO, 3, 25, Data.GetID(IMG_ENEMIES));
 	Scene[2].addEnemy(SOLDADO, 20, 25, Data.GetID(IMG_ENEMIES));
+	Scene[2].addEnemy(PLANTABOMBA, 8,20, Data.GetID(IMG_ENEMIES));
+	Scene[2].addEnemy(PLANTABOMBA, 22, 19, Data.GetID(IMG_ENEMIES));
 	//sound init
 
 	Sound::getInstance()->playBgm(SOUND_OVERLOAD);
 	
 	//Player initialization
 	res = Data.LoadImage(IMG_PLAYER,"linkSpritepro2.png",GL_RGBA);
-	//res = Data.LoadImage(IMG_LIFE, "corazones_vida.png", GL_RGBA);
 	if(!res) return false;
 	Player.SetTile(11,16);
 	Player.SetMaxLife(6);
 	Player.SetWidthHeight(16,25);
 	Player.SetState(STATE_LOOKDOWN);
 	Player.setWeapon(SWORD);
-	//Player.setLifeTexId(Data.GetID(IMG_LIFE));
 	Player.setItemTexId(Data.GetID(IMG_ITEMS));
-	//Player.SetPosition(11*16, 16*16+8);
 	Player.setCurrentSceneId(0);
 
 	return res;
@@ -193,7 +194,6 @@ bool cGame::Process()
 		}
 		else if (keys['b']) {
 			Player.changeWeapon();
-			//Player.BowAttack();
 		}
 		if (keys['m']) {
 			if (delay >= 20) {
@@ -211,9 +211,6 @@ bool cGame::Process()
 	}
 
 	
-	
-
-	//++timer;
 	return res;
 }
 

@@ -39,7 +39,7 @@ void Boss::Draw()
 		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
 	else Enemy::Draw();
-		
+
 }
 
 void Boss::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame)
@@ -71,9 +71,9 @@ void Boss::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, i
 
 
 void Boss::Logic(vector<int> map, int width, cBicho* player) {
-	
+
 	Enemy::Logic(map, width, player);
-	if (commandDelay %102 > CD && !ulti) {
+	if (commandDelay % 102 > CD && !ulti) {
 		FireAttack();
 	}
 	else if (commandDelay % 32 > 30 && ulti) {
@@ -84,7 +84,7 @@ void Boss::Logic(vector<int> map, int width, cBicho* player) {
 		int x, y;
 		GetPosition(&x, &y);
 		if (commandDelay < 550) x += 2;
-		else if(commandDelay<600) y += 2;
+		else if (commandDelay<600) y += 2;
 		else if (commandDelay<650) x -= 4;
 		else if (commandDelay<700) y -= 2;
 		else if (commandDelay<750) x += 2;
@@ -94,9 +94,9 @@ void Boss::Logic(vector<int> map, int width, cBicho* player) {
 		}
 		SetPosition(x, y);
 	}
-	
+
 	++commandDelay;
-	
+
 	if (fireball.isActive())fireball.Logic(map, width, player);
 }
 
@@ -104,12 +104,12 @@ void Boss::FireAttack()
 {
 	if (!fireball.isActive() && fireball.isActionFinished()) {
 		bool correct = true;
-		
-			fireball.SetWidthHeight(30, 30);
-			fireball.SetPosition(x+5 , y+10 );
-			fireball.SetState(STATE_BOW_DOWN);
-			fireball.setAtk(2);
-		
+
+		fireball.SetWidthHeight(30, 30);
+		fireball.SetPosition(x + 5, y + 10);
+		fireball.SetState(STATE_BOW_DOWN);
+		fireball.setAtk(2);
+
 		if (correct) {
 			Sound::getInstance()->playFireBall();
 			actionFinished = false;

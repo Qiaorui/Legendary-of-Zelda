@@ -24,20 +24,16 @@ void Soldado::Draw()
 
 		switch (GetState())
 		{
-			//1
 		case STATE_LOOKLEFT:	xo = 183.0f / 840.0f;
 			yo = 71.0f / 567.0f;
 			break;
-			//4
 		case STATE_LOOKRIGHT:	xo = 95.0f / 840.0f;
 			yo = 71.0f / 567.0f;
 			break;
-			//1..3
 		case STATE_WALKLEFT:	xo = 183.0f / 840.0f + (GetFrame()*(bitxl + 4.0f / 840.0f));
 			yo = 71.0f / 567.0f;
 			NextFrame(2); // con 4 gira la cabeza
 			break;
-			//4..6
 		case STATE_WALKRIGHT:	xo = 95.0f / 840.0f + (GetFrame()*(bitxl + 2.0f / 840.0f));
 			yo = 71.0f / 567.0f;
 			NextFrame(2); // con 4 gira la cabeza
@@ -46,26 +42,19 @@ void Soldado::Draw()
 		case STATE_LOOKUP:      xo = 265.0f / 840.0f;
 			yo = 71.0f / 567.0f;
 			break;
-
 		case STATE_LOOKDOWN:    xo = 16.0f / 840.0f;
 			yo = 71.0f / 567.0f;
 			break;
-
 		case STATE_WALKUP:	 xo = 265.0f / 840.0f + (GetFrame()*(bitxp + 4.0f / 840.0f));
 			yo = 71.0f / 567.0f;
 			NextFrame(2); // con 4 gira la cabeza
 			break;
-
 		case STATE_WALKDOWN:    xo = 16.0f / 840.0f + (GetFrame()*(bitxp + 4.0f / 840.0f));
 			yo = 71.0f / 567.0f;
 			NextFrame(2); // si se pone 4 gira la cabeza
 			break;
-
-
-			//default:			xo = 91.0f/432.0f; yo = bity; break;
 		}
 
-		//When we are not atacking 
 		if (GetState() == STATE_LOOKDOWN || GetState() == STATE_LOOKUP || GetState() == STATE_WALKUP || GetState() == STATE_WALKDOWN) {
 			xf = xo + bitxp;
 		}

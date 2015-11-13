@@ -20,119 +20,95 @@ bool cScene::LoadLevel(int level, float tilewidth, float tileheight)
 	bool res;
 	FILE *fd;
 	char file[16];
-	int i,j,px,py;
+	int i, j, px, py;
 	char tile = ' ';
 	float coordx_tile, coordy_tile;
 	int row, column;
 	float h = 16.0f / tileheight;
 	float w = 16.0f / tilewidth;
-	res=true;
+	res = true;
 	string buffer = "";
-	if(level<10) sprintf(file,"%s0%d%s",(char *)FILENAME,level,(char *)FILENAME_EXT);
-	else		 sprintf(file,"%s%d%s",(char *)FILENAME,level,(char *)FILENAME_EXT);
+	if (level<10) sprintf(file, "%s0%d%s", (char *)FILENAME, level, (char *)FILENAME_EXT);
+	else		 sprintf(file, "%s%d%s", (char *)FILENAME, level, (char *)FILENAME_EXT);
 
-	fd=fopen(file,"r");
-	if(fd==NULL) return false;
+	fd = fopen(file, "r");
+	if (fd == NULL) return false;
 
-	id_DL=glGenLists(1);
-	glNewList(id_DL,GL_COMPILE);
-		glBegin(GL_QUADS);
-	
-			for(j=height-1;j>=0;j--)
-			{
-				px=0;
-				py=0+(j*TILE_SIZE);
+	id_DL = glGenLists(1);
+	glNewList(id_DL, GL_COMPILE);
+	glBegin(GL_QUADS);
 
-				for(i=0;i<width;i++)
+	for (j = height - 1; j >= 0; j--)
+	{
+		px = 0;
+		py = 0 + (j*TILE_SIZE);
+
+		for (i = 0; i<width; i++)
+		{
+			while (tile != '(') {
+				fscanf(fd, "%c", &tile);
+			}
+			while (tile != ',') {
+				fscanf(fd, "%c", &tile);
+				buffer += tile;
+			}
+			row = stoi(buffer);
+			buffer.clear();
+			while (tile != ')') {
+				fscanf(fd, "%c", &tile);
+				buffer += tile;
+			}
+			column = stoi(buffer);
+			buffer.clear();
+
+			if (row == 0 && column == 3 && level == 1) {
+				int tmp = rand() % 16;
+				switch (tmp)
 				{
-					while (tile != '(') {
-						fscanf(fd, "%c", &tile);
-					}				
-					while (tile != ',') {
-						fscanf(fd, "%c", &tile);
-						buffer += tile;
-					}
-					row = stoi(buffer);
-					buffer.clear();
-					while (tile != ')') {
-						fscanf(fd, "%c", &tile);
-						buffer += tile;
-					}
-					column = stoi(buffer);
-					buffer.clear();
-	
-					//Tiles = 1,2,3,...
-					if (row == 0 && column == 3 && level == 1) {
-						int tmp = rand() % 16;
-						switch (tmp)
-						{
-						case 0:
-							column = 3;
-							row = 1;
-							break;
-						case 1:
-							column = 3;
-							row = 2;
-							break;
-						/*case 2:
-							column = 4;
-							row = 2;
-							break;
-						case 3:
-							column = 5;
-							row = 2;
-							break;*/
-						case 4:
-							column = 7;
-							row = 0;
-							break;
-						case 5:
-							column = 7;
-							row = 1;
-							break;
-						default:
-							break;
-						}
-					}
-					
-					if (level == 1) {
-						if (row < 4) map[(j*width) + i] = 0;
-						else map[(j*width) + i] = 1;
-					}
-					else {
-						if (row < 7) map[(j*width) + i] = 0;
-						else map[(j*width) + i] = 1;
-					}
-					//map[(j*width) + i] = (row*13)+column;
-
-					coordx_tile = column*w;
-					coordy_tile = row*h;
-					
-					glTexCoord2f(coordx_tile, coordy_tile + h);	glVertex2i(px, py);
-					glTexCoord2f(coordx_tile + w, coordy_tile + h);	glVertex2i(px + 16, py);
-					glTexCoord2f(coordx_tile + w, coordy_tile);	glVertex2i(px + 16, py + 16);
-					glTexCoord2f(coordx_tile, coordy_tile);	glVertex2i(px, py + 16);
-
-					/*
-					if (map[(j*SCENE_WIDTH) + i] % 2) coordx_tile = 0.0f;
-					else						 coordx_tile = 0.5f;
-					if (map[(j*SCENE_WIDTH) + i]<3) coordy_tile = 0.0f;
-					else						 coordy_tile = 0.5f;
-
-					//BLOCK_SIZE = 24, FILE_SIZE = 64
-					// 24 / 64 = 0.375
-					glTexCoord2f(coordx_tile, coordy_tile + 0.375f);	glVertex2i(px, py);
-					glTexCoord2f(coordx_tile + 0.375f, coordy_tile + 0.375f);	glVertex2i(px + BLOCK_SIZE, py);
-					glTexCoord2f(coordx_tile + 0.375f, coordy_tile);	glVertex2i(px + BLOCK_SIZE, py + BLOCK_SIZE);
-					glTexCoord2f(coordx_tile, coordy_tile);	glVertex2i(px, py + BLOCK_SIZE);
-					*/
-
-					px+=TILE_SIZE;
+				case 0:
+					column = 3;
+					row = 1;
+					break;
+				case 1:
+					column = 3;
+					row = 2;
+					break;
+				case 4:
+					column = 7;
+					row = 0;
+					break;
+				case 5:
+					column = 7;
+					row = 1;
+					break;
+				default:
+					break;
 				}
-				fscanf(fd,"%c",&tile); //pass enter
 			}
 
-		glEnd();
+			if (level == 1) {
+				if (row < 4) map[(j*width) + i] = 0;
+				else map[(j*width) + i] = 1;
+			}
+			else {
+				if (row < 7) map[(j*width) + i] = 0;
+				else map[(j*width) + i] = 1;
+			}
+
+			coordx_tile = column*w;
+			coordy_tile = row*h;
+
+			glTexCoord2f(coordx_tile, coordy_tile + h);	glVertex2i(px, py);
+			glTexCoord2f(coordx_tile + w, coordy_tile + h);	glVertex2i(px + 16, py);
+			glTexCoord2f(coordx_tile + w, coordy_tile);	glVertex2i(px + 16, py + 16);
+			glTexCoord2f(coordx_tile, coordy_tile);	glVertex2i(px, py + 16);
+
+			px += TILE_SIZE;
+		}
+		fscanf(fd, "%c", &tile); //pass enter
+	}
+
+	glEnd();
 	glEndList();
 
 	fclose(fd);
@@ -244,9 +220,6 @@ void cScene::logic(cPlayer* player) {
 	{
 		if(enemies[i]->isActive()) enemies[i]->Logic(map, width, player);
 	}
-	
-
-
 }
 
 
@@ -258,8 +231,6 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 	switch (enemyType)
 	{
 	case SOLDADO:
-
-
 			enemies.push_back(new Soldado);
 			enemies[id]->SetTile(x,y);
 			enemies[id]->SetMaxLife(3);
@@ -279,7 +250,7 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 	case GOLEM:
 			enemies.push_back(new Golem);
 			enemies[id]->SetTile(x,y);
-			enemies[id]->SetMaxLife(3);
+			enemies[id]->SetMaxLife(5);
 			enemies[id]->SetWidthHeight(24, 25);
 			enemies[id]->SetState(STATE_SLEEP);
 			enemies[id]->setImage(tex_id);
@@ -287,7 +258,7 @@ void cScene::addEnemy(int enemyType, int x, int y, int tex_id) {
 	case BOSS:
 		enemies.push_back(new Boss);
 		enemies[id]->SetTile(x, y);
-		enemies[id]->SetMaxLife(10);
+		enemies[id]->SetMaxLife(20);
 		enemies[id]->SetWidthHeight(32, 53);
 		enemies[id]->SetState(STATE_LOOKDOWN);
 		enemies[id]->setImage(tex_id);

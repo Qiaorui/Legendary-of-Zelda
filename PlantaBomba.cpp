@@ -65,7 +65,7 @@ void PlantaBomba::DrawRect(int tex_id, float xo, float yo, float xf, float yf, i
 void PlantaBomba::Logic(vector<int> map, int width, cBicho* player) {
 	if (commandDelay == 0) {
 		FireAttack();
-		commandDelay = 50;
+		commandDelay = 30;
 	}
 	if (commandDelay > 0) --commandDelay;
 	Enemy::Logic(map,width, player);

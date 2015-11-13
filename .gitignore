@@ -24,6 +24,7 @@ DEBUG/
 !*.h
 !corona.*
 !/resource/*
+!zeldaLib/**
 !GL*/**
 !2DEngine.vcxproj
 *.user

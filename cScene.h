@@ -10,13 +10,6 @@
 #include "Gear.h"
 #include "Block.h"
 
-//#define SCENE_Xo		(2*TILE_SIZE)
-//#define SCENE_Yo		TILE_SIZE
-//#define SCENE_Xo		0
-//#define SCENE_Yo		0
-
-//#define SCENE_WIDTH		36
-//#define SCENE_HEIGHT	28
 
 #define FILENAME		"level"
 #define FILENAME_EXT	".txt"
@@ -59,7 +52,6 @@ private:
 	vector<Block> blocks;
 	vector<Sender> senders;
 	vector<Enemy*> enemies;
-	//int map[SCENE_WIDTH * SCENE_HEIGHT];	//scene
 	int id_DL;								//actual level display list
 	int width;
 	int height;
