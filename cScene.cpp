@@ -197,17 +197,25 @@ int cScene::addSender(int x, int y, int scene, int ToX, int ToY, int state, floa
 
 
 void cScene::logic(cPlayer* player) {
+	vector<cBicho*> bichos;
+	for (int i = 0; i < enemies.size(); ++i) {
+		bichos.push_back(enemies[i]);
+	}
+	bichos.push_back(player);
+
 	for (int i = 0; i < gears.size(); i++)
 	{
 		if (gears[i].isActive()) {
-			gears[i].logic(player);
+			gears[i].logic(bichos);
 			int id = gears[i].getSender();
 			if (gears[i].isTouched()) {
 				if (senders[id].isWall()) {
+					Sound::getInstance()->playOpen();
 					senders[id].switchState();
 				}
 			}
 			else if (!senders[id].isWall()) {
+				Sound::getInstance()->playClose();
 				senders[id].switchState();
 			}
 		}

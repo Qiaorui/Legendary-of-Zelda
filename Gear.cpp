@@ -19,6 +19,7 @@ bool Gear::touch(cRect *rc)
 	return collidesX && collidesY;
 }
 
+/*
 void Gear::logic(cBicho* bicho) {
 	cRect body;
 	bicho->GetArea(&body);
@@ -33,11 +34,19 @@ void Gear::logic(cBicho* bicho) {
 		touched = false;
 		Sound::getInstance()->playClose();
 	}
-}
+}*/
 
-void logic(vector<cBicho*> bichos) {
-
-
+void Gear::logic(vector<cBicho*> bichos) {
+	bool b = false;
+	cRect body;
+	for (int i = 0; i < bichos.size() && !b; i++)
+	{
+		bichos[i]->GetArea(&body);
+		if (touch(&body)) {
+			b = true;
+		}
+	}
+	touched = b;
 }
 
 void Gear::setSender(int id) {
