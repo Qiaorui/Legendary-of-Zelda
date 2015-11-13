@@ -1,8 +1,8 @@
 # Legendary-of-Zelda
 
 ##Author
-*Qiaorui Xiang*
-*Oscar Hernandez Saborit*
+- *Qiaorui Xiang*
+- *Oscar Hernandez Saborit*
 
 ##Instruction	
 ####To compile
