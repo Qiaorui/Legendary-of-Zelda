@@ -6,7 +6,7 @@ cGame::cGame(void)
 {
 	delay = 0;
 	miniMap = false;
-
+	color = 255;
 }
 
 cGame::~cGame(void)
@@ -199,13 +199,18 @@ bool cGame::Process()
 				delay = 0;
 			}
 		}
+
+		//Game Logic
+		Player.logic(Scene[id].GetMap(), w, Scene[id].getEnemies());
+		Scene[id].logic(&Player);
+	}
+	else {
+		if (color > 0) --color;
 	}
 
 	
 	
-	//Game Logic
-	Player.logic(Scene[id].GetMap(), w , Scene[id].getEnemies());
-	Scene[id].logic(&Player);
+
 	//++timer;
 	return res;
 }
@@ -225,6 +230,9 @@ void cGame::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	
+	if (!Player.isAlive()) {
+		glColor3b(color, color, color);
+	}
 
 	int id = Player.getCurrentSceneId();
 	int x, y;
