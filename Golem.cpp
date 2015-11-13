@@ -6,6 +6,7 @@ Golem::Golem(){
 	visible = true;
 	delayattack = 15;
 	commandDelay = 0;
+	speed = 1;
 	mode = 0;
 }
 
@@ -13,15 +14,10 @@ Golem::~Golem(){}
 void Golem::Draw()
 {
 	if (alive) {
-		//if (tex_id == 2) {
 		float xo, yo, xf, yf;
 		xf = yf = -1;
-		//BLOCK_SIZE = 16, FILE_SIZE = 432
-		// 16 / 432 = 0.037
-		//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
 		float  bitx = 24.0f / 454.0f;;
-		//BLOCK_SIZE = 16, FILE_SIZE = 303
-		// 16 / 303 = 0.053
+
 		float bity = 25.0f / 340.0f;
 		int frame = GetFrame();
 
@@ -73,22 +69,17 @@ void Golem::Draw()
 			break;
 
 
-			//default:			xo = 91.0f/432.0f; yo = bity; break;
+			
 		}
 
-		//When we are not atacking 
+
 		xf = xo + bitx;
 		yf = yo - bity;
 
 		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
 	else Enemy::Draw();
-	//}
-	//else {
-	//	DrawLife(tex_id);
-	//}
 
-	//DrawRect(tex_id, 16.0f / 840.0f, 71.0 / 567.0f, 31.0f / 840.0f, 44.0f / 567.0f, 0, 0);
 }
 
 void Golem::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame)
@@ -124,28 +115,90 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 	int xp, yp;
 	GetPosition(&xgolem, &ygolem);
 	player->GetPosition(&xp, &yp);
-	if (yp - ygolem < 30 && xp == xgolem && GetState() == STATE_SLEEP) mode = 1;
+	if (yp - ygolem < 30 && abs(xp - xgolem) < 7 && GetState() == STATE_SLEEP) {
+		mode = 1;
+	}
+	else {
+		SetState(STATE_SLEEP);
+	}
 	if (mode == 1) {
-		if (commandDelay < 5) {
+		if (commandDelay < 40) {
 			SetState(STATE_OPEN);
 			++commandDelay;
 		}
-		else if (commandDelay < 60) {
-			SetState(STATE_WALKDOWN);
-			SetPosition(xgolem, ygolem - 1);
+		else if (commandDelay < 100) {
+			/*SetState(STATE_WALKDOWN);
+			SetPosition(xgolem, ygolem - 1);*/
+			++commandDelay;
+			if (xp > xgolem) {
+				if (CollidesMapWall(map, RIGHT, width)) {
+					if (yp > ygolem) {
+						MoveUp(map, width);
+					}
+					else {
+						MoveDown(map, width);
+					}
+				}
+				else {
+					MoveRight(map, width);
+				}
+			}
+			//left
+			else if (xp < xgolem) {
+				if (CollidesMapWall(map, LEFT, width)) {
+					if (yp > ygolem) {
+						MoveUp(map, width);
+					}
+					else {
+						MoveDown(map, width);
+					}
+				}
+				else {
+					MoveLeft(map, width);
+				}
+
+			}
+			//up
+			else if (yp > ygolem) {
+				if (CollidesMapWall(map, UP, width)) {
+					if (xp > xgolem) {
+						MoveRight(map, width);
+					}
+					else {
+						MoveLeft(map, width);
+					}
+				}
+				else {
+					MoveUp(map, width);
+				}
+
+			}
+			//down
+			else if (yp < ygolem) {
+				if (CollidesMapWall(map, DOWN, width)) {
+					if (xp > xgolem) {
+						MoveRight(map, width);
+					}
+					else {
+						MoveLeft(map, width);
+					}
+				}
+				else {
+					MoveDown(map, width);
+				}
+			}
+		}
+		else if (commandDelay < 140){
+			mode = 2;
+			SetState(STATE_SLEEP);
 			++commandDelay;
 		}
 		else {
-			mode = 2;
-			SetState(STATE_LOOKDOWN);
 			commandDelay = 0;
 		}
 	}
 	
-	
-			
-	
-	
+
 	cRect body;
 	player->GetArea(&body);
 	if (delayattack < 15) {

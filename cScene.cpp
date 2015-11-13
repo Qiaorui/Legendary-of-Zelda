@@ -165,7 +165,7 @@ void cScene::Draw(int tex_id)
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		if(enemies[i]->isVisible()) enemies[i]->Draw();
-		if (!enemies[i]->isVisible()) enemies.erase(enemies.begin() + i);
+		//if (!enemies[i]->isVisible()) enemies.erase(enemies.begin() + i);
 	}
 
 
@@ -204,7 +204,7 @@ int cScene::addSender(int x, int y, int scene, int ToX, int ToY, int state, floa
 void cScene::logic(cPlayer* player) {
 	vector<cBicho*> bichos;
 	for (int i = 0; i < enemies.size(); ++i) {
-		bichos.push_back(enemies[i]);
+		if (enemies[i]->isAlive()) bichos.push_back(enemies[i]);
 	}
 	for (int i = 0; i < blocks.size(); i++)
 	{

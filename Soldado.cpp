@@ -126,7 +126,7 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 		commandDelay = 0;
 	}
 	++commandDelay;
-	if(abs(px-ex)<60 || abs(py - ey)<60){
+	if(abs(px-ex)<100 || abs(py - ey)<100){
 		/*
 		See->cBicho.h
 
@@ -139,7 +139,7 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 	if (commandDelay >= 2 + 15) {
 		move = false;
 		//right
-		if (px - ex > 10) {
+		if (px > ex) {
 			if (CollidesMapWall(map, RIGHT, width)) {
 				if (py > ey) {
 					MoveUp(map, width);
@@ -154,7 +154,7 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 			move = true;
 		}
 		//left
-		else if (px - ex < -10) {
+		else if (px < ex ) {
 			if (CollidesMapWall(map,LEFT, width)) {
 				if (py > ey) {
 					MoveUp(map, width);
@@ -170,7 +170,7 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 			move = true;
 		}
 		//up
-		else if (py - ey > 10 && !move) {
+		else if (py > ey && !move) {
 			if (CollidesMapWall(map, UP, width)) {
 				if (px > ex) {
 					MoveRight(map, width);
@@ -185,7 +185,7 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 
 		}
 		//down
-		else if (py - ey < 10 && !move) {
+		else if (py < ey && !move) {
 			if (CollidesMapWall(map, DOWN, width)) {
 				if (px > ex) {
 					MoveRight(map, width);
