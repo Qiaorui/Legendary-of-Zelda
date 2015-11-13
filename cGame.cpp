@@ -49,6 +49,7 @@ bool sceneInitialize(cData& data, cScene* scene) {
 		2, 15, 3, STATE_LOOKUP,											//scene id, position x, y, state
 		11 * 16 / 208.0f, 13 * 16 / 208.0f, 2 * 16 / 496.0f, 0 * 16 / 496.0f,  //xo,xf,yo,yf
 		32, 32);									
+	
 	scene[1].setSenderCloseImage(id, 0, 32.0f / 208.0f, 144.0f / 496.0f, 112.0f / 496.0f);
 	scene[1].addGear(4, 6,
 		id,
@@ -57,6 +58,7 @@ bool sceneInitialize(cData& data, cScene* scene) {
 	scene[1].addBlock(20,9,
 		0 * 16 / 208.0f, 1 * 16 / 208.0f, 7 * 16 / 496.0f, 6 * 16 / 496.0f,
 		16, 16);
+		
 	scene[1].addBlock(21, 9,
 		0 * 16 / 208.0f, 1 * 16 / 208.0f, 7 * 16 / 496.0f, 6 * 16 / 496.0f,
 		16, 16);
@@ -111,7 +113,8 @@ bool cGame::Init()
 	Scene[0].addEnemy(PLANTABOMBA, 32, 15, Data.GetID(IMG_ENEMIES));
 	Scene[1].addEnemy(GOLEM, 4, 12, Data.GetID(IMG_GOLEM));
 	Scene[1].addEnemy(SOLDADO, 5, 7, Data.GetID(IMG_ENEMIES));
-	Scene[1].addEnemy(GOLEM, 20, 12, Data.GetID(IMG_GOLEM));
+	Scene[1].addEnemy(SOLDADO,20, 7, Data.GetID(IMG_ENEMIES));
+	//Scene[1].addEnemy(GOLEM, 20, 12, Data.GetID(IMG_GOLEM));
 	Scene[1].addEnemy(GOLEM, 12, 12, Data.GetID(IMG_GOLEM));
 	Scene[2].addEnemy(BOSS, 15, 20, Data.GetID(IMG_BOSS));
 	Scene[2].addEnemy(GOLEM, 12, 15, Data.GetID(IMG_GOLEM));

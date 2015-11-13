@@ -40,7 +40,7 @@ void Fireball::Logic(vector<int> map, int width, cBicho* player)
 			break;
 		}
 	}
-	if (distance > 200 || CollidesMapWall(map, LEFT, width) || attackDelay >= 10) {
+	if (distance > 200 || attackDelay >= 10) {
 		active = false;
 		visible = false;
 		actionFinished = true;
