@@ -41,7 +41,7 @@ void Weapon::Logic(vector<int> map, int width, vector<cBicho*> enemies) {
 	}
 }
 
-void Weapon::Logic2(vector<int> map, int width, cBicho* player) {
+void Weapon::Logic(vector<int> map, int width, cBicho* player) {
 	
 		cRect body;
 		player->GetArea(&body);

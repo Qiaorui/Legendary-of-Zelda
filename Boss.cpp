@@ -4,7 +4,7 @@
 
 Boss::Boss()
 {
-	delaymove = 0;
+	commandDelay = 0;
 	ulti = false;
 }
 
@@ -89,29 +89,29 @@ void Boss::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, i
 void Boss::Logic(vector<int> map, int width, cBicho* player) {
 	
 	Enemy::Logic(map, width, player);
-	if (delaymove%102 > CD && !ulti) {
+	if (commandDelay %102 > CD && !ulti) {
 		FireAttack();
 	}
-	else if (delaymove % 32 > 30 && ulti) {
+	else if (commandDelay % 32 > 30 && ulti) {
 		FireAttack();
 	}
-	if (delaymove > 500) {
+	if (commandDelay > 500) {
 		ulti = true;
 		int x, y;
 		GetPosition(&x, &y);
-		if (delaymove < 550) x += 2;
-		else if(delaymove<600) y += 2;
-		else if (delaymove<650) x -= 4;
-		else if (delaymove<700) y -= 2;
-		else if (delaymove<750) x += 2;
+		if (commandDelay < 550) x += 2;
+		else if(commandDelay<600) y += 2;
+		else if (commandDelay<650) x -= 4;
+		else if (commandDelay<700) y -= 2;
+		else if (commandDelay<750) x += 2;
 		else {
-			delaymove = 0;
+			commandDelay = 0;
 			ulti = false;
 		}
 		SetPosition(x, y);
 	}
 	
-	++delaymove;
+	++commandDelay;
 	
 	if (fireball.isActive())fireball.Logic(map, width, player);
 }

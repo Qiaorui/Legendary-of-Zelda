@@ -3,7 +3,7 @@
 
 
 Soldado::Soldado(){
-	delaymove = 15;
+	commandDelay = 15;
 	visible = true;
 	move = false;
 }
@@ -13,16 +13,10 @@ Soldado::~Soldado(){}
 void Soldado::Draw()
 {
 	if (alive) {
-		//if (tex_id == 2) {
 		float xo, yo, xf, yf;
 		xf = yf = -1;
-		//BLOCK_SIZE = 16, FILE_SIZE = 432
-		// 16 / 432 = 0.037
-		//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
 		float  bitxl = 18.0f / 840.0f;
 		float bitxp = 16.0f / 840.0f;
-		//BLOCK_SIZE = 16, FILE_SIZE = 303
-		// 16 / 303 = 0.053
 		float bity = 28.0f / 567.0f;
 		float  bitx = 0.0f;
 		int frame = GetFrame();
@@ -81,12 +75,7 @@ void Soldado::Draw()
 		DrawRect(tex_id, xo, yo, xf, yf, GetState(), frame);
 	}
 	else Enemy::Draw();
-	//}
-	//else {
-	//	DrawLife(tex_id);
-	//}
-	
-//DrawRect(tex_id, 16.0f / 840.0f, 71.0 / 567.0f, 31.0f / 840.0f, 44.0f / 567.0f, 0, 0);
+
 }
 
 void Soldado::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s, int frame)
@@ -116,13 +105,14 @@ void Soldado::DrawRect(int tex_id, float xo, float yo, float xf, float yf, int s
 
 
 void Soldado::Logic(vector<int> map, int width, cBicho* player) {
+
 	//comprobar si colisiona con link//////////
 	cRect body;
 	player->GetArea(&body);
 	int ex, ey, px, py;
 	player->GetPosition(&px, &py);
 	GetPosition(&ex, &ey);
-	if (delaymove < 15) {
+	if (commandDelay < 15) {
 		if (px < ex) px = px - 1;
 		else px = px + 1;
 		if (py < ey) py = py - 1;
@@ -133,11 +123,11 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 		Sound::getInstance()->playDamage();
 		int l;
 		player->hurt(1);
-		delaymove = 0;
+		commandDelay = 0;
 	}
-	++delaymove;
+	++commandDelay;
 	if(abs(px-ex)<60 || abs(py - ey)<60){
-	if (delaymove >= 2 + 15) {
+	if (commandDelay >= 2 + 15) {
 		move = false;
 		if (px - ex > 10) {
 			++ex;
@@ -158,7 +148,7 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 			SetState(STATE_WALKDOWN);
 		}
 		SetPosition(ex, ey);
-		delaymove = 15;
+		commandDelay = 15;
 	}
 		
 	}

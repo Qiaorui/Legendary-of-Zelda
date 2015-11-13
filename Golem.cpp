@@ -5,7 +5,7 @@
 Golem::Golem(){
 	visible = true;
 	delayattack = 15;
-	delaymove = 0;
+	commandDelay = 0;
 	mode = 0;
 }
 
@@ -126,19 +126,19 @@ void Golem::Logic(vector<int> map, int width, cBicho* player) {
 	player->GetPosition(&xp, &yp);
 	if (yp - ygolem < 30 && xp == xgolem && GetState() == STATE_SLEEP) mode = 1;
 	if (mode == 1) {
-		if (delaymove < 5) {
+		if (commandDelay < 5) {
 			SetState(STATE_OPEN);
-			++delaymove;
+			++commandDelay;
 		}
-		else if (delaymove < 60) {
+		else if (commandDelay < 60) {
 			SetState(STATE_WALKDOWN);
 			SetPosition(xgolem, ygolem - 1);
-			++delaymove;
+			++commandDelay;
 		}
 		else {
 			mode = 2;
 			SetState(STATE_LOOKDOWN);
-			delaymove = 0;
+			commandDelay = 0;
 		}
 	}
 	

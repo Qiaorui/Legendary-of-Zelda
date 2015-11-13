@@ -9,7 +9,7 @@ public:
 	Weapon();
 	~Weapon();
 	virtual void Logic(vector<int> map, int width, vector<cBicho*> enemies);
-	virtual void Logic2(vector<int> map, int width, cBicho* player );
+	virtual void Logic(vector<int> map, int width, cBicho* bicho );
 	virtual void Draw();
 	void setAtk(int atk);
 	int getAtk();

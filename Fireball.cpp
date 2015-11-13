@@ -19,56 +19,27 @@ Fireball::~Fireball()
 void Fireball::Logic(vector<int> map, int width, cBicho* player)
 {
 
-	Weapon::Logic2(map, width, player);
-
-
-	switch (GetState()) {
-
-	case STATE_BOW_DOWN:
-		if (enemy_id >= 0) {
-			SetState(STATE_HIT_DOWN);
-			y -= 10;
-		}
-		else {
+	Weapon::Logic(map, width, player);
+	if (enemy_id < 0) {
+		switch (GetState()) {
+		case STATE_BOW_DOWN:
 			y -= speed;
 			distance += speed;
-		}
-		break;
-	case STATE_BOW_UP:
-		if (enemy_id >= 0) {
-			SetState(STATE_HIT_UP);
-			y += 10;
-		}
-		else {
+			break;
+		case STATE_BOW_UP:
 			y += speed;
 			distance += speed;
-		}
-
-		break;
-	case STATE_BOW_RIGHT:
-		if (enemy_id >= 0) {
-			SetState(STATE_HIT_RIGHT);
-			x += 10;
-		}
-		else {
+			break;
+		case STATE_BOW_RIGHT:
 			x += speed;
 			distance += speed;
-		}
-
-		break;
-	case STATE_BOW_LEFT:
-		if (enemy_id >= 0) {
-			SetState(STATE_HIT_LEFT);
-			x -= 10;
-		}
-		else {
+			break;
+		case STATE_BOW_LEFT:
 			x -= speed;
 			distance += speed;
+			break;
 		}
-
-		break;
 	}
-
 	if (distance > 200 || CollidesMapWall(map, LEFT, width) || attackDelay >= 10) {
 		active = false;
 		visible = false;

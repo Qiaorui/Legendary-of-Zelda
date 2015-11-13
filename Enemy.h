@@ -8,7 +8,6 @@ class Enemy :
 	public cBicho
 {
 protected:
-	int delaymove;
 	int tex_id;
 
 public:

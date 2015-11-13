@@ -3,7 +3,7 @@
 
 PlantaBomba::PlantaBomba(){
 	visible = true;
-	delaymove = 0;
+	commandDelay = 0;
 	Fire.push_back(new Fireball);
 	Fire.push_back(new Fireball);
 	Fire.push_back(new Fireball);
@@ -14,14 +14,8 @@ PlantaBomba::~PlantaBomba(){}
 void PlantaBomba::Draw()
 {
 	if (alive) {
-		//if (tex_id == 2) {
 		float xo, yo, xf, yf;
-		//BLOCK_SIZE = 16, FILE_SIZE = 432
-		// 16 / 432 = 0.037
-		//N = 15, (FILE_SIZE-15*BLOCK_SIZE)/14 = 13.714  =>0.0317
 		float  bitx = 18.0f / 840.0f;
-		//BLOCK_SIZE = 16, FILE_SIZE = 303
-		// 16 / 303 = 0.053
 		float bity = 17.0f / 567.0f;
 		int frame = GetFrame();
 
@@ -69,11 +63,11 @@ void PlantaBomba::DrawRect(int tex_id, float xo, float yo, float xf, float yf, i
 
 
 void PlantaBomba::Logic(vector<int> map, int width, cBicho* player) {
-	if (delaymove>CD) {
+	if (commandDelay == 0) {
 		FireAttack();
-		delaymove = 0;
+		commandDelay = 50;
 	}
-	++delaymove;
+	if (commandDelay > 0) --commandDelay;
 	Enemy::Logic(map,width, player);
 	for (int i = 0; i < Fire.size(); ++i) {
 		if (Fire[i]->isActive())Fire[i]->Logic(map, width, player);
@@ -84,22 +78,17 @@ void PlantaBomba::FireAttack()
 {
 	for (int i = 0; i < Fire.size(); ++i) {
 		if (!Fire[i]->isActive() && Fire[i]->isActionFinished()) {
-			bool correct = true;
-
 			Fire[i]->SetWidthHeight(10, 10);
-			Fire[i]->SetPosition(x + w/2, y + h/2);
+			Fire[i]->SetPosition(x + w / 2, y + h / 2);
 			if (i == 0)Fire[i]->SetState(STATE_BOW_DOWN);
 			else if (i == 1)Fire[i]->SetState(STATE_BOW_UP);
 			else if (i == 2)Fire[i]->SetState(STATE_BOW_RIGHT);
 			else if (i == 3)Fire[i]->SetState(STATE_BOW_LEFT);
 			Fire[i]->setAtk(1);
-
-			if (correct) {
-				Sound::getInstance()->playFireBall();
-				actionFinished = false;
-				cleanFrame();
-				Fire[i]->attack();
-			}
+			Sound::getInstance()->playFireBall();
+			actionFinished = false;
+			cleanFrame();
+			Fire[i]->attack();
 		}
 	}
 }
