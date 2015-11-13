@@ -146,6 +146,13 @@ void cScene::Draw(int tex_id)
 	glBindTexture(GL_TEXTURE_2D,tex_id);
 	glCallList(id_DL);
 	glDisable(GL_TEXTURE_2D);
+
+	for (int i = 0; i < gears.size(); i++)
+	{
+		if (gears[i].isVisible()) {
+			gears[i].draw(tex_id);
+		}
+	}
 	for (int i = 0; i < senders.size(); i++)
 	{
 		if(senders[i].isVisible()) senders[i].draw(tex_id);
@@ -155,6 +162,7 @@ void cScene::Draw(int tex_id)
 		if(enemies[i]->isVisible()) enemies[i]->Draw();
 		if (!enemies[i]->isVisible()) enemies.erase(enemies.begin() + i);
 	}
+
 
 }
 vector<int> cScene::GetMap()
@@ -189,6 +197,23 @@ int cScene::addSender(int x, int y, int scene, int ToX, int ToY, int state, floa
 
 
 void cScene::logic(cPlayer* player) {
+	for (int i = 0; i < gears.size(); i++)
+	{
+		if (gears[i].isActive()) {
+			gears[i].logic(player);
+			int id = gears[i].getSender();
+			if (gears[i].isTouched()) {
+				if (senders[id].isWall()) {
+					senders[id].switchState();
+				}
+			}
+			else if (!senders[id].isWall()) {
+				senders[id].switchState();
+			}
+		}
+	}
+
+
 	for (int i = 0; i < senders.size(); i++)
 	{
 		if(senders[i].isActive()) senders[i].logic(player);
@@ -197,12 +222,8 @@ void cScene::logic(cPlayer* player) {
 	{
 		if(enemies[i]->isActive()) enemies[i]->Logic(map, width, player);
 	}
+	
 
-	/*for (int i = 0; i < items.size(); i++)
-	{
- 		items[i]->Logic(GetMap(), player, enemies);
-		if (!items[i]->isActive()) items.erase(items.begin() + i);
-	}*/
 
 }
 
@@ -262,5 +283,14 @@ vector<Enemy*> cScene::getEnemies(){
 
 void cScene::setSenderCloseImage(int index, float xo, float xf, float yo, float yf) {
 	senders[index].setCloseImage(xo, xf, yo, yf);
-	//senders[index].switchState();
+	senders[index].switchState();
+}
+
+void cScene::addGear(int x, int y, int sender_id, float xo, float xf, float yo, float yf, int w, int h) {
+	Gear gear;
+	gear.SetTile(x, y);
+	gear.setSender(sender_id);
+	gear.SetWidthHeight(w, h);
+	gear.setImage(xo, xf, yo, yf);
+	gears.push_back(gear);
 }

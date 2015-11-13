@@ -100,6 +100,7 @@
     <ClCompile Include="Espada.cpp" />
     <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="Flecha.cpp" />
+    <ClCompile Include="Gear.cpp" />
     <ClCompile Include="GLUTMain.cpp" />
     <ClCompile Include="Golem.cpp" />
     <ClCompile Include="PlantaBomba.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Espada.h" />
     <ClInclude Include="Fireball.h" />
     <ClInclude Include="Flecha.h" />
+    <ClInclude Include="Gear.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Golem.h" />
     <ClInclude Include="PlantaBomba.h" />

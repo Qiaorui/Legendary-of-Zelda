@@ -47,6 +47,10 @@ bool sceneInitialize(cData& data, cScene* scene) {
 		11 * 16 / 208.0f, 13 * 16 / 208.0f, 2 * 16 / 496.0f, 0 * 16 / 496.0f,  //xo,xf,yo,yf
 		32, 32);									
 	scene[1].setSenderCloseImage(id, 0, 32.0f / 208.0f, 144.0f / 496.0f, 112.0f / 496.0f);
+	scene[1].addGear(12, 10,
+		id,
+		8 * 16 / 208.0f, 9 * 16 / 208.0f, 14 * 16 / 496.0f, 13 * 16 / 496.0f,
+		16, 16);
 
 	res = scene[1].LoadLevel(2,208.0f,496.0f);
 	if (!res) return false;

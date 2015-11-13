@@ -124,7 +124,7 @@ void Boss::FireAttack()
 			fireball.SetWidthHeight(30, 30);
 			fireball.SetPosition(x+5 , y+10 );
 			fireball.SetState(STATE_BOW_DOWN);
-			fireball.setAtk(1);
+			fireball.setAtk(2);
 		
 		if (correct) {
 			Sound::getInstance()->playFireBall();

@@ -4,6 +4,9 @@
 
 Trigger::Trigger()
 {
+	wall = false;
+	active = true;
+	visible = true;
 }
 
 

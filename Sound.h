@@ -25,6 +25,8 @@ public:
 	void playLose();
 	void playFireBall();
 	void StopSounds();
+	void playOpen();
+	void playClose();
 	
 
 

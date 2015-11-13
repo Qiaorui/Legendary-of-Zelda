@@ -76,3 +76,10 @@ void Sound::StopSounds() {
 	engine->stopAllSounds();
 
 }
+
+void Sound::playOpen() {
+	engine->play2D("resource/gate-latch.wav", false);
+}
+void Sound::playClose() {
+	engine->play2D("resource/LTTP_Dungeon_Open.wav", false);
+}

@@ -7,6 +7,7 @@
 #include "Golem.h"
 #include "PlantaBomba.h"
 #include "Boss.h"
+#include "Gear.h"
 
 //#define SCENE_Xo		(2*TILE_SIZE)
 //#define SCENE_Yo		TILE_SIZE
@@ -43,6 +44,8 @@ public:
 	void setHeight(int h);
 	int addSender(int x, int y, int scene, int ToX, int ToY, int state, float xo, float xf, float yo, float yf, int w, int h);
 	void setSenderCloseImage(int index, float xo, float xf, float yo, float yf);
+	void addGear(int x, int y, int sender_id, float xo, float xf, float yo, float yf, int w, int h);
+
 	void logic(cPlayer* player);
 	void addEnemy(int enemyType, int x, int y, int tex_id);
 	vector<Enemy*> getEnemies();
@@ -51,6 +54,7 @@ public:
 
 private:
 	vector<int> map;
+	vector<Gear> gears;
 	vector<Sender> senders;
 	vector<Enemy*> enemies;
 	//int map[SCENE_WIDTH * SCENE_HEIGHT];	//scene
