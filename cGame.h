@@ -39,7 +39,7 @@ private:
 	cPlayer Player;
 	cData Data;
 	int delay;
-	int color;
+
 	bool miniMap;
 };
 

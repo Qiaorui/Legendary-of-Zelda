@@ -2,11 +2,13 @@
 #include "Globals.h"
 #include "Sound.h"
 
+float color;
+
 cGame::cGame(void)
 {
 	delay = 0;
 	miniMap = false;
-	color = 255;
+	color = 255.0f/255.0f;
 }
 
 cGame::~cGame(void)
@@ -205,7 +207,7 @@ bool cGame::Process()
 		Scene[id].logic(&Player);
 	}
 	else {
-		if (color > 0) --color;
+		if (color > 0) color =  color -  1.0f / 255.0f;;
 	}
 
 	
@@ -231,7 +233,7 @@ void cGame::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	if (!Player.isAlive()) {
-		glColor3b(color, color, color);
+		glColor3f(color, color, color);
 	}
 
 	int id = Player.getCurrentSceneId();
