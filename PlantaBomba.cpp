@@ -3,6 +3,7 @@
 
 PlantaBomba::PlantaBomba(){
 	visible = true;
+	delaymove = 0;
 	Fire.push_back(new Fireball);
 	Fire.push_back(new Fireball);
 	Fire.push_back(new Fireball);
@@ -68,9 +69,11 @@ void PlantaBomba::DrawRect(int tex_id, float xo, float yo, float xf, float yf, i
 
 
 void PlantaBomba::Logic(vector<int> map, int width, cBicho* player) {
-	FireAttack();
-	
-	
+	if (delaymove>CD) {
+		FireAttack();
+		delaymove = 0;
+	}
+	++delaymove;
 	Enemy::Logic(map,width, player);
 	for (int i = 0; i < Fire.size(); ++i) {
 		if (Fire[i]->isActive())Fire[i]->Logic(map, width, player);

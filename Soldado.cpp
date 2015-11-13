@@ -5,6 +5,7 @@
 Soldado::Soldado(){
 	delaymove = 15;
 	visible = true;
+	move = false;
 }
 
 Soldado::~Soldado(){}
@@ -118,10 +119,10 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 	//comprobar si colisiona con link//////////
 	cRect body;
 	player->GetArea(&body);
+	int ex, ey, px, py;
+	player->GetPosition(&px, &py);
+	GetPosition(&ex, &ey);
 	if (delaymove < 15) {
-		int ex, ey, px, py;
-		player->GetPosition(&px, &py);
-		GetPosition(&ex, &ey);
 		if (px < ex) px = px - 1;
 		else px = px + 1;
 		if (py < ey) py = py - 1;
@@ -135,30 +136,33 @@ void Soldado::Logic(vector<int> map, int width, cBicho* player) {
 		delaymove = 0;
 	}
 	++delaymove;
-	if (delaymove >= FRAME_DELAY + 15) {
-		int x, y;
-		GetPosition(&x, &y);
-		switch (rand() % 4) {
-		case 0:
-			++x;
+	if(abs(px-ex)<60 || abs(py - ey)<60){
+	if (delaymove >= 2 + 15) {
+		move = false;
+		if (px - ex > 10) {
+			++ex;
 			SetState(STATE_WALKRIGHT);
-			break;
-		case 1:
-			--x;
-			SetState(STATE_WALKLEFT);
-			break;
-		case 2:
-			++y;
-			SetState(STATE_WALKUP);
-			break;
-		case 3:
-			--y;
-			SetState(STATE_WALKDOWN);
-			break;
+			move = true;
 		}
-		SetPosition(x, y);
+		else if (px - ex < -10) {
+			--ex;
+			SetState(STATE_WALKLEFT);
+			move = true;
+		}
+		else if (py - ey > 10 && !move) {
+			++ey;
+			SetState(STATE_WALKUP);
+		}
+		else if (py - ey < 10 && !move) {
+			--ey;
+			SetState(STATE_WALKDOWN);
+		}
+		SetPosition(ex, ey);
 		delaymove = 15;
 	}
+		
+	}
+	else SetState(STATE_LOOKDOWN);
 
 	Enemy::Logic(map,width, player);
 	

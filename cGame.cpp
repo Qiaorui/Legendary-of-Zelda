@@ -100,11 +100,11 @@ bool cGame::Init()
 	Scene[1].addEnemy(GOLEM, 4, 12, Data.GetID(IMG_GOLEM));
 	Scene[1].addEnemy(GOLEM, 20, 12, Data.GetID(IMG_GOLEM));
 	Scene[1].addEnemy(GOLEM, 12, 12, Data.GetID(IMG_GOLEM));
-	Scene[2].addEnemy(BOSS, 20, 10, Data.GetID(IMG_BOSS));
-	Scene[2].addEnemy(GOLEM, 4, 12, Data.GetID(IMG_GOLEM));
-	Scene[2].addEnemy(GOLEM, 20, 12, Data.GetID(IMG_GOLEM));
-	Scene[2].addEnemy(SOLDADO, 3, 21, Data.GetID(IMG_ENEMIES));
-	Scene[2].addEnemy(SOLDADO, 3, 4, Data.GetID(IMG_ENEMIES));
+	Scene[2].addEnemy(BOSS, 15, 20, Data.GetID(IMG_BOSS));
+	Scene[2].addEnemy(GOLEM, 12, 15, Data.GetID(IMG_GOLEM));
+	Scene[2].addEnemy(GOLEM, 18, 15, Data.GetID(IMG_GOLEM));
+	Scene[2].addEnemy(SOLDADO, 3, 25, Data.GetID(IMG_ENEMIES));
+	Scene[2].addEnemy(SOLDADO, 20, 25, Data.GetID(IMG_ENEMIES));
 	//sound init
 
 	Sound::getInstance()->playBgm(SOUND_OVERLOAD);

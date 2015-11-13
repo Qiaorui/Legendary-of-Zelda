@@ -18,4 +18,5 @@ public:
 
 private:
 	vector <Fireball*> Fire;
+	int CD = 100;
 };

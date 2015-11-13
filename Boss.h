@@ -19,5 +19,7 @@ private:
 	int delayattack;
 	Fireball fireball;
 	int maxdistance = 200;
+	int CD = 60;
+	bool ulti;
 };
 

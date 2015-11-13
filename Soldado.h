@@ -15,7 +15,7 @@ public:
 
 
 private:
-
+	bool move;
 
 };
 
