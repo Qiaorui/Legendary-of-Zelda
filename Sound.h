@@ -27,6 +27,7 @@ public:
 	void StopSounds();
 	void playOpen();
 	void playClose();
+	void playPush();
 	
 
 

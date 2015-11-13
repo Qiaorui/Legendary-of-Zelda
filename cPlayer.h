@@ -41,6 +41,6 @@ private:
 	//int life_tex_id;
 	int item_tex_id;
 
-	int commandDelay;
+
 
 };

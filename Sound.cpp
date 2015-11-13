@@ -83,3 +83,7 @@ void Sound::playOpen() {
 void Sound::playClose() {
 	engine->play2D("resource/LTTP_Dungeon_Open.wav", false);
 }
+
+void Sound::playPush() {
+	engine->play2D("resource/LTTP_Link_Push.wav", false);
+}

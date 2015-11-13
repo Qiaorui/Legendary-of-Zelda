@@ -414,8 +414,10 @@ void cBicho::stepBack() {
 		break;
 	case STATE_WALKLEFT:
 		x += speed;
+		break;
 	case STATE_WALKRIGHT:
 		x -= speed;
+		break;
 	default:
 		break;
 	}

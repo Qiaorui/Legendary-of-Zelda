@@ -157,6 +157,11 @@ void cScene::Draw(int tex_id)
 	{
 		if(senders[i].isVisible()) senders[i].draw(tex_id);
 	}
+	for (int i = 0; i < blocks.size(); i++)
+	{
+		if (blocks[i].isVisible()) blocks[i].draw(tex_id);
+	}
+
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		if(enemies[i]->isVisible()) enemies[i]->Draw();
@@ -201,6 +206,10 @@ void cScene::logic(cPlayer* player) {
 	for (int i = 0; i < enemies.size(); ++i) {
 		bichos.push_back(enemies[i]);
 	}
+	for (int i = 0; i < blocks.size(); i++)
+	{
+		bichos.push_back(&blocks[i]);
+	}
 	bichos.push_back(player);
 
 	for (int i = 0; i < gears.size(); i++)
@@ -219,6 +228,11 @@ void cScene::logic(cPlayer* player) {
 				senders[id].switchState();
 			}
 		}
+	}
+
+	for (int i = 0; i < blocks.size(); i++)
+	{
+		if (blocks[i].isActive()) blocks[i].logic(player, map, width);
 	}
 
 
@@ -301,4 +315,12 @@ void cScene::addGear(int x, int y, int sender_id, float xo, float xf, float yo, 
 	gear.SetWidthHeight(w, h);
 	gear.setImage(xo, xf, yo, yf);
 	gears.push_back(gear);
+}
+
+void cScene::addBlock(int x, int y, float xo, float xf, float yo, float yf, int w, int h) {
+	Block block;
+	block.SetTile(x, y);
+	block.SetWidthHeight(w, h);
+	block.setImage(xo, xf, yo, yf);
+	blocks.push_back(block);
 }

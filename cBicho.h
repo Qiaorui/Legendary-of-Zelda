@@ -93,6 +93,7 @@ protected:
 	int x, y;
 	int w, h;
 	int current_scene_id;
+	int commandDelay;
 private:
 
 	int seq, delay;
